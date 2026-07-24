@@ -6,12 +6,12 @@
   --color-bg: #ffffff;
   --color-bg-secondary: #f8fafc;
   --color-card: #FFFFFF;
-  --color-card-hover: #f8fafc;
+  --color-card-hover: #f1f5f9;
   --color-text: #1e1b4b;
   --color-text-muted: #6b7280;
   --color-text-accent: #6366f1;
-  --color-border: #f1f5f9;
-  --color-border-hover: #e5e7eb;
+  --color-border: #e5e7eb;
+  --color-border-hover: #d1d5db;
   --color-nav-bg: rgba(255, 255, 255, 0.8);
   --color-hero-gradient: linear-gradient(135deg, #f8fafc, #f1f5f9, #faf5ff);
   --color-cta-bg: linear-gradient(135deg, #6366f1, #a855f7);
@@ -56,12 +56,21 @@ a {
   text-decoration: none;
 }
 
+::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+.dark ::placeholder {
+  color: #64748b;
+}
+
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
 }
 
 .gradient-bg {
-  background: var(--color-hero-gradient);
+  background: var(--color-cta-bg);
 }
 
 .card {
