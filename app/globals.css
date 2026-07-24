@@ -40,6 +40,26 @@
   margin: 0;
 }
 
+/* ========================================
+   Smooth theme transition
+   All color-related properties fade between
+   dark/light modes for eye comfort
+   ======================================== */
+*,
+*::before,
+*::after {
+  transition-property: background-color, color, border-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+}
+
+/* Reset transition on elements where it would
+   conflict with Framer Motion or other animations */
+[data-motion],
+.motion-safe\:transform {
+  transition-property: background-color, color, border-color;
+}
+
 html {
   scroll-behavior: smooth;
 }
