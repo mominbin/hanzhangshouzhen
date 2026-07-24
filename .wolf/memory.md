@@ -16,3 +16,11 @@
 - **glow animation**: Added `alternate` to loop direction
 - **ThemeProvider**: Added from next-themes wrapping children (attribute="class", defaultTheme="dark", enableSystem={false})
 - **Metadata**: Added keywords array and robots { index: true, follow: true }
+
+## 2026-07-24 — Code Quality Fixes
+- **globals.css**: Fixed :root and .dark CSS variables to match tailwind.config.ts (indigo accent, correct hex values, --color-cta-bg now uses gradient)
+- **globals.css**: Removed hardcoded font-family from body (Tailwind's font-sans handles it)
+- **package.json**: Downgraded eslint-config-next from ^14.2.35 to ^14.2.0 (more permissive range)
+- **next.config.js**: Added comment explaining images.unoptimized
+- **app/layout.tsx**: Moved JSON-LD `<script>` from `<head>` to `<body>` (before ThemeProvider)
+- Commit: `fix: reconcile CSS colors with tailwind config, fix deps and SEO`
