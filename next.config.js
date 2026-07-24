@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Static export / no Next.js image optimization needed for this site
+  output: 'export',  // 静态导出，兼容 Cloudflare Pages / 阿里云 OSS 等
   images: {
     unoptimized: true,
   },
