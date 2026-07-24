@@ -91,8 +91,8 @@ export const siteConfig: SiteConfig = {
   },
   contact: {
     email: 'mominbin@163.com',
-    phone: '15900888545',
-    wechat: '15900888545',
+    phone: '17721428575',
+    wechat: '17721428575',
     address: '上海市浦东新区',
   },
   hero: {

@@ -11,8 +11,10 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    const subject = `项目咨询 - ${form.name}`
+    const body = `${form.message}%0D%0A%0D%0A姓名：${form.name}%0D%0A联系方式：${form.contact}`
+    window.location.href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(subject)}&body=${body}`
     setSubmitted(true)
-    setForm({ name: '', contact: '', message: '' })
     setTimeout(() => setSubmitted(false), 3000)
   }
 
