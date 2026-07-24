@@ -1,26 +1,10 @@
 # Memory Log
 
-## 2026-07-24 — Task 1: Project Scaffolding
-- Created project from scratch with Next.js 14, TypeScript, Tailwind CSS
-- Files created: package.json, tsconfig.json, next.config.js, tailwind.config.ts, postcss.config.js, .gitignore, app/globals.css, app/layout.tsx, app/page.tsx
-- Dependencies installed (111 packages)
-- Build verified successfully (`npx next build`)
-- Commit: `feat: scaffold Next.js project with Tailwind CSS and theme system`
-- Commit: `fix: correct tailwind colors, add ThemeProvider, complete metadata`
-
-## 2026-07-24 — Spec Compliance Fixes (7 issues)
-- **primary colors**: Changed from blue (#2563EB) to indigo (#6366f1 / #a5b4fc / #4f46e5)
-- **accent colors**: Changed from cyan (#06B6D4) to purple (#a855f7 / #c4b5fd / #7c3aed)
-- **dark/light keys**: Replaced numeric 50-900 scales with semantic keys (bg, card, border, text, muted)
-- **fontFamily**: Added 'system-ui' before 'sans-serif'
-- **glow animation**: Added `alternate` to loop direction
-- **ThemeProvider**: Added from next-themes wrapping children (attribute="class", defaultTheme="dark", enableSystem={false})
-- **Metadata**: Added keywords array and robots { index: true, follow: true }
-
-## 2026-07-24 — Code Quality Fixes
-- **globals.css**: Fixed :root and .dark CSS variables to match tailwind.config.ts (indigo accent, correct hex values, --color-cta-bg now uses gradient)
-- **globals.css**: Removed hardcoded font-family from body (Tailwind's font-sans handles it)
-- **package.json**: Downgraded eslint-config-next from ^14.2.35 to ^14.2.0 (more permissive range)
-- **next.config.js**: Added comment explaining images.unoptimized
-- **app/layout.tsx**: Moved JSON-LD `<script>` from `<head>` to `<body>` (before ThemeProvider)
-- Commit: `fix: reconcile CSS colors with tailwind config, fix deps and SEO`
+## 2026-07-24 — 项目初始化
+- 创建上海含章收珍软件科技公司主页项目
+- 技术栈: Next.js 14 + TypeScript + Tailwind CSS + next-themes + Framer Motion
+- 设计风格: 暗黑/明亮双模式，紫蓝科技色系
+- 所有内容集中管理在 config/site.ts
+- 8 大板块: Navbar / Hero / Services / Projects / About / Stats / Testimonials / Contact / Footer
+- SEO: JSON-LD Organization schema, robots.txt, sitemap.xml
+- 构建通过，主页 48KB first load

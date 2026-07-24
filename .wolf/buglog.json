@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "timestamp": "2026-07-24T10:58:00",
+    "error_message": "ESLint 10 incompatible with Next.js 14",
+    "root_cause": "eslint-config-next requires ESLint ^8.57.0, but eslint@10 was installed",
+    "fix": "Downgrade to eslint@^8.57.1 and eslint-config-next@^14.2.0",
+    "tags": ["eslint", "dependencies", "build"]
+  },
+  {
+    "timestamp": "2026-07-24T11:05:00",
+    "error_message": "react/no-unescaped-entities in About.tsx",
+    "root_cause": "Chinese quotation marks \"\" in JSX are flagged by ESLint",
+    "fix": "Replace with HTML entities &ldquo; &rdquo;",
+    "tags": ["eslint", "jsx", "react"]
+  },
+  {
+    "timestamp": "2026-07-24T11:02:00",
+    "error_message": "Color mismatch between tailwind.config.ts and globals.css",
+    "root_cause": "Initial implementation used different color values (blue/cyan palette vs indigo/purple spec)",
+    "fix": "Reconcile all CSS variable values in globals.css to match tailwind.config.ts indigo/purple scheme",
+    "tags": ["css", "design", "colors"]
+  }
+]
