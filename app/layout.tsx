@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
 import './globals.css'
 
 const seoTitle = '上海含章收珍软件科技 | 专业软件开发定制服务'
@@ -7,6 +8,11 @@ const seoDescription = '上海含章收珍软件科技有限公司，专注企�
 export const metadata: Metadata = {
   title: seoTitle,
   description: seoDescription,
+  keywords: ['上海软件公司', '软件开发定制', '企业管理平台', '小程序开发', 'App开发', '企业官网'],
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: seoTitle,
     description: seoDescription,
@@ -44,7 +50,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
