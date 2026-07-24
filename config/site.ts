@@ -13,6 +13,7 @@ export interface Project {
   description: string
   image: string
   tech: string[]
+  orientation?: 'landscape' | 'portrait'
 }
 
 export interface Stat {
@@ -85,13 +86,13 @@ export const siteConfig: SiteConfig = {
     slogan: '用代码创造价值',
     tagline: '含章可贞，收珍聚宝 — 以技术匠心为客户创造数字化价值',
     description: '专注于企业管理平台 · 移动App · 小程序 · 企业官网定制开发',
-    icp: '沪ICP备XXXXXXXX号',
+    icp: '沪ICP备2025126296号',
     founded: 2024,
   },
   contact: {
-    email: 'contact@hanzhangshouzhen.com',
-    phone: '400-XXX-XXXX',
-    wechat: 'hanzhangshouzhen',
+    email: 'mominbin@163.com',
+    phone: '15900888545',
+    wechat: '15900888545',
     address: '上海市浦东新区',
   },
   hero: {
@@ -130,21 +131,22 @@ export const siteConfig: SiteConfig = {
   projects: [
     {
       id: '1',
-      name: '智慧门店管理平台',
+      name: '手机回收订单管理系统',
       type: '管理平台',
       category: '管理平台',
-      description: '为连锁零售企业打造的综合性门店管理系统，包含进销存、会员管理、数据分析、库存预警等功能模块，帮助企业实现数字化运营转型。',
-      image: '/images/projects/project1.jpg',
-      tech: ['React', 'Node.js', 'PostgreSQL', 'Redis'],
+      description: '基于 Arco Design 的企业级手机回收订单管理后台，涵盖订单流转、库存管理、数据报表、权限控制等核心模块，支持暗黑模式与国际化。',
+      image: '/images/projects/project3.png',
+      tech: ['Vue 3', 'Vite', 'Arco Design', 'ECharts', 'Pinia', 'TypeScript'],
     },
     {
       id: '2',
-      name: 'FitLife 健身App',
+      name: '2048集卡',
       type: '移动App',
       category: '移动App',
-      description: '面向健身爱好者的移动应用，支持AI训练计划定制、饮食营养记录、社区互动分享、运动数据追踪等功能。',
-      image: '/images/projects/project2.jpg',
-      tech: ['Flutter', 'Firebase', 'TensorFlow Lite', 'GraphQL'],
+      description: '基于 HarmonyOS ArkTS 开发的 2048 集卡游戏，独创卡牌收集玩法，滑动合并数字解锁稀有卡牌，含图鉴画廊、排行榜和深色模式。',
+      image: '/images/projects/project2.png',
+      tech: ['HarmonyOS', 'ArkTS', 'ArkUI'],
+      orientation: 'portrait',
     },
   ],
   stats: [
@@ -186,7 +188,7 @@ export const siteConfig: SiteConfig = {
     keywords: '软件开发,小程序开发,移动App开发,企业管理平台,上海软件公司,定制开发',
   },
   social: {
-    github: 'https://github.com/hanzhangshouzhen',
+    github: 'https://github.com/mominbin',
     juejin: '',
   },
 }
