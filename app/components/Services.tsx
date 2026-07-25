@@ -6,7 +6,7 @@ import SectionHeader from './ui/SectionHeader'
 import { siteConfig } from '@/config/site'
 import type { Service } from '@/config/site'
 
-const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+const iconMap: Record<string, React.ComponentType<{ size?: string | number; className?: string }>> = {
   Smartphone,
   Monitor,
   LayoutGrid,
