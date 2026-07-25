@@ -2,11 +2,12 @@
 
 import { motion } from 'framer-motion'
 import { Smartphone, Monitor, LayoutGrid, Globe } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import SectionHeader from './ui/SectionHeader'
 import { siteConfig } from '@/config/site'
 import type { Service } from '@/config/site'
 
-const iconMap: Record<string, React.ComponentType<{ size?: string | number; className?: string }>> = {
+const iconMap: Record<string, LucideIcon> = {
   Smartphone,
   Monitor,
   LayoutGrid,
