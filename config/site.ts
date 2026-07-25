@@ -3,6 +3,7 @@ export interface Service {
   title: string
   desc: string
   featured: boolean
+  image?: string
 }
 
 export interface Project {
@@ -96,10 +97,10 @@ export const siteConfig: SiteConfig = {
     address: '上海市浦东新区',
   },
   hero: {
-    badge: '已交付 20+ 企业项目',
+    badge: '从需求到落地，全流程技术伙伴',
     title: '为企业和个人打造专属数字系统',
     subtitle: '专注于企业管理平台 · 移动App · 小程序 · 企业官网定制开发',
-    primaryCta: '免费咨询',
+    primaryCta: '立刻咨询',
     secondaryCta: '查看案例',
   },
   services: [
@@ -108,24 +109,28 @@ export const siteConfig: SiteConfig = {
       title: '移动App开发',
       desc: 'iOS / Android 原生及跨平台开发，Flutter/React Native 技术栈，从UI设计到应用商店上架全流程服务',
       featured: true,
+      image: '/images/projects/project2.png',
     },
     {
       icon: 'Monitor',
       title: '管理平台开发',
       desc: '企业级 Web 管理系统，数据可视化大屏、流程自动化、权限管理、报表中心，提升运营效率',
       featured: true,
+      image: '/images/projects/project3.png',
     },
     {
       icon: 'LayoutGrid',
       title: '小程序开发',
       desc: '微信生态全链路开发，从账号申请、功能开发到上线运营一站式服务，覆盖电商、预约、社区等场景',
       featured: false,
+      image: '/images/projects/project4.png',
     },
     {
       icon: 'Globe',
       title: '企业官网开发',
       desc: '品牌展示型网站设计与开发，SEO 优化、响应式设计、高性能加载，打造专业企业形象',
       featured: false,
+      image: '/images/projects/project1.png',
     },
   ],
   projects: [
@@ -150,8 +155,6 @@ export const siteConfig: SiteConfig = {
     },
   ],
   stats: [
-    { label: '完成项目', value: 20, suffix: '+' },
-    { label: '服务客户', value: 5, suffix: '+' },
     { label: '技术团队', value: 5, suffix: '人+' },
     { label: '行业经验', value: 10, suffix: '年+' },
   ],

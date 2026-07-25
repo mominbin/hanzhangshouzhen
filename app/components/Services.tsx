@@ -34,17 +34,35 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="card p-6 md:p-8 group"
+      className="card overflow-hidden group h-full"
     >
-      <div className="mb-4 inline-block">
-        <ServiceIcon name={service.icon} />
+      <div className="flex flex-col sm:flex-row gap-6 p-6 md:p-8 h-full">
+        <div className="flex-1">
+          <div className="mb-4 inline-block">
+            <ServiceIcon name={service.icon} />
+          </div>
+          <h3 className="text-lg md:text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+            {service.title}
+          </h3>
+          <p className="text-sm md:text-base leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+            {service.desc}
+          </p>
+        </div>
+        {service.image && (
+          <div className="sm:w-48 flex-shrink-0">
+            <div
+              className="rounded-lg overflow-hidden border"
+              style={{ borderColor: 'var(--color-border)' }}
+            >
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-32 object-cover"
+              />
+            </div>
+          </div>
+        )}
       </div>
-      <h3 className="text-lg md:text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-        {service.title}
-      </h3>
-      <p className="text-sm md:text-base leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-        {service.desc}
-      </p>
     </motion.div>
   )
 }
@@ -91,7 +109,7 @@ export default function Services() {
                     style={{ borderColor: 'var(--color-border)' }}
                   >
                     <img
-                      src={i === 0 ? '/images/projects/project3.png' : '/images/projects/project2.png'}
+                      src={service.image ?? '/images/projects/project2.png'}
                       alt={service.title}
                       className="w-full h-32 object-cover"
                     />
@@ -102,14 +120,10 @@ export default function Services() {
           ))}
         </div>
 
-        {/* Tighter pair for secondary services — hairline divider */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px rounded-xl overflow-hidden"
-          style={{ background: 'var(--color-border)' }}
-        >
+        {/* Secondary services grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {others.map((service, i) => (
-            <div key={service.title} style={{ background: 'var(--color-card)' }}>
-              <ServiceCard service={service} index={i + 2} />
-            </div>
+            <ServiceCard key={service.title} service={service} index={i + 2} />
           ))}
         </div>
       </div>

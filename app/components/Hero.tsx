@@ -89,7 +89,7 @@ export default function Hero() {
                 </button>
                 {/* Reassurance microcopy */}
                 <span className="text-xs text-center sm:text-left" style={{ color: 'var(--color-text-muted)' }}>
-                  无需承诺，30分钟免费沟通
+                  专业对接沟通，快速梳理需求
                 </span>
               </div>
 
