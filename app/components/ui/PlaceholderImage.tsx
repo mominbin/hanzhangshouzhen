@@ -28,6 +28,10 @@ export default function PlaceholderImage({ text, src, className = '', rounded = 
               src={src}
               alt={text}
               className="w-full h-full object-contain"
+              loading="lazy"
+              decoding="async"
+              width={451}
+              height={613}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
@@ -37,6 +41,10 @@ export default function PlaceholderImage({ text, src, className = '', rounded = 
               src={src}
               alt={text}
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              width={1901}
+              height={961}
               whileHover={{ scale: 1.35 }}
               transition={{ duration: 1.5, ease: 'easeInOut' }}
               style={{ transformOrigin: '100% 100%' }}
@@ -58,6 +66,7 @@ export default function PlaceholderImage({ text, src, className = '', rounded = 
                 src={src}
                 alt={text}
                 className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                decoding="async"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}

@@ -53,6 +53,7 @@ function ImageLightbox({ src, alt, onClose }: { src: string; alt: string; onClos
         transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
         src={src}
         alt={alt}
+        decoding="async"
         className="max-w-full max-h-[85vh] rounded-xl shadow-2xl object-contain"
         onClick={(e) => e.stopPropagation()}
         style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.5)' }}
@@ -74,6 +75,10 @@ function ServiceImage({ src, alt }: { src: string; alt: string }) {
           <img
             src={src}
             alt={alt}
+            loading="lazy"
+            decoding="async"
+            width={400}
+            height={250}
             className="w-full h-32 object-cover transition-transform duration-500 group-hover/img:scale-105"
           />
         </div>
@@ -159,7 +164,7 @@ export default function Services() {
                   </p>
                 </div>
                 <ServiceImage
-                  src={service.image ?? '/images/projects/project2.png'}
+                  src={service.image ?? '/images/projects/project2.webp'}
                   alt={service.title}
                 />
               </div>

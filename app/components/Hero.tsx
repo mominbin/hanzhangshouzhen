@@ -120,9 +120,13 @@ export default function Hero() {
               }}
             >
               <img
-                src="/images/projects/project3.png"
+                src="/images/projects/project3.webp"
                 alt="手机回收订单管理系统"
                 className="w-full h-auto"
+                loading="lazy"
+                decoding="async"
+                width={1861}
+                height={962}
               />
             </div>
           </motion.div>
