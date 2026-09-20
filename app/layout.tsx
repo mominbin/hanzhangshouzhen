@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
+import RevealBoot from './components/RevealBoot'
 import { siteConfig } from '@/config/site'
 import './globals.css'
 
@@ -117,15 +118,21 @@ export default function RootLayout({
             显示字体用宋体（中国官方票据的标题字体），正文用黑体，
             票据编号用等宽。定义见 globals.css 的 --font-* 。 */}
 
-        {/* 揭示动效的启用标志。
-            滚动揭示的初始隐藏态只在 .js-reveal 下生效，而该类由这段
-            同步脚本设置 —— 它必须先于渲染执行。
-            这样一旦 JS 包加载失败（网络、缓存、老版本 bundle），
-            该类不存在，内容一律可见，不会出现「首屏以下全空」。
-            @media (scripting: none) 覆盖不到「脚本可解析但执行失败」的情况。 */}
+        {/* 揭示动效的启用标志 + 失效保护。
+            滚动揭示的初始隐藏态只在 .js-reveal 下生效。
+            若包加载失败（404 / 解析错误 / 网络中断），RevealBoot 永不挂载，
+            1.8s 后计时器撤下该类 —— 内容全部可见，不会出现首屏以下全空。
+            仅靠 @media (scripting: none) 不够：它覆盖不了
+            「脚本可解析但执行失败」这一类。 */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.add('js-reveal')`,
+            __html:
+              "(function(){var d=document.documentElement;" +
+              "d.classList.add('js-reveal');" +
+              "var t=setTimeout(function(){" +
+              "if(!window.__revealReady)d.classList.remove('js-reveal');},1800);" +
+              "window.__revealBoot=function(){window.__revealReady=true;clearTimeout(t);};" +
+              "})();",
           }}
         />
         {/* ── 百度统计 (替换 YOUR_BAIDU_TONGJI_ID) ── */}
@@ -159,6 +166,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
         />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <RevealBoot />
           {children}
         </ThemeProvider>
       </body>

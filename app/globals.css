@@ -44,7 +44,9 @@
   --on-ground: #FDFCF9;        /* 7.47:1 */
   --on-ground-muted: #EFD9CE;  /* 5.65:1 */
   --on-ground-rule: rgba(253, 252, 249, 0.28);
-  --on-ground-rule-strong: rgba(253, 252, 249, 0.5);
+  /* 0.55：控件边框需 ≥3:1（WCAG 1.4.11）。
+     实测混合后 0.38 只有 2.39:1、0.5 得 3.08:1，0.55 留出余量。 */
+  --on-ground-rule-strong: rgba(253, 252, 249, 0.55);
   /* 地面上的链接色：#1B3A6B 仅 1.47:1、#8FB3E0 仅 3.54:1，均不可用。
      取 #BBD4EE 得 5.03:1。 */
   --on-ground-link: #BBD4EE;
@@ -245,12 +247,14 @@ a.on-ground-link {
 .dark .act { color: #1A1614; }
 .dark .act:hover { background: #F08A79; }
 
-/* 输入 —— 坐在棕红地面上。
-   不能取 --panel：暗色模式下那是近黑 #1A1614，在棕红上读作「挖了个黑洞」。
-   改为材料上刻出的浅色凹槽：同色系提亮 + 纸白文字。 */
+/* 输入 —— 材料上刻出的凹槽（暗，不是亮）。
+   先前的浅色白雾（rgba(253,252,249,.10)）混合后底为 #974d34，
+   placeholder 在暗色模式下只有 4.09:1，低于 4.5:1。
+   改为暗凹槽后，浅色文字对比反而更高：
+     α=0.18 → 凹槽 #75311a，placeholder 7.01:1(亮) / 6.34:1(暗)，边框 3.82:1 */
 .input {
   width: 100%;
-  background: rgba(253, 252, 249, 0.10);
+  background: rgba(12, 10, 8, 0.18);
   border: var(--rule) solid var(--on-ground-rule-strong);
   border-radius: 0;
   padding: var(--s3);
@@ -258,12 +262,12 @@ a.on-ground-link {
   color: var(--on-ground);
   transition: background 160ms var(--ease), border-color 160ms var(--ease);
 }
-.input:hover { background: rgba(253, 252, 249, 0.14); }
+.input:hover { background: rgba(12, 10, 8, 0.26); }
 .input:focus {
   outline: 2px solid var(--on-ground);
   outline-offset: 0;
   border-color: var(--on-ground);
-  background: rgba(253, 252, 249, 0.14);
+  background: rgba(12, 10, 8, 0.26);
 }
 .input::placeholder { color: var(--on-ground-muted); }
 

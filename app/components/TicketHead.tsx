@@ -57,7 +57,7 @@ export default function TicketHead() {
 
       <div className="mx-auto max-w-[1180px] px-6 md:px-10">
         {/* 开票方：直接落在棕红地面上 */}
-        <div id="hero" className="print-wipe pt-9 pb-7 md:pt-12 md:pb-9">
+        <div id="hero" className="print-wipe pt-7 pb-5 md:pt-8 md:pb-6">
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div>
               <p className="font-mono text-[11px] tracking-[0.14em] text-on-muted">
@@ -95,14 +95,14 @@ export default function TicketHead() {
 
         {/* 购方栏：留白等着填 */}
         <div className="relative grid grid-cols-1 g-rule-b md:grid-cols-[1.6fr_1fr_1fr]">
-          <div className="py-6 md:border-r md:border-on-ground/25 md:pr-8">
+          <div className="py-4 md:border-r md:border-on-ground/25 md:pr-8">
             <span className="g-field-label">购方名称 / BUYER</span>
             {/* 空白字段就是一条空栏线 —— 票据本来的样子 */}
             <p className="mt-2 border-b border-on-ground/50 pb-1 font-display text-[clamp(.95rem,1.8vw,1.15rem)] leading-snug text-on-muted">
               此处开给贵司
             </p>
           </div>
-          <div className="border-t border-on-ground/25 py-6 md:border-t-0 md:border-r md:px-8">
+          <div className="border-t border-on-ground/25 py-4 md:border-t-0 md:border-r md:px-8">
             <span className="g-field-label">开票日期</span>
             <p className="font-mono text-[14px] text-on-ground">
               {today && (
@@ -115,7 +115,7 @@ export default function TicketHead() {
               )}
             </p>
           </div>
-          <div className="border-t border-on-ground/25 py-6 md:border-t-0 md:pl-8">
+          <div className="border-t border-on-ground/25 py-4 md:border-t-0 md:pl-8">
             <span className="g-field-label">服务项目</span>
             <p className="font-body text-[14px] text-on-ground">详见下表 · 共四项</p>
           </div>
