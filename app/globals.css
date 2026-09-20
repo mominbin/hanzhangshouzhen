@@ -329,6 +329,32 @@ a.link {
   animation: type-in 760ms steps(var(--chars, 12), end) both;
 }
 
+/* ============================================================
+   滚动揭示
+   ------------------------------------------------------------
+   craft-floor 禁止「每个板块都套同一个入场」。所以下面每个板块
+   按它自己是什么来决定显影方式，全部取自票据世界的动作：
+
+     已交付·联次   → 行项落墨，随后核销章才落下（先有内容才有章）
+     签收意见      → 正文落墨，签字栏线随后绘制（先写内容后签字）
+     供方·备注事项 → 行项逐条落墨（它本来就是一份清单）
+     合计          → 双线收口绘制 + 合计落墨 + 监制章按下
+     票据底部      → 双线绘制 + 各栏落墨
+
+   默认隐藏只在脚本可用时生效，禁用 JS 时一律可见。
+   ============================================================ */
+[data-reveal] .rv-ink { opacity: 0; }
+[data-reveal] .rv-rule { clip-path: inset(0 100% 0 0); }
+
+[data-reveal='true'] .rv-ink {
+  animation: ink-in 640ms var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 110ms);
+}
+[data-reveal='true'] .rv-rule {
+  animation: print-wipe 760ms var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 110ms + 220ms);
+}
+
 /* ── 监制章按下 ── */
 @keyframes seal-press {
   0%   { transform: rotate(-3.5deg) scale(1.75); opacity: 0; }
@@ -386,6 +412,8 @@ a.link {
 @media (scripting: none) {
   .stamp-mark,
   .seal-press { opacity: 1; }
+  [data-reveal] .rv-ink { opacity: 1; }
+  [data-reveal] .rv-rule { clip-path: none; }
 }
 
 /* ── 减弱动态效果 ──
@@ -401,6 +429,10 @@ a.link {
   .rule-draw,
   .ink-in,
   .type-in { animation: none !important; }
+
+  /* 滚动揭示：内容直接可见，不搬演 */
+  [data-reveal] .rv-ink { opacity: 1; }
+  [data-reveal] .rv-rule { clip-path: none; }
 
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

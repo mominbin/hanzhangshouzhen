@@ -16,7 +16,7 @@ import { useInView } from './useInView'
 export default function Action() {
   const [note, setNote] = useState('')
   const [copied, setCopied] = useState(false)
-  const { ref: totalRef, seen: pressed } = useInView<HTMLDivElement>('-10% 0px -10% 0px')
+  const { ref, seen } = useInView<HTMLElement>('-8% 0px -12% 0px')
 
   const phone = siteConfig.contact.phone.replace(/\s/g, '')
 
@@ -35,35 +35,46 @@ export default function Action() {
   }
 
   return (
-    <section id="contact" className="mx-auto max-w-[1180px] px-6 md:px-10">
-      {/* 合计区：双线收口 */}
-      <div className="mt-12 md:mt-16" ref={totalRef}>
-        <div className="rule-double" />
+    <section
+      id="contact"
+      ref={ref}
+      data-reveal={String(seen)}
+      className="mx-auto max-w-[1180px] px-6 md:px-10"
+    >
+      {/* 合计区：双线收口。线先绘制，合计随后落墨，监制章最后按下 ——
+          顺序即这个动作本身：先有栏线，再填写，再盖章。 */}
+      <div className="mt-12 md:mt-16">
+        <div className="rv-rule rule-double" />
         <div className="grid grid-cols-1 gap-y-6 py-6 md:grid-cols-[1.8fr_1fr] md:items-start md:gap-x-10">
-          <div>
+          <div className="rv-ink" style={{ '--i': 1 } as React.CSSProperties}>
             <span className="field-label">合计 / TOTAL</span>
             <p className="font-display text-[clamp(1.15rem,2.4vw,1.6rem)] leading-snug tracking-[-0.01em] text-ink">
               肆 项服务 · 贰 个已交付案例 · 肆 家云厂商背书
             </p>
           </div>
           <div className="md:text-right">
-            <span className="field-label md:text-right">监制</span>
+            <span className="field-label rv-ink md:text-right" style={{ '--i': 2 } as React.CSSProperties}>
+              监制
+            </span>
             {/* 监制章在合计区进入视口时按下 —— 世界的原生动作。 */}
-            <span className="seal seal-press text-[12px]" data-pressed={pressed}>
+            <span className="seal seal-press text-[12px]" data-pressed={seen}>
               上海含章收珍 · 交付监制
             </span>
           </div>
         </div>
-        <div className="rule-double" />
+        <div className="rv-rule rule-double" style={{ '--i': 1 } as React.CSSProperties} />
       </div>
 
       {/* 备注栏 + 开票动作 */}
       <div className="grid grid-cols-1 gap-y-10 py-12 md:grid-cols-[1.4fr_1fr] md:gap-x-12 md:py-16">
         <div>
-          <h2 className="font-display text-[clamp(1.25rem,2.6vw,1.75rem)] tracking-[-0.01em] text-ink">
+          <h2
+            className="rv-ink font-display text-[clamp(1.25rem,2.6vw,1.75rem)] tracking-[-0.01em] text-ink"
+            style={{ '--i': 2 } as React.CSSProperties}
+          >
             备注栏
           </h2>
-          <p className="mt-3 max-w-[62ch] text-[15px] leading-relaxed text-ink-muted">
+          <p className="rv-ink mt-3 max-w-[62ch] text-[15px] leading-relaxed text-ink-muted" style={{ '--i': 3 } as React.CSSProperties}>
             写下您要做的东西，一句话就够。按下右边的按钮，这段备注会被复制到剪贴板，
             同时拨通电话；接通后直接粘贴即可，不用重新讲一遍。
           </p>
@@ -85,7 +96,9 @@ export default function Action() {
         </div>
 
         <div className="rule-l md:pl-12">
-          <span className="field-label">开票动作 / ACTION</span>
+          <span className="field-label rv-ink" style={{ '--i': 3 } as React.CSSProperties}>
+            开票动作 / ACTION
+          </span>
 
           <button
             type="button"
@@ -96,7 +109,7 @@ export default function Action() {
             {copied ? '已复制，正在拨号…' : '复制备注并致电'}
           </button>
 
-          <dl className="mt-8 space-y-4">
+          <dl className="rv-ink mt-8 space-y-4" style={{ '--i': 4 } as React.CSSProperties}>
             <div>
               <dt className="field-label">电话 / 微信</dt>
               <dd>

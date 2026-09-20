@@ -1,6 +1,7 @@
 'use client'
 
 import { siteConfig } from '@/config/site'
+import { useInView } from './useInView'
 
 /**
  * 票据底部
@@ -10,13 +11,14 @@ import { siteConfig } from '@/config/site'
  */
 export default function TicketFoot() {
   const year = new Date().getFullYear()
+  const { ref, seen } = useInView<HTMLElement>('-8% 0px -8% 0px')
 
   return (
-    <footer className="mx-auto max-w-[1180px] px-6 md:px-10">
-      <div className="rule-double mt-12 md:mt-16" />
+    <footer ref={ref} data-reveal={String(seen)} className="mx-auto max-w-[1180px] px-6 md:px-10">
+      <div className="rv-rule rule-double mt-12 md:mt-16" />
 
       <div className="grid grid-cols-1 gap-y-8 py-8 md:grid-cols-[1.4fr_1fr_1fr] md:gap-x-10">
-        <div>
+        <div className="rv-ink" style={{ '--i': 1 } as React.CSSProperties}>
           <span className="field-label">供方联系</span>
           <address className="not-italic">
             <a
@@ -37,7 +39,7 @@ export default function TicketFoot() {
           </address>
         </div>
 
-        <div>
+        <div className="rv-ink" style={{ '--i': 1.5 } as React.CSSProperties}>
           <span className="field-label">票据说明</span>
           <p className="max-w-[40ch] text-[12.5px] leading-relaxed text-ink-muted">
             本页为上海含章收珍软件科技有限公司的服务项目说明，形式取商业凭证体例。
@@ -45,7 +47,7 @@ export default function TicketFoot() {
           </p>
         </div>
 
-        <div>
+        <div className="rv-ink" style={{ '--i': 2 } as React.CSSProperties}>
           <span className="field-label">备案</span>
           <p className="font-mono text-[12.5px] text-ink-muted">{siteConfig.company.icp}</p>
           {siteConfig.social.github && (
