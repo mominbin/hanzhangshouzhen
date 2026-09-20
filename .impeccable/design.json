@@ -1,74 +1,221 @@
 {
   "schemaVersion": 2,
-  "name": "含章收珍 · 票据世界",
-  "description": "页面即一份正式商业凭证。地面为票面棕红，内容直接坐在材料上；栏线建立秩序，零圆角、零阴影、零渐变。",
-
+  "generatedAt": "2026-09-20T20:43:34+08:00",
+  "title": "Design System: 含章收珍 · 票据世界",
+  "description": "页面即一份正式商业凭证。纸面为地，票面棕红只作一条通栏；栏线建立秩序，零圆角、零阴影、零渐变。",
   "extensions": {
-    "narrative": {
-      "northStar": "这张票被打印出来，然后被填写、盖章、核销。",
-      "rules": [
-        "地面是命名材料本身（票面棕红），内容直接坐在其上，不设中间面板",
-        "秩序由栏线建立，不靠留白；零圆角、零阴影、零渐变",
-        "全站只有一个高饱和实心色：章红填充的「立刻咨询」按钮",
-        "章红只作填充，不作文字或描边 —— 它 on 棕红仅 1.29:1",
-        "印章在棕红地面上取纸白描边（红底上的白色钢印）",
-        "等宽表格数字；宋体标题、黑体正文、等宽编号"
-      ],
-      "doNot": [
-        "不要把地面换成中性色再让棕红只做点缀",
-        "不要在棕红地面上使用章红作文字或描边",
-        "不要给卡片加圆角、阴影或渐变"
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "纸面", "canonical": "#FDFCF9", "purpose": "页面地面（亮色）。不是纯白，是暖纸。", "tonalRamp": ["#0C0B09", "#262523", "#434240", "#62615F", "#838280", "#A6A5A2", "#CAC9C6", "#EFEEEB"] },
+      "paper-dark": { "role": "neutral", "displayName": "纸面（夜里的账房）", "canonical": "#1A1614", "purpose": "暗色主题地面。深暖，不是蓝黑。", "tonalRamp": ["#0E0A08", "#282422", "#46413F", "#65605D", "#86817E", "#A9A4A1", "#CDC8C5", "#F3EDEA"] },
+      "paper-sunk": { "role": "neutral", "displayName": "下沉面", "canonical": "#F6F3EC", "purpose": "刻下去一层的面。当前只服务滚动条轨道。", "tonalRamp": ["#0D0B07", "#272520", "#44423C", "#63615B", "#85827C", "#A8A59E", "#CCC9C2", "#F1EEE7"] },
+      "paper-sunk-dark": { "role": "neutral", "displayName": "下沉面（暗）", "canonical": "#221D1A", "purpose": "暗色主题的下沉面。", "tonalRamp": ["#0F0A08", "#292421", "#46413D", "#66605C", "#87817D", "#AAA3A0", "#CEC8C3", "#F4EDE9"] },
+      "band": { "role": "primary", "displayName": "票面棕红（命名材料）", "canonical": "#8C3A1E", "purpose": "命名材料本身 —— 全站唯一一条通栏，承载开票方与栏目索引。两主题同值。不是地面，不是点缀。", "tonalRamp": ["#1B0300", "#451100", "#732303", "#984529", "#BE674A", "#E48A6C", "#FFB59D", "#FFE9E2"] },
+      "band-deep": { "role": "primary", "displayName": "棕红深档", "canonical": "#6B2C15", "purpose": "双线收口的线色、次级按钮悬停边框、反馈动画中段。", "tonalRamp": ["#1A0400", "#441200", "#6B2C15", "#8F4C35", "#B46D55", "#D99077", "#FEB59C", "#FEE9E2"] },
+      "on-band": { "role": "neutral", "displayName": "通栏纸白", "canonical": "#FDFCF9", "purpose": "棕红通栏内的主文字与焦点环。7.47:1（亮）。出通栏即失效。", "tonalRamp": ["#0C0B09", "#262523", "#434240", "#62615F", "#838280", "#A6A5A2", "#CAC9C6", "#EFEEEB"] },
+      "on-band-dark": { "role": "neutral", "displayName": "通栏纸白（暗）", "canonical": "#E9DECF", "purpose": "暗色主题通栏内的主文字。5.77:1。", "tonalRamp": ["#110A02", "#2C2418", "#494034", "#696053", "#8B8173", "#AEA395", "#D2C7B9", "#F8EDDE"] },
+      "on-band-muted": { "role": "neutral", "displayName": "通栏纸白次级", "canonical": "#EFD9CE", "purpose": "通栏内的次级文字、栏目索引、字段名。5.65:1（亮）。", "tonalRamp": ["#150703", "#312119", "#4F3E35", "#6F5D53", "#917E74", "#B5A096", "#DAC4B9", "#FEEADF"] },
+      "on-band-muted-dark": { "role": "neutral", "displayName": "通栏纸白次级（暗）", "canonical": "#E2D0C0", "purpose": "暗色主题通栏内的次级文字。5.12:1。", "tonalRamp": ["#140801", "#2F2216", "#4D3F32", "#6E5E50", "#8F7F70", "#B3A292", "#D7C6B6", "#FDEBDB"] },
+      "ink": { "role": "neutral", "displayName": "墨", "canonical": "#1C1A17", "purpose": "纸面上的正文与标题。16.92:1（亮）/ 14.60:1（暗）。", "tonalRamp": ["#0D0B08", "#272522", "#44423E", "#63615D", "#84827E", "#A7A5A1", "#CBC9C4", "#F1EEEA"] },
+      "ink-dark": { "role": "neutral", "displayName": "墨（暗）", "canonical": "#EDE7DC", "purpose": "暗色主题纸面上的正文。", "tonalRamp": ["#0E0B04", "#29241C", "#464138", "#666157", "#878278", "#AAA49A", "#CEC8BE", "#F4EEE3"] },
+      "ink-muted": { "role": "neutral", "displayName": "次级墨", "canonical": "#5A544C", "purpose": "字段名、说明、票脚。7.29:1（亮）/ 6.65:1（暗）。", "tonalRamp": ["#0F0A05", "#29241D", "#474139", "#666058", "#888179", "#ABA49B", "#CFC8BF", "#F5EDE4"] },
+      "ink-muted-dark": { "role": "neutral", "displayName": "次级墨（暗）", "canonical": "#A69C8E", "purpose": "暗色主题的次级墨。", "tonalRamp": ["#110A02", "#2C2418", "#494134", "#696053", "#8A8173", "#AEA395", "#D2C7B9", "#F8EDDE"] },
+      "rule-color": { "role": "neutral", "displayName": "栏线", "canonical": "#D9D2C4", "purpose": "1px 装饰性分栏线。不承担控件识别，不受 WCAG 1.4.11 约束。", "tonalRamp": ["#0F0A03", "#2A241A", "#474136", "#676154", "#888275", "#ABA497", "#CFC8BA", "#F5EEDF"] },
+      "rule-color-dark": { "role": "neutral", "displayName": "栏线（暗）", "canonical": "#332E27", "purpose": "暗色主题的栏线。", "tonalRamp": ["#0F0A05", "#29241D", "#46413A", "#666058", "#878179", "#AAA49B", "#CFC8BF", "#F4EDE4"] },
+      "rule-strong": { "role": "neutral", "displayName": "控件边框", "canonical": "#888886", "purpose": "输入框、次级按钮、签字线、票眉下划线。3.46:1（亮）/ 3.14:1（暗）—— 达 1.4.11 的 3:1。", "tonalRamp": ["#0B0B0A", "#252523", "#424240", "#61615F", "#828280", "#A5A5A3", "#C9C9C7", "#EEEEEC"] },
+      "rule-strong-dark": { "role": "neutral", "displayName": "控件边框（暗）", "canonical": "#666668", "purpose": "暗色主题的控件边框。", "tonalRamp": ["#0B0B0C", "#252526", "#424244", "#616163", "#828284", "#A5A5A7", "#C9C9CB", "#EEEEF0"] },
+      "row-hover": { "role": "neutral", "displayName": "行悬停", "canonical": "#F2EDE2", "purpose": "行项与备注事项的 hover 底色；次级按钮悬停底色。", "tonalRamp": ["#0E0B05", "#28251C", "#464239", "#656157", "#868278", "#A9A59A", "#CDC9BE", "#F3EEE3"] },
+      "row-hover-dark": { "role": "neutral", "displayName": "行悬停（暗）", "canonical": "#241F1B", "purpose": "暗色主题的行悬停底色。", "tonalRamp": ["#0F0A07", "#292420", "#46413C", "#66605B", "#87817C", "#AAA49E", "#CFC8C2", "#F4EDE7"] },
+      "seal": { "role": "secondary", "displayName": "监制章红", "canonical": "#C0271A", "purpose": "印章描边与文字、纸面上的焦点环、票眉电话链接、主行动填充。5.77:1（亮）/ 5.92:1（暗）；白字压它 5.92:1；绝不出现在棕红通栏上（1.29:1）。", "tonalRamp": ["#1F0000", "#4D0100", "#800400", "#B4170B", "#DD4636", "#FE7461", "#FFB3A7", "#FFE9E5"] },
+      "seal-dark": { "role": "secondary", "displayName": "监制章红（暗）", "canonical": "#E8705F", "purpose": "暗色主题的章红：印章、焦点环、主行动、caret。", "tonalRamp": ["#1F0000", "#4C0200", "#800500", "#A63427", "#CD5849", "#F57C6A", "#FFB3A7", "#FFE9E5"] },
+      "vote": { "role": "tertiary", "displayName": "抵扣联蓝", "canonical": "#1B3A6B", "purpose": "只有一份差事：明细行项里的「参考案例」链接。10.98:1（亮）/ 8.29:1（暗）。", "tonalRamp": ["#000923", "#042251", "#224173", "#406196", "#6083BA", "#82A6DF", "#AACBFE", "#E5EFFE"] },
+      "vote-dark": { "role": "tertiary", "displayName": "抵扣联蓝（暗）", "canonical": "#8FB3E0", "purpose": "暗色主题的案例链接色。", "tonalRamp": ["#000B1F", "#052549", "#234369", "#42638C", "#6285AF", "#84A8D4", "#A8CCFA", "#E4F0FF"] },
+      "selection-bg": { "role": "neutral", "displayName": "选中底", "canonical": "#8C3A1E", "purpose": "::selection 背景取命名材料本身。", "tonalRamp": ["#1B0300", "#451100", "#732303", "#984529", "#BE674A", "#E48A6C", "#FFB59D", "#FFE9E2"] },
+      "selection-bg-dark": { "role": "neutral", "displayName": "选中底（暗）", "canonical": "#E8705F", "purpose": "暗色主题的 ::selection 背景。", "tonalRamp": ["#1F0000", "#4C0200", "#800500", "#A63427", "#CD5849", "#F57C6A", "#FFB3A7", "#FFE9E5"] },
+      "selection-fg": { "role": "neutral", "displayName": "选中字", "canonical": "#FDFCF9", "purpose": "::selection 文字取纸白。", "tonalRamp": ["#0C0B09", "#262523", "#434240", "#62615F", "#838280", "#A6A5A2", "#CAC9C6", "#EFEEEB"] },
+      "selection-fg-dark": { "role": "neutral", "displayName": "选中字（暗）", "canonical": "#1A1614", "purpose": "暗色主题的 ::selection 文字。", "tonalRamp": ["#0E0A08", "#282422", "#46413F", "#65605D", "#86817E", "#A9A4A1", "#CDC8C5", "#F3EDEA"] },
+      "caret": { "role": "neutral", "displayName": "光标", "canonical": "#C0271A", "purpose": "caret-color 取章红。", "tonalRamp": ["#1F0000", "#4D0100", "#800400", "#B4170B", "#DD4636", "#FE7461", "#FFB3A7", "#FFE9E5"] },
+      "caret-dark": { "role": "neutral", "displayName": "光标（暗）", "canonical": "#E8705F", "purpose": "暗色主题的 caret。", "tonalRamp": ["#1F0000", "#4C0200", "#800500", "#A63427", "#CD5849", "#F57C6A", "#FFB3A7", "#FFE9E5"] },
+      "scrollbar-track": { "role": "neutral", "displayName": "滚动条轨道", "canonical": "#F6F3EC", "purpose": "浏览器家具也走 token。", "tonalRamp": ["#0D0B07", "#272520", "#44423C", "#63615B", "#85827C", "#A8A59E", "#CCC9C2", "#F1EEE7"] },
+      "scrollbar-track-dark": { "role": "neutral", "displayName": "滚动条轨道（暗）", "canonical": "#221D1A", "purpose": "暗色主题的滚动条轨道。", "tonalRamp": ["#0F0A08", "#292421", "#46413D", "#66605C", "#87817D", "#AAA3A0", "#CEC8C3", "#F4EDE9"] },
+      "scrollbar-thumb": { "role": "neutral", "displayName": "滚动条滑钮", "canonical": "#C9BFAE", "purpose": "亮色主题的滚动条滑钮。", "tonalRamp": ["#110A01", "#2C2416", "#494132", "#696051", "#8A8171", "#ADA493", "#D2C8B7", "#F8EDDB"] },
+      "scrollbar-thumb-dark": { "role": "neutral", "displayName": "滚动条滑钮（暗）", "canonical": "#4A4139", "purpose": "暗色主题的滚动条滑钮。", "tonalRamp": ["#110904", "#2B231C", "#494038", "#695F57", "#8A8077", "#ADA39A", "#D2C7BD", "#F8ECE2"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display · 宋体票头", "purpose": "票头公司全称（h1）。宋体是中国官方票据的标题字体，不是平台默认回退。" },
+      "headline": { "displayName": "Headline · 宋体板块标题", "purpose": "板块标题（h2）与合计行的大写金额。" },
+      "title": { "displayName": "Title · 宋体条目名", "purpose": "行项项目名、联次与供方名称、备注事项条目。" },
+      "body": { "displayName": "Body · 黑体正文", "purpose": "全站基准 16px / 1.7；段落实际取 13.5–15px 配 leading-relaxed。" },
+      "caption": { "displayName": "Caption · 票据说明", "purpose": "说明、备案、注解。正文的下限。" },
+      "label": { "displayName": "Label · 字段名", "purpose": "11px / 0.08em 的字段名，必须紧接着它命名的值。" },
+      "numeric": { "displayName": "Numeric · 等宽数字", "purpose": "票号、日期、备案号、序号、合计。全站 tabular-nums。" }
+    },
+    "materials": {
+      "note": "这个世界的颜色分「命名材料」与「专色」两类，不做主题色分配。",
+      "namedMaterial": { "token": "band", "value": "#8C3A1E", "form": "一条通栏（不是地面、不是点缀）", "decision": "用户定调「棕红是一条通栏 更符合我的审美」，回退提交 ff1d4b2；此前整页地面为棕红的形态已被否。" },
+      "spots": [
+        { "token": "seal", "name": "监制章红", "duty": "印章描边与文字、纸面上的焦点环、主行动填充、票眉电话链接、caret" },
+        { "token": "vote", "name": "抵扣联蓝", "duty": "明细行项里的「参考案例」链接" }
       ]
     },
-
-    "breakpoints": {
-      "mobile": 375,
-      "tablet": 768,
-      "desktop": 1440
-    },
-
-    "motion": {
-      "ease": "cubic-bezier(0.16, 1, 0.3, 1)",
-      "thesis": "世界的原生动作：打印、填写、盖章、核销",
-      "tokens": {
-        "print-wipe": "950ms — 棕红地面自左向右显影",
-        "rule-draw": "760ms — 栏线绘制",
-        "ink-in": "640ms — 行项落墨（离焦到清晰）",
-        "type-in": "760ms steps() — 等宽编号逐字打出",
-        "stamp": "820ms — 核销章落章",
-        "seal-press": "680ms — 监制章按下"
-      },
-      "reducedMotion": "全部位移与缩放降级；印章与揭示态直接显示"
-    },
-
-    "surfaces": {
-      "ground": {
-        "value": "#8C3A1E",
-        "role": "页面地面 —— 命名材料。两主题同值",
-        "note": "背景以字面值写在 html 与 body 上，不经 CSS var()（检测器无法解析 var() 背景）"
-      },
-      "groove": {
-        "value": "rgba(12, 10, 8, 0.18)",
-        "over": "#8C3A1E",
-        "blended": "#75311A",
-        "role": "输入框凹槽 —— 材料上刻出的暗槽",
-        "note": "placeholder 在其上 7.01:1(亮) / 6.34:1(暗)"
-      },
-      "seal": {
-        "value": "#C0271A",
-        "role": "章红 —— 只作填充，不作文字或描边",
-        "whiteOnIt": "5.92:1",
-        "onGround": "1.29:1 — 故绝不用作地面上的文字或描边"
-      }
+    "shadows": [],
+    "shadowNote": "零阴影。产物 CSS 中 box-shadow 只出现在 Tailwind preflight 的 :-moz-ui-invalid{box-shadow:none}。深度由栏线、双线收口、面层差与印章叠压画出。",
+    "gradients": [],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "全站唯一的缓动曲线（--ease）。" },
+      { "name": "print-wipe", "value": "950ms clip-path inset 自左向右", "purpose": "首屏棕红通栏显影 —— 这张票被打印出来。" },
+      { "name": "rule-draw", "value": "760ms scaleX(0) → scaleX(1)，origin left", "purpose": "购方栏底边绘制进来；打印序列的第二拍。" },
+      { "name": "ink-in", "value": "640ms opacity + translateY(14px) + blur(3px) → 清晰", "purpose": "落墨：离焦到清晰，读作墨吸进纸里（首屏 850ms 起，--i 以 130ms 错开）。" },
+      { "name": "type-in", "value": "760ms steps(var(--chars, 12), end)", "purpose": "等宽字符逐字打出（针式打印机）：日期与票号。" },
+      { "name": "rv-ink / rv-rule", "value": "640ms / 760ms，--i 以 110ms 错开，rule 另加 220ms 延迟", "purpose": "下方板块的滚动揭示：先落墨，后画线（useInView 触发）。" },
+      { "name": "stamp", "value": "820ms rotate -16° → -7°，scale 2.6 → 1", "purpose": "核销章落章（已交付联次）。" },
+      { "name": "ink-spread", "value": "900ms opacity .6 → 0，scale .55 → 2.1，延迟 300ms", "purpose": "落章后的墨晕。" },
+      { "name": "seal-press", "value": "680ms rotate -3.5° 固定，scale 1.75 → 0.93 → 1.02 → 1", "purpose": "监制章按下（合计区进入视口）。" },
+      { "name": "ink-flash", "value": "900ms 章红 → 深棕 → 章红 + translateY(2px)", "purpose": "复制动作的反馈。" }
+    ],
+    "motionDegradation": [
+      "@media (scripting: none)：印章与揭示态一律可见",
+      "@media (prefers-reduced-motion: reduce)：位移与缩放全降级，状态信息保留",
+      "RevealBoot 1.8s 失效保护：覆盖「脚本可解析但执行失败」，撤下 .js-reveal，内容全部可见"
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px", "purpose": "收起票号（唯一用途）" },
+      { "name": "md", "value": "768px", "purpose": "主切换断点：表头出现、行项变四栏、栏目并置" },
+      { "name": "gate-375", "value": "375px", "purpose": "门禁最小档" },
+      { "name": "gate-768", "value": "768px", "purpose": "门禁平板档" },
+      { "name": "gate-1440", "value": "1440px", "purpose": "门禁桌面档（实测 0px 横向溢出）" }
+    ],
+    "container": { "value": "1180px", "purpose": "全站唯一内容容器（max-w-[1180px]），左右 px-6 / md:px-10。" },
+    "gate": {
+      "method": "impeccable detect 只解析内联样式；Next 静态导出的 CSS 在 out/_next/static/css/*.css，必须单独扫该文件，否则是假阴性。",
+      "positiveControls": ["故意违规的内联 <style> 文件 → 8 条发现", "故意违规的 .css 文件 → 1 条发现"],
+      "results": { "cssBundle": 0, "indexHtml": 0, "notFoundHtml": 2 },
+      "knownWarningsNotSuppressed": "out/404.html 的 2 条 tiny-text（11.5px 版权行、11px 票脚）。未做任何 suppress，判为非阻塞并上报：同一套 11px 字段名/票眉在主站出现 19 处而 detect 报 0 条，检测器在同类用法上判定不一致。",
+      "measuredBeyondDetector": "通栏 rgb(140,58,30)；h1 on 通栏 7.47:1 / 5.77:1；栏目索引 5.65:1 / 5.12:1；焦点环 5.77:1 / 5.92:1（纸面）与 5.65:1 / 5.12:1（通栏）；全站圆角 0px；横向溢出 0px"
     }
   },
-
-  "colorMeta": {
-    "ground": { "displayName": "票面棕红", "role": "地面 / 材料本身" },
-    "on-ground": { "displayName": "纸白", "role": "地面上的正文", "contrastOnGround": 7.47 },
-    "on-ground-muted": { "displayName": "纸白次级", "role": "地面上的次级文字", "contrastOnGround": 5.65 },
-    "seal": { "displayName": "监制章红", "role": "仅填充", "contrastOnGround": 1.29 },
-    "vote": { "displayName": "抵扣联蓝", "role": "已弃用于地面" },
-    "on-ground-link": { "displayName": "地面链接色", "value": "#BBD4EE", "contrastOnGround": 5.03 }
+  "components": [
+    {
+      "name": "主行动按钮",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "全站唯一的高饱和实心红：合计区「立刻咨询」。章红填充 + 白字，直角，无阴影。",
+      "html": "<a class=\"ds-act\" href=\"tel:17721428575\">立刻咨询</a>",
+      "css": ".ds-act{display:inline-flex;align-items:center;gap:8px;background:var(--seal);color:#FFFFFF;font-family:\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif;font-weight:600;font-size:16px;line-height:1.7;padding:12px 24px;border:none;border-radius:0;cursor:pointer;text-decoration:none;transition:background 200ms cubic-bezier(.16,1,.3,1)}.ds-act:hover{background:#A31F14}.ds-act:active{transform:translateY(1px)}.ds-act:focus-visible{outline:2px solid var(--seal);outline-offset:1px}"
+    },
+    {
+      "name": "次级行动按钮",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "描边不填充 —— 世界里只允许一个实心红，那一席归主行动。复制成功时描边与文字转章红。",
+      "html": "<button class=\"ds-act-quiet\" type=\"button\">复制备注并致电</button>",
+      "css": ".ds-act-quiet{display:inline-flex;align-items:center;gap:8px;background:none;color:var(--ink);border:1px solid var(--rule-strong);border-radius:0;font-family:\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif;font-weight:600;font-size:16px;padding:12px 24px;cursor:pointer;transition:background 200ms cubic-bezier(.16,1,.3,1),border-color 200ms cubic-bezier(.16,1,.3,1)}.ds-act-quiet:hover{background:var(--row-hover);border-color:var(--band-deep)}.ds-act-quiet:active{transform:translateY(1px)}.ds-act-quiet[data-copied='true']{border-color:var(--seal);color:var(--seal)}.ds-act-quiet:focus-visible{outline:2px solid var(--seal);outline-offset:1px}"
+    },
+    {
+      "name": "票据字段输入",
+      "kind": "input",
+      "refersTo": "field-input",
+      "description": "纸面上的票据字段：纸底、深墨边框、直角。hover 边框转棕红深档，focus 换成章红描边 + 2px outline。",
+      "html": "<label class=\"ds-field-label\" for=\"ds-note\">需求备注 / REMARKS</label><textarea class=\"ds-input\" id=\"ds-note\" rows=\"3\" placeholder=\"例：我们做连锁零售，想做一个门店的进销存后台，要和现有的收银系统对接\"></textarea><p class=\"ds-input-hint\">未填写也可以直接拨打。备注只是帮您少讲一遍。</p>",
+      "css": ".ds-field-label{display:block;margin-bottom:4px;font-family:\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif;font-size:11px;letter-spacing:.08em;color:var(--ink-muted)}.ds-input{display:block;width:100%;box-sizing:border-box;background:var(--paper);color:var(--ink);border:1px solid var(--rule-strong);border-radius:0;padding:12px;font-family:\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif;font-size:16px;line-height:1.7;transition:border-color 160ms cubic-bezier(.16,1,.3,1)}.ds-input:hover{border-color:var(--band-deep)}.ds-input:focus{outline:2px solid var(--seal);outline-offset:0;border-color:var(--seal)}.ds-input::placeholder{color:var(--ink-muted)}.ds-input-hint{margin:8px 0 0;font-size:12px;line-height:1.625;color:var(--ink-muted)}"
+    },
+    {
+      "name": "字段名 / 值对",
+      "kind": "custom",
+      "refersTo": "field-label",
+      "description": "这个世界的结构装置：每个字段名下面必须坐着它命名的值 —— 没有值的 label 就是装饰性 kicker。",
+      "html": "<span class=\"ds-field-label\">供方名称 / SUPPLIER</span><p class=\"ds-field-value\">上海含章收珍软件科技有限公司</p>",
+      "css": ".ds-field-label{display:block;margin-bottom:4px;font-family:\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif;font-size:11px;letter-spacing:.08em;color:var(--ink-muted)}.ds-field-value{margin:0;font-family:\"Songti SC\",\"SimSun\",\"Noto Serif SC\",serif;font-size:clamp(1.05rem,2vw,1.3rem);font-weight:400;line-height:1.375;color:var(--ink)}"
+    },
+    {
+      "name": "棕红通栏 · 开票方与栏目索引",
+      "kind": "nav",
+      "refersTo": "ticket-band",
+      "description": "命名材料本身，全站唯一一条通栏。承载开票方（字段名 + 宋体全称 + 一句自述）与票据的栏目索引；通栏内的字取两种纸白。",
+      "html": "<div class=\"ds-band\"><p class=\"ds-band-label\">开票方 / ISSUER</p><h1 class=\"ds-band-title\">上海含章收珍软件科技有限公司</h1><nav class=\"ds-band-nav\" aria-label=\"票据栏目\"><a href=\"#hero\">首页</a><a href=\"#services\">服务</a><a href=\"#projects\">案例</a><a href=\"#about\">关于</a><a href=\"#contact\">联系</a></nav></div>",
+      "css": ".ds-band{background:var(--band);color:var(--on-band);padding:28px 24px 20px}.ds-band-label{margin:0;font-family:\"JetBrains Mono\",Consolas,monospace;font-size:11px;letter-spacing:.14em;color:var(--on-band-muted)}.ds-band-title{margin:12px 0 0;font-family:\"Songti SC\",\"SimSun\",\"Noto Serif SC\",serif;font-size:clamp(1.4rem,4.4vw,3rem);font-weight:400;line-height:1.2;letter-spacing:-.02em;color:var(--on-band);text-wrap:balance}.ds-band-nav{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:12px;font-family:\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif;font-size:13px}.ds-band-nav a{color:var(--on-band-muted);text-decoration:underline;text-decoration-color:rgba(239,217,206,.4);text-underline-offset:5px;transition:color 200ms cubic-bezier(.16,1,.3,1)}.ds-band-nav a:hover{color:var(--on-band);text-decoration-color:var(--on-band)}.ds-band-nav a:focus-visible{outline:2px solid var(--on-band);outline-offset:1px}"
+    },
+    {
+      "name": "行项",
+      "kind": "custom",
+      "refersTo": "line-item-row",
+      "description": "页面的视觉锚点：每项服务是一行带栏线的行项，不是卡片。序号等宽，末尾是真链接或一个破折号。",
+      "html": "<ol class=\"ds-rows\"><li class=\"ds-row\"><span class=\"ds-row-no\">01</span><h3 class=\"ds-row-title\">移动App开发</h3><p class=\"ds-row-desc\">iOS / Android 原生及跨平台开发，Flutter/React Native 技术栈，从UI设计到应用商店上架全流程服务</p><a class=\"ds-row-link\" href=\"#projects\">2048集卡 · HarmonyOS</a></li><li class=\"ds-row\"><span class=\"ds-row-no\">02</span><h3 class=\"ds-row-title\">管理平台开发</h3><p class=\"ds-row-desc\">企业级 Web 管理系统，数据可视化大屏、流程自动化、权限管理、报表中心，提升运营效率</p><a class=\"ds-row-link\" href=\"#projects\">手机回收订单管理系统</a></li></ol>",
+      "css": ".ds-rows{margin:0;padding:0;list-style:none}.ds-row{display:grid;grid-template-columns:64px 1fr 2fr 1.1fr;gap:0 24px;align-items:baseline;border-bottom:1px solid var(--rule-color);padding:16px 0;transition:background-color 150ms}.ds-row:hover{background:var(--row-hover)}.ds-row-no{font-family:\"JetBrains Mono\",Consolas,monospace;font-size:13px;color:var(--ink-muted);text-align:right}.ds-row-title{margin:0;font-family:\"Songti SC\",\"SimSun\",serif;font-size:18px;font-weight:400;line-height:1.375;color:var(--ink)}.ds-row-desc{margin:0;max-width:52ch;font-family:\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif;font-size:14px;line-height:1.625;color:var(--ink-muted)}.ds-row-link{font-family:\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif;font-size:13px;color:var(--vote);text-decoration:underline;text-decoration-color:rgba(27,58,107,.4);text-underline-offset:3px}.ds-row-link:hover{text-decoration-color:var(--vote)}"
+    },
+    {
+      "name": "监制章",
+      "kind": "custom",
+      "refersTo": "seal",
+      "description": "章红描边 + 宋体 + -3.5° 旋转。进入视口时按下（seal-press），章不会盖得端正，所以它歪着。",
+      "html": "<span class=\"ds-seal\">上海含章收珍 · 交付监制</span>",
+      "css": "@keyframes ds-seal-press{0%{transform:rotate(-3.5deg) scale(1.75);opacity:0}55%{transform:rotate(-3.5deg) scale(.93);opacity:1}75%{transform:rotate(-3.5deg) scale(1.02);opacity:1}100%{transform:rotate(-3.5deg) scale(1);opacity:1}}.ds-seal{display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--seal);color:var(--seal);font-family:\"Songti SC\",\"SimSun\",serif;font-size:12px;letter-spacing:.12em;padding:8px 12px;animation:ds-seal-press 680ms cubic-bezier(.16,1,.3,1) both}@media (prefers-reduced-motion: reduce){.ds-seal{animation:none;opacity:1;transform:rotate(-3.5deg)}}"
+    },
+    {
+      "name": "核销章",
+      "kind": "custom",
+      "refersTo": "stamp-mark",
+      "description": "已交付联次的核销章：3px 章红描边、-7° 旋转，落章后拖一层内缩 6px 的墨晕（ink-spread）。已完成的联次不消失，只被盖过去。",
+      "html": "<span class=\"ds-stamp\" data-stamped=\"true\">已交付</span>",
+      "css": "@keyframes ds-stamp{0%{transform:rotate(-16deg) scale(2.6);opacity:0}52%{transform:rotate(-5deg) scale(.9);opacity:1}68%{transform:rotate(-8deg) scale(1.04);opacity:1}84%{transform:rotate(-6.5deg) scale(.99);opacity:1}100%{transform:rotate(-7deg) scale(1);opacity:1}}@keyframes ds-ink-spread{0%{opacity:.6;transform:scale(.55)}100%{opacity:0;transform:scale(2.1)}}.ds-stamp{position:relative;display:inline-block;border:3px solid var(--seal);color:var(--seal);font-family:\"Songti SC\",\"SimSun\",serif;font-size:12px;letter-spacing:.16em;padding:8px 16px;animation:ds-stamp 820ms cubic-bezier(.16,1,.3,1) both}.ds-stamp::after{content:\"\";position:absolute;inset:-6px;border:2px solid var(--seal);animation:ds-ink-spread 900ms cubic-bezier(.16,1,.3,1) 300ms both}@media (prefers-reduced-motion: reduce){.ds-stamp{animation:none;opacity:1}.ds-stamp::after{display:none}}"
+    },
+    {
+      "name": "作废票据（404）",
+      "kind": "card",
+      "refersTo": "void-ticket",
+      "description": "404 是一张被作废的票据：作废章压在票据上沿、双线夹住票身、票号 № HZSZ-2026-404。这个手势属于世界，不由通用错误页模板替代。",
+      "html": "<div class=\"ds-void\"><span class=\"ds-void-stamp\">作废</span><div class=\"ds-void-body\"><span class=\"ds-void-label\">错误代码 / CODE</span><p class=\"ds-void-code\">404</p><p class=\"ds-void-text\">您访问的页面不存在或已被移动。</p><p class=\"ds-void-sub\">这张票据没有开出过 —— 请核对地址，或从首页重新进入。</p><a class=\"ds-void-act\" href=\"/\">返回首页</a></div></div>",
+      "css": ".ds-void{position:relative;width:100%;max-width:560px;color:var(--ink);font-family:\"PingFang SC\",\"Microsoft YaHei\",system-ui,sans-serif}.ds-void::before,.ds-void::after{content:\"\";display:block;height:5px;border-top:1px solid var(--band-deep);border-bottom:1px solid var(--band-deep)}.ds-void-body{border-left:1px solid var(--rule-color);border-right:1px solid var(--rule-color);padding:48px 32px;text-align:center}.ds-void-stamp{position:absolute;top:-16px;right:24px;z-index:1;border:3px solid var(--seal);color:var(--seal);font-family:\"Songti SC\",\"SimSun\",serif;font-size:clamp(1.5rem,5vw,2.25rem);letter-spacing:.16em;padding:8px 16px;transform:rotate(-7deg)}.ds-void-label{display:block;margin-bottom:4px;font-size:11px;letter-spacing:.08em;color:var(--ink-muted)}.ds-void-code{margin:0;font-family:\"JetBrains Mono\",Consolas,monospace;font-size:clamp(3.5rem,12vw,6rem);line-height:1;color:var(--ink)}.ds-void-text{margin:24px 0 0;font-size:15px;line-height:1.625;color:var(--ink-muted)}.ds-void-sub{margin:4px 0 0;font-size:13px;line-height:1.625;color:var(--ink-muted)}.ds-void-act{display:inline-flex;align-items:center;gap:8px;margin-top:32px;background:var(--seal);color:#FFFFFF;font-weight:600;font-size:16px;padding:12px 24px;border-radius:0;text-decoration:none;transition:background 200ms cubic-bezier(.16,1,.3,1)}.ds-void-act:hover{background:#A31F14}.ds-void-act:focus-visible{outline:2px solid var(--seal);outline-offset:1px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "这张票被打印出来，然后被填写、盖章、核销。",
+    "overview": "页面本身就是一份正式商业凭证。它拒绝本品类默认的那个排布 —— 深色底、紫蓝渐变、发光边缘、居中大标题、四张等大服务卡、logo 墙（S1 的方向契约 THESIS 逐条写明要删的就是这些）。留到纸面上的东西必须像票据一样可核验：每一项服务是一个字段，每一行有栏线，每一个数字有出处。\n\n纸面为地，棕红只作一条通栏。#8C3A1E 在这个世界里是命名材料 —— 票面本身，不是可自由分配的主题色。它只出现在一条通栏里，承载开票方与栏目索引；页面地面是纸白。中途曾按「整页由单一材料色域占满」的判定把整页地面翻成棕红，用户看过产物后定调「棕红是一条通栏 更符合我的审美」，改回的提交是 ff1d4b2。用户定调优先于任何判定与契约草案。\n\n票面密度高、留白少：秩序由栏线建立，不靠空白。零圆角、零阴影、零渐变是法规级的三条 —— 产物里可以逐条验尸。世界的原生动作是：这张票被打印出来，然后被填写、盖章、核销；动效只承担这一套动作，并带三层降级（scripting: none、prefers-reduced-motion、RevealBoot 1.8s 失效保护）。",
+    "keyCharacteristics": [
+      "纸面为地，棕红只此一条通栏，承载开票方与栏目索引",
+      "零圆角、零阴影、零渐变；深度与秩序都由 1px 栏线画出来",
+      "宋体标题 / 黑体正文 / 等宽数字，三个声部",
+      "全站唯一实心按钮：合计区的「立刻咨询」（章红填充）",
+      "两枚专色各有名分：监制章红（纸面）、抵扣联蓝（案例链接）",
+      "11px 字段名命名字段，不承担装饰；数字一律等宽",
+      "404 是一张作废票据，不是通用错误页"
+    ],
+    "rules": [
+      { "name": "命名材料律", "body": "棕红是票面材料，不是可自由分配的主题色。它是一条通栏，不是地面，也不是点缀 —— 这三种用法只有通栏成立，另两种都被否过。", "section": "colors" },
+      { "name": "两枚专色律", "body": "印章红与抵扣联蓝各有名分，不互换、不混用、不添第三枚。红是盖章与行动的颜色，蓝是「指向别处」的颜色。", "section": "colors" },
+      { "name": "过地换色律", "body": "章红在纸面上可作文字、描边、填充、焦点环；一到棕红通栏里就一律不可用（章红 on 棕红仅 1.29:1）。通栏之内的焦点环必须改取 --on-band —— 曾一度全站取章红而地面是棕红，15 个可聚焦元素里 6 个焦点环隐形。", "section": "colors" },
+      { "name": "唯一实心律", "body": "全站只有一枚填充实心红：合计区的「立刻咨询」。其余行动一律描边（.act-quiet）。", "section": "colors" },
+      { "name": "三声部律", "body": "宋体负责标题与票面大字，黑体负责正文，等宽负责一切数字与票号。三者不换班 —— 数字用宋体会读成印刷品，正文用等宽会读成终端的截图。", "section": "typography" },
+      { "name": "字段名律", "body": "11px 小字必须是某个字段的名字，紧跟它命名的值。本世界用字段名建立结构，不用装饰性 kicker —— 票头那条「开票方 / ISSUER」坐在 h1 之上，它仍然是字段名，因为它命名的值就是公司全称本身。一个没有值的字段名就是 kicker，不许出现。", "section": "typography" },
+      { "name": "等宽数字律", "body": "数字一律等宽 + tabular-nums。票据靠列对齐，不靠字体美观。", "section": "typography" },
+      { "name": "栏线秩序律", "body": "秩序由栏线建立，不靠留白。要分隔就先考虑加一条线（.rule-b），再考虑加一片空；票面密度高是这个世界的优点，不是要修的毛病。", "section": "layout" },
+      { "name": "单一容器律", "body": "每一节都坐在同一个 1180px 容器里，栏线因此能首尾对齐、连成票面。不要为一个板块另开一个宽度。", "section": "layout" },
+      { "name": "三边律", "body": "栏线只有 .rule-t / .rule-b / .rule-l 三条边 —— 没有 .rule-r。它们是普通 CSS 类，不是 Tailwind 工具类：md:rule-r 这类写法静默失效。需要按断点变化时，用 Tailwind 工具类。", "section": "layout" },
+      { "name": "平压律", "body": "深度是画出来的，不是投出来的。要分层就画线、换纸色、盖章 —— 不加阴影、不加模糊、不加玻璃。", "section": "elevation" },
+      { "name": "起手帧律", "body": "动画的起手帧也会撑开布局（opacity: 0 的元素照样占据可滚动溢出区）。任何带 scale/位移的入场帧，先想它在最窄视口里把什么顶出去了。", "section": "elevation" },
+      { "name": "直角律", "body": "圆角不属于这个世界。检验一个新构件的办法：把它所有圆角改成 0，若它因此更像票据，那它就还没写完。", "section": "shapes" },
+      { "name": "印章特权限", "body": "只有印章能歪。旋转数值是固定的（-3.5° / -7°），不要在别处借用角度。", "section": "shapes" }
+    ],
+    "dos": [
+      "Do 把棕红当一条通栏用：它承载开票方与栏目索引，#8C3A1E 两主题同值。",
+      "Do 把新构件放进 1180px 容器与 4px 刻度里（--s1–--s32），栏线对齐票面。",
+      "Do 用字段名（.field-label 11px）命名每一个值；每个字段名紧跟它命名的值。",
+      "Do 数字一律等宽 + tabular-nums；序号用 String(i+1).padStart(2,'0') 补零。",
+      "Do 在棕红通栏内取 --on-band / --on-band-muted，焦点环取 --on-band；在纸面上焦点环取 --seal。",
+      "Do 新增揭示动效时用 rv-ink + rv-rule + useInView，并以 --i 以 110ms 错开；同时保证三层降级（scripting: none、prefers-reduced-motion、RevealBoot 1.8s）都覆盖得到。",
+      "Do 把 11–11.5px 限制在票据家什（票眉、字段名、票脚）里；正文不小于 12.5px。",
+      "Do 出具门禁证据时扫 out/_next/static/css/*.css（impeccable detect 只解析内联样式，对 Next 静态导出的 HTML 是盲的），并先跑阳性对照再采信阴性结果。"
+    ],
+    "donts": [
+      "Don't 把棕红铺成整页地面或大面积面板 —— 那是被用户否过的形态（提交 ff1d4b2 之前的状态）。",
+      "Don't 在棕红通栏上使用章红作文字、描边或填充（1.29:1，看不见）。",
+      "Don't 给任何东西加圆角、阴影、渐变、模糊或玻璃 —— 三条法规各自可在产物里验尸。",
+      "Don't 引入图标（本仓零图标，无 lucide 依赖）或把 Unicode 字形当图标用。",
+      "Don't 给 .rule-* 这类普通 CSS 类加 md: / sm: 前缀（静默失效）；需要断点变化时用 Tailwind 工具类。",
+      "Don't 假设 .rule-r 存在 —— 只有 t / b / l 三条边。",
+      "Don't 在同一个元素上同时放静态边框和动画绘制线（会叠成双线，且动效因首帧已在而完全不可见）。",
+      "Don't 新开第二种动效语言：不打 bounce / elastic，不引入动效库，不让非印章的元素旋转。",
+      "Don't 用字段名做装饰 —— 没有值的 label 就是 kicker，这个世界不收。",
+      "Don't 用 CSS 变量间接声明来让检测器闭嘴（impeccable detect 不解析 var()，看不见不等于没有）。"
+    ]
   }
 }
