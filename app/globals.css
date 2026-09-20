@@ -12,7 +12,7 @@
    ⚠️ 地面是票面棕红 —— 材料本身，不是点缀。
    首版的棕红只作为一条通栏出现，页面 90% 是中性平面，
    与契约「棕红占满整片地面，是材料而非点缀」相悖，已修正：
-   两主题的地面同为 #8C3A1E，内容坐在其上的纸白/深暖面板里。
+   两主题的地面同为 #8C3A1E，内容直接坐在材料上，不设中间面板。
    ============================================================ */
 
 :root {
@@ -28,9 +28,7 @@
   --font-body: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", Consolas, "Courier New", monospace;
 
-  --lh-tight: 1.25;
   --lh-body: 1.7;
-  --measure: 68ch;
 
   /* ── 缓动 ── */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -51,19 +49,9 @@
      取 #BBD4EE 得 5.03:1。 */
   --on-ground-link: #BBD4EE;
 
-  /* ══ 面板：坐在棕红地面上（亮色 = 纸白）══ */
-  --panel: #FDFCF9;
-  --panel-sunk: #F4F1E9;
-  --ink: #1C1A17;              /* 16.92:1 on 纸白 */
-  --ink-muted: #5A544C;        /*  7.29:1 */
-  --rule-color: #D9D2C4;
-  --rule-strong: #888886;      /* 控件边框 3.46:1 */
-  --row-hover: #F0EBE0;
   /* 章红只作填充（.act 按钮底），不作文字或描边 ——
      它 on 棕红仅 1.29:1。白字 on 章红 = 5.92:1 可用。 */
   --seal: #C0271A;
-  --vote: #1B3A6B;             /* 抵扣联蓝 10.98:1 */
-  --panel-shadow-none: none;
 
   /* ── 浏览器表面 ── */
   --selection-bg: #8C3A1E;
@@ -71,7 +59,6 @@
   --caret: #C0271A;
   --scrollbar-track: #7A3218;
   --scrollbar-thumb: #A85236;
-  --focus: #FDFCF9;            /* 地面上聚焦环取纸白 */
 }
 
 .dark {
@@ -91,23 +78,13 @@
      取 #BBD4EE 得 5.03:1。 */
   --on-ground-link: #BBD4EE;
 
-  /* ══ 面板：深暖 ══ */
-  --panel: #1A1614;
-  --panel-sunk: #221D1A;
-  --ink: #EDE7DC;              /* 14.60:1 */
-  --ink-muted: #A69C8E;        /*  6.65:1 */
-  --rule-color: #332E27;
-  --rule-strong: #666668;      /* 3.14:1 */
-  --row-hover: #241F1B;
-  --seal: #E8705F;             /* 5.92:1 */
-  --vote: #8FB3E0;             /*  8.29:1 */
+  --seal: #E8705F;             /* 与亮色块同为「只作填充」 */
 
   --selection-bg: #FDFCF9;
   --selection-fg: #8C3A1E;
   --caret: #E8705F;
   --scrollbar-track: #6B2C15;
   --scrollbar-thumb: #9A4A2C;
-  --focus: #FDFCF9;
 }
 
 /* ============================================================

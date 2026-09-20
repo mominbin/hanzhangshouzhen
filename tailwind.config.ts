@@ -24,23 +24,6 @@ const config: Config = {
           ground: 'var(--on-ground)',
           muted: 'var(--on-ground-muted)',
         },
-        /* 面板（坐在棕红地面上的内容区） */
-        panel: {
-          DEFAULT: 'var(--panel)',
-          sunk: 'var(--panel-sunk)',
-        },
-        /* 面板上的文字 */
-        ink: {
-          DEFAULT: 'var(--ink)',
-          muted: 'var(--ink-muted)',
-        },
-        rule: {
-          DEFAULT: 'var(--rule-color)',
-          strong: 'var(--rule-strong)',
-        },
-        seal: 'var(--seal)',
-        vote: 'var(--vote)',
-        hover: 'var(--row-hover)',
       },
       fontFamily: {
         display: 'var(--font-display)',
