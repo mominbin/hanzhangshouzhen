@@ -1,0 +1,114 @@
+{
+  "runId": "2026-09-20-redesign",
+  "frozenAt": "2026-09-20T10:11:42.020Z",
+  "frozenBy": "人工闸口 2 · 用户确认",
+  "commit": "033a6e0",
+  "capture": {
+    "method": "tiled-viewport",
+    "note": "非 fullPage —— fullPage 对视口动画页面会产生空白伪影",
+    "viewport": "1440x900",
+    "tilesPerTheme": 6
+  },
+  "themes": [
+    "dark",
+    "light"
+  ],
+  "images": [
+    {
+      "file": "after-1440w-dark-tile0.png",
+      "sha256": "11c77a5f56cb79202dbcb8b4f9c376d38d4267423aa3de20adb643289942c4d5"
+    },
+    {
+      "file": "after-1440w-dark-tile1.png",
+      "sha256": "c935cd8cfedb737b851cdd331755d7ca944a187f3537a51a875bd0b107a12bc7"
+    },
+    {
+      "file": "after-1440w-dark-tile2.png",
+      "sha256": "e266f8a14925a7038cebad58d7b57a6fb978c6a180537ab1f90c77cf81712a96"
+    },
+    {
+      "file": "after-1440w-dark-tile3.png",
+      "sha256": "acdeb75f74ab694ded90ddb01bdec4b0f14f40ddf893918ae58d28fa5ebc4b5e"
+    },
+    {
+      "file": "after-1440w-dark-tile4.png",
+      "sha256": "3d8397ba5cb0a0819fb247c6f78f3aabaa45104f46c6d8e0d86d34a3b2cda0c0"
+    },
+    {
+      "file": "after-1440w-dark-tile5.png",
+      "sha256": "61e24d3fc10aff63df1c0a73d216553ff1efe502d6e23ea43b62331df894d59b"
+    },
+    {
+      "file": "after-1440w-light-tile0.png",
+      "sha256": "24975740396eb6fcdb435aa3fa2d9053da947b7e777384e6b7b59fe0f46a159a"
+    },
+    {
+      "file": "after-1440w-light-tile1.png",
+      "sha256": "39e0b1225487d9b64d0d840424f71681ca7e00c7592afa8780d082a7f8ff42ef"
+    },
+    {
+      "file": "after-1440w-light-tile2.png",
+      "sha256": "d34effa0de816bc552478c31b342acf875a27d965fac38fc835d12736055d93c"
+    },
+    {
+      "file": "after-1440w-light-tile3.png",
+      "sha256": "f41e26feeda1309918955f24a11419dbfde9493c2a6137f7db50cab09af30438"
+    },
+    {
+      "file": "after-1440w-light-tile4.png",
+      "sha256": "45800c8cde43e4ed8491cbf2f9368afc65d10fd043b1d2b2d292da29fb72e8ea"
+    },
+    {
+      "file": "after-1440w-light-tile5.png",
+      "sha256": "e860e146bde17611e9404459f58c0deb2a4a5451a9ccb649a6450fa1d471587f"
+    },
+    {
+      "file": "before-1440w-dark-tile0.png",
+      "sha256": "67f0414e6a0ac5839cfab4a6e892ada1274be90fb9b4febec2fdd4104d9aac9d"
+    },
+    {
+      "file": "before-1440w-dark-tile1.png",
+      "sha256": "a23671f0b241651efc82b93695911cedebf2ac4dcab03f4bb2ddd2dd4e047e6f"
+    },
+    {
+      "file": "before-1440w-dark-tile2.png",
+      "sha256": "b9a2f9e1a5917a1348d6840c8cf09b8b49735969e257a414fbe586b7f679e827"
+    },
+    {
+      "file": "before-1440w-dark-tile3.png",
+      "sha256": "84c59bb98ba37bd336c9940edb271dc884e18c34fdfb754254ce98061ee7f769"
+    },
+    {
+      "file": "before-1440w-dark-tile4.png",
+      "sha256": "e47fe78f9abb8633029445105ac8fef3426f9dee194a6a408c5a0723bd344f29"
+    },
+    {
+      "file": "before-1440w-dark-tile5.png",
+      "sha256": "02c91e7ad7b1fd43deb17f4ad2119d9859540a489eac388d60e88bc83fb76628"
+    },
+    {
+      "file": "before-1440w-light-tile0.png",
+      "sha256": "764767e945ba848f78352aacfddafe54e9b980c3f28f968aee526cbb6acd2a89"
+    },
+    {
+      "file": "before-1440w-light-tile1.png",
+      "sha256": "ae2d649e1d61bd68be68cdd47c69909d46928711549c3f3103a2086fe4e66552"
+    },
+    {
+      "file": "before-1440w-light-tile2.png",
+      "sha256": "e0e8206b9de264b72e7c34c349504e559d8baa771b610d5eb5fed902d29232dd"
+    },
+    {
+      "file": "before-1440w-light-tile3.png",
+      "sha256": "1b4564e9cfca346bc6f5fbef930a2a918719227159361245b2cc096fa6587efd"
+    },
+    {
+      "file": "before-1440w-light-tile4.png",
+      "sha256": "98b0b912f4654f998a0d92510a10463b970eac86fb8fecdcdc27d6231c14d3f7"
+    },
+    {
+      "file": "before-1440w-light-tile5.png",
+      "sha256": "a8cd6813cfbf723753fc23935735a1d6cf818bbed89d44500bc2578f293d4ed8"
+    }
+  ]
+}
