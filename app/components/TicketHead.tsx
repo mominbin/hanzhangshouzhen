@@ -50,9 +50,9 @@ export default function TicketHead() {
         </div>
       </div>
 
-      {/* 棕红通栏：开票方 */}
+      {/* 棕红通栏：开票方。print-wipe 让它像被打印头扫过一样显影 */}
       <div className="band">
-        <div className="mx-auto max-w-[1180px] px-6 py-8 md:px-10 md:py-10">
+        <div className="print-wipe mx-auto max-w-[1180px] px-6 py-8 md:px-10 md:py-10">
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div>
               <p className="font-mono text-[11px] tracking-[0.14em] text-band-on-muted">
@@ -91,7 +91,7 @@ export default function TicketHead() {
 
       {/* 购方栏：留白等着填 */}
       <div className="mx-auto max-w-[1180px] px-6 md:px-10">
-        <div className="rule-b grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr]">
+        <div className="relative grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr]">
           <div className="md:rule-r py-6 md:pr-8">
             <span className="field-label">购方名称 / BUYER</span>
             {/* 空白字段就是一条空栏线 —— 票据本来的样子，不用破折号去填，
@@ -108,6 +108,12 @@ export default function TicketHead() {
             <span className="field-label">服务项目</span>
             <p className="font-body text-[14px] text-ink">详见下表 · 共四项</p>
           </div>
+          {/* 栏线随打印绘制。绝对定位的 1px 元素，不驱动 layout。 */}
+          <span
+            aria-hidden="true"
+            className="rule-draw absolute inset-x-0 bottom-0 h-px bg-rule"
+            style={{ animationDelay: '420ms' }}
+          />
         </div>
       </div>
     </header>

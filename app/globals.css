@@ -226,6 +226,15 @@ a.link {
 .dark .act { color: #151310; }
 .dark .act:hover { background: #F08A79; }
 
+/* 动作反馈：备注复制成功时按钮沉一下、墨色加深再回，确认动作已被接收。
+   纯颜色与位移，不驱动 layout。 */
+@keyframes ink-flash {
+  0%   { background: var(--seal);    transform: translateY(0); }
+  35%  { background: var(--band-deep); transform: translateY(1px); }
+  100% { background: var(--seal);    transform: translateY(0); }
+}
+.act[data-copied="true"] { animation: ink-flash 780ms var(--ease); }
+
 /* 次级行动：文字链接，带下划线 */
 .act-quiet {
   background: none;
@@ -256,9 +265,66 @@ a.link {
 .input::placeholder { color: var(--ink-muted); }
 
 /* ============================================================
-   招牌动效 —— 全站唯一一个 authored moment
+   动效论文
+   ------------------------------------------------------------
+   世界的原生动作是：这张票被【打印】出来，然后被【填写、盖章、核销】。
+   所有动效都从这四个动作派生，不引入任何通用 fade-and-rise。
+
+   FOCAL    票据打印：棕红通栏自左向右显影，栏线随之绘制，
+            明细行项逐行落墨 —— 只发生在首屏，一次性。
+   CONTINUITY 核销章在联次进入视口时落下（案例被核销）。
+   FEEDBACK  监制章在合计区进入视口时按下；复制按钮的状态切换。
+   BUDGET    只用 transform / opacity / clip-path；
+             全部动效 ≤ 820ms；滚动触发的仅两处（核销章、监制章）。
+
+   默认态一律可见：动效只做「加墨」，失败时不隐藏内容。
+   ============================================================ */
+
+/* ── 打印：自左向右显影（通栏）── */
+@keyframes print-wipe {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+.print-wipe {
+  animation: print-wipe 620ms var(--ease) both;
+}
+
+/* ── 栏线绘制：自左向右 ── */
+@keyframes rule-draw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.rule-draw {
+  transform-origin: left center;
+  animation: rule-draw 520ms var(--ease) both;
+}
+
+/* ── 落墨：行项逐行显影（同级错开，总延迟封顶）── */
+@keyframes ink-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.ink-in {
+  animation: ink-in 420ms var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* ── 监制章按下 ── */
+@keyframes seal-press {
+  0%   { transform: rotate(-3.5deg) scale(1.6); opacity: 0; }
+  60%  { transform: rotate(-3.5deg) scale(.95); opacity: 1; }
+  100% { transform: rotate(-3.5deg) scale(1);   opacity: 1; }
+}
+.seal-press {
+  opacity: 0;
+}
+.seal-press[data-pressed="true"] {
+  animation: seal-press 480ms var(--ease) forwards;
+}
+
+/* ============================================================
+   核销章
    核销章落章：案例联次进入视口时，印章压下并散开墨点。
-   其余内容默认可见，不做统一的入场淡入。
    ============================================================ */
 @keyframes stamp {
   0%   { transform: rotate(-14deg) scale(2.4); opacity: 0; }
@@ -292,10 +358,27 @@ a.link {
   animation: ink-spread 620ms var(--ease) 220ms forwards;
 }
 
-/* ── 减弱动态效果 ── */
+/* ── 禁用 JS 时的兜底 ──
+   .stamp-mark 与 .seal-press 的基础态是 opacity:0，靠 IntersectionObserver 触发。
+   脚本不可用时它们会永远不可见 —— 印章是内容（「已交付」是信息），不能丢。 */
+@media (scripting: none) {
+  .stamp-mark,
+  .seal-press { opacity: 1; }
+}
+
+/* ── 减弱动态效果 ──
+   减少位移与缩放，但保留状态信息：印章、核销章仍要看得见。 */
 @media (prefers-reduced-motion: reduce) {
-  .stamp-mark { opacity: 1; animation: none !important; transform: rotate(-7deg); }
+  .stamp-mark,
+  .seal-press { opacity: 1; animation: none !important; }
+  .stamp-mark { transform: rotate(-7deg); }
   .stamp-mark::after { display: none; }
+
+  /* 打印类动效直接跳到终态，不搬演过程 */
+  .print-wipe,
+  .rule-draw,
+  .ink-in { animation: none !important; }
+
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

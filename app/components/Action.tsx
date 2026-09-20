@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { siteConfig } from '@/config/site'
+import { useInView } from './useInView'
 
 /**
  * 合计 + 开票动作
@@ -15,6 +16,7 @@ import { siteConfig } from '@/config/site'
 export default function Action() {
   const [note, setNote] = useState('')
   const [copied, setCopied] = useState(false)
+  const { ref: totalRef, seen: pressed } = useInView<HTMLDivElement>('-10% 0px -10% 0px')
 
   const phone = siteConfig.contact.phone.replace(/\s/g, '')
 
@@ -35,7 +37,7 @@ export default function Action() {
   return (
     <section id="contact" className="mx-auto max-w-[1180px] px-6 md:px-10">
       {/* 合计区：双线收口 */}
-      <div className="mt-12 md:mt-16">
+      <div className="mt-12 md:mt-16" ref={totalRef}>
         <div className="rule-double" />
         <div className="grid grid-cols-1 gap-y-6 py-6 md:grid-cols-[1.8fr_1fr] md:items-start md:gap-x-10">
           <div>
@@ -46,7 +48,8 @@ export default function Action() {
           </div>
           <div className="md:text-right">
             <span className="field-label md:text-right">监制</span>
-            <span className="seal text-[12px]">
+            {/* 监制章在合计区进入视口时按下 —— 世界的原生动作。 */}
+            <span className="seal seal-press text-[12px]" data-pressed={pressed}>
               上海含章收珍 · 交付监制
             </span>
           </div>
@@ -84,7 +87,12 @@ export default function Action() {
         <div className="rule-l md:pl-12">
           <span className="field-label">开票动作 / ACTION</span>
 
-          <button type="button" onClick={act} className="act mt-4 w-full justify-center md:w-auto">
+          <button
+            type="button"
+            onClick={act}
+            data-copied={copied}
+            className="act mt-4 w-full justify-center md:w-auto"
+          >
             {copied ? '已复制，正在拨号…' : '复制备注并致电'}
           </button>
 

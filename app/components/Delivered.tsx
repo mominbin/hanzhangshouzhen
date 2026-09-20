@@ -1,47 +1,16 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import { siteConfig } from '@/config/site'
+import { useInView } from './useInView'
 
 /**
  * 已交付 · 联次
  *
  * 两个真实案例是票据的两张联次。进入视口时核销章落下 ——
- * 这是全站唯一一个 authored moment，其余内容默认可见，不做统一入场淡入。
- *
- * 动效语法取自这个世界本身：盖章的动作是压下、微旋、墨点散开。
- * 用 IntersectionObserver 而非 Framer Motion —— 一个观察器足够，不必为此背上整个动效库。
+ * 世界原生动作之一：交付完成的联次被盖章核销。
  */
-function useStamped<T extends HTMLElement>() {
-  const ref = useRef<T>(null)
-  const [stamped, setStamped] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    // 系统开启减弱动态效果时直接落章，不播动画
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setStamped(true)
-      return
-    }
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setStamped(true)
-          io.disconnect()
-        }
-      },
-      { rootMargin: '-15% 0px -15% 0px' }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
-  return { ref, stamped }
-}
-
 function Entry({ p, index }: { p: (typeof siteConfig.projects)[number]; index: number }) {
-  const { ref, stamped } = useStamped<HTMLLIElement>()
+  const { ref, seen: stamped } = useInView<HTMLLIElement>()
 
   return (
     <li ref={ref} className="rule-b grid grid-cols-1 gap-y-5 py-6 md:grid-cols-[76px_1fr_1.5fr_auto] md:items-start md:gap-x-8 md:py-7">

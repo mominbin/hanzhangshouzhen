@@ -42,7 +42,8 @@ export default function LineItems() {
             <li
               key={svc.title}
               id={i === 0 ? 'service-1' : undefined}
-              className="rule-b group transition-colors duration-150 hover:bg-hover"
+              className="ink-in rule-b group transition-colors duration-150 hover:bg-hover"
+              style={{ '--i': i } as React.CSSProperties}
             >
               {/* 桌面：四栏行项 */}
               <div className="hidden grid-cols-[64px_1fr_2fr_1.1fr] items-baseline gap-x-6 py-5 md:grid">
