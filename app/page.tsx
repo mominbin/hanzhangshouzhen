@@ -1,27 +1,32 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Services from './components/Services'
-import Projects from './components/Projects'
-import About from './components/About'
-import Testimonials from './components/Testimonials'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import TicketHead from './components/TicketHead'
+import LineItems from './components/LineItems'
+import Delivered from './components/Delivered'
+import Endorsements from './components/Endorsements'
+import Supplier from './components/Supplier'
+import Action from './components/Action'
+import TicketFoot from './components/TicketFoot'
 
+/**
+ * 首页 —— 一份票据
+ *
+ * 阅读顺序即说服顺序，依 s0-brief 的信息优先级：
+ *   能做什么（明细行项）→ 做过什么（已交付联次）→ 别人怎么说（签收意见）
+ *   → 你是谁（供方信息）→ 怎么联系（开票动作）
+ *
+ * 原先把「关于我们」排在「他们信任我们」之前，与访客的决策顺序不一致，已调正。
+ */
 export default function HomePage() {
   return (
     <>
-      <Navbar />
+      <TicketHead />
       <main>
-        {/* 顺序依 S0 信息优先级：能做什么 → 案例 → 凭什么信 → 怎么联系 → 你是谁。
-            原顺序把「关于/品牌故事」（优先级 5）排在「他们信任我们」（优先级 3）之前。 */}
-        <Hero />
-        <Services />
-        <Projects />
-        <Testimonials />
-        <About />
-        <Contact />
+        <LineItems />
+        <Delivered />
+        <Endorsements />
+        <Supplier />
+        <Action />
       </main>
-      <Footer />
+      <TicketFoot />
     </>
   )
 }

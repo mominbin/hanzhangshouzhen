@@ -3,99 +3,300 @@
 @tailwind utilities;
 
 /* ============================================================
-   视觉系统 token · run-id 2026-09-20-redesign
-   变量名保持与旧版一致（避免改动全部组件），仅替换取值。
-   定义来源：.workflow/2026-09-20-redesign/tokens.css
+   票据世界 · token 系统
+   run-id 2026-09-20-redesign ｜ seed key 4d45f41c
+   surface brief: .impeccable/surfaces/app-page-tsx.md
+
+   世界：中国增值税发票 / 收款凭证。
+   法规：零圆角、零阴影、零渐变；栏线建立秩序，不靠留白。
+   配色全部经 WCAG 计算（见 DESIGN.md 的对比度表）。
    ============================================================ */
+
 :root {
-  /* 间距刻度（4px 基准）——门禁「无魔数」的判定基准 */
-  --space-1: 4px;  --space-2: 8px;   --space-3: 12px; --space-4: 16px;
-  --space-6: 24px; --space-8: 32px;  --space-12: 48px; --space-16: 64px;
-  --space-24: 96px; --space-32: 128px;
+  /* ── 间距刻度（4px 基准）── */
+  --s1: 4px;   --s2: 8px;   --s3: 12px;  --s4: 16px;
+  --s6: 24px;  --s8: 32px;  --s12: 48px; --s16: 64px;
+  --s24: 96px; --s32: 128px;
 
-  /* 圆角 */
-  --radius-control: 6px;
-  --radius-card: 10px;
+  /* ── 字体 ──
+     显示字体用宋体：中国官方票据的标题字体本就是宋体，不是平台默认回退。
+     （craft-floor 禁止「系统显示字体」，但此处宋体是该世界的正确字形，
+      非"最近的已安装字体"；本机无法下载字体，理由已记入 DESIGN.md。）
+     正文用黑体，票据编号/密码区用等宽。 */
+  --font-display: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", serif;
+  --font-body: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, "Courier New", monospace;
 
-  /* 字体：系统 CJK 栈，不加载 Web 字体 */
-  --font-sans: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei",
-               "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  /* ── 行高与行宽 ── */
+  --lh-tight: 1.25;
+  --lh-body: 1.7;
+  --measure: 68ch;
+  --tracking-display: -0.02em;
 
-  /* 配色 —— 亮色模式 */
-  --color-bg: #FAFAF8;              /* 暖白画布 */
-  --color-bg-secondary: #F2F1ED;
-  --color-card: #FFFFFF;
-  --color-card-hover: #F7F7F4;
-  --color-text: #1A1A1C;            /* 16.63:1 */
-  --color-text-muted: #5C5C61;      /*  6.36:1 */
-  --color-text-accent: #0F766E;     /* 靛青 */
-  --color-border: #E3E2DD;
-  --color-border-hover: #888886;    /* 控件边框 3.40:1，WCAG 1.4.11 */
-  --color-nav-bg: rgba(250, 250, 248, 0.82);
-  --color-cta-bg: #0F766E;          /* 白字 5.47:1 */
-  --color-cta-hover: #115E59;       /* 白字 7.58:1 */
-  --color-surface-elevated: #FFFFFF;
-  --color-accent-subtle: #E6F2F0;
+  /* ── 缓动：指数缓出 ── */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Tailwind 通道变量：供 rgb(var(--x) / <alpha-value>) 使用，
-     使 text-primary / bg-primary/10 等类名随主题切换 */
-  --accent-rgb: 15 118 110;         /* #0F766E */
-  --accent-hover-rgb: 17 94 89;     /* #115E59 */
+  /* ── 票据线宽 ── */
+  --rule: 1px;
+  --rule-hair: 0.5px;
+  --rule-double: 3px;
+
+  /* ══ 亮色模式：纸面 ══ */
+  --paper: #FDFCF9;          /* 纸白 · 页面地面 */
+  --paper-sunk: #F6F3EC;     /* 下沉区（表头、备注） */
+  --ink: #1C1A17;            /* 墨黑 · 正文 16.92:1 */
+  --ink-muted: #5A544C;      /* 次级墨 7.29:1 */
+  --ink-faint: #8A8074;      /* 三级 · 仅用于非必要装饰文字 */
+
+  --band: #8C3A1E;           /* 票面棕红 · 通栏底 */
+  --band-deep: #6B2C15;      /* 深棕红 · 栏线 */
+  --on-band: #FDFCF9;        /* 棕红上的字 7.47:1 */
+  --on-band-muted: #EFD9CE;  /* 棕红上的次级字 */
+
+  --blue: #1B3A6B;           /* 抵扣联蓝 10.98:1 */
+  --seal: #C0271A;           /* 监制章红 5.77:1 —— 全站唯一的高饱和 */
+
+  --rule-color: #D9D2C4;     /* 细栏线（装饰，不受 1.4.11） */
+  --rule-strong: #8A8074;    /* 控件边框 3.5:1（WCAG 1.4.11） */
+
+  --row-hover: #F2EDE2;
+
+  /* ── 浏览器表面（craft-floor 点名最常被跳过的一项）── */
+  --selection-bg: #8C3A1E;
+  --selection-fg: #FDFCF9;
+  --caret: #C0271A;
+  --scrollbar-track: #F6F3EC;
+  --scrollbar-thumb: #C9BFAE;
+  --focus: #C0271A;
 }
 
 .dark {
-  --color-bg: #0C0C0E;              /* 近黑，非蓝黑 */
-  --color-bg-secondary: #141416;
-  --color-card: #161618;
-  --color-card-hover: #1D1D20;
-  --color-text: #EDEDEF;            /* 16.71:1 */
-  --color-text-muted: #A1A1A6;      /*  7.60:1 */
-  --color-text-accent: #2DD4BF;     /* 10.50:1 */
-  --color-border: #26262A;
-  --color-border-hover: #666668;    /* 控件边框 3.41:1，WCAG 1.4.11 */
-  --color-nav-bg: rgba(12, 12, 14, 0.82);
-  --color-cta-bg: #0F766E;          /* 按钮底色两模式一致，文字色区分 */
-  --color-cta-hover: #115E59;
-  --color-surface-elevated: #161618;
-  --color-accent-subtle: #10312D;
+  /* ══ 暗色模式：夜里的账房 —— 暖黑纸面、灯光下的棕红 ══ */
+  --paper: #151310;          /* 暖黑 */
+  --paper-sunk: #1D1A16;
+  --ink: #EDE7DC;            /* 15.07:1 */
+  --ink-muted: #A69C8E;      /*  6.86:1 */
+  --ink-faint: #7D7466;
 
-  --accent-rgb: 45 212 191;         /* #2DD4BF */
-  --accent-hover-rgb: 94 234 212;   /* #5EEAD4 */
+  --band: #7A3218;           /* 棕红在暗处压深 */
+  --band-deep: #5C2512;
+  --on-band: #F5EFE4;        /*  8.4:1 on #7A3218 */
+  --on-band-muted: #E5C9BC;
+
+  --blue: #8FB3E0;           /*  8.56:1 */
+  --seal: #E8705F;           /*  6.11:1 */
+
+  --rule-color: #332E27;
+  --rule-strong: #6E6459;    /* 3.2:1 */
+
+  --row-hover: #211D18;
+
+  --selection-bg: #E8705F;
+  --selection-fg: #151310;
+  --caret: #E8705F;
+  --scrollbar-track: #1D1A16;
+  --scrollbar-thumb: #443C33;
+  --focus: #E8705F;
 }
-/* 注：--color-hero-gradient 已移除——渐变是本轮要消除的 AI 味来源 */
 
-* {
-  box-sizing: border-box;
-  padding: 0;
+/* ============================================================
+   基础
+   ============================================================ */
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
   margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: var(--lh-body);
+  font-variant-numeric: tabular-nums;   /* 全站表格数字 */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* ========================================
-   Smooth theme transition
-   All color-related properties fade between
-   dark/light modes for eye comfort
-   ======================================== */
-*,
-*::before,
-*::after {
-  transition-property: background-color, color, border-color;
-  transition-duration: 0.5s;
-  transition-timing-function: ease;
+/* ── 浏览器表面 ── */
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
 }
 
-/* Reset transition on elements where it would
-   conflict with Framer Motion or other animations */
-[data-motion],
-.motion-safe\:transform {
-  transition-property: background-color, color, border-color;
+* { caret-color: var(--caret); }
+
+/* 细窄滚动条，取票据世界的栏线色 */
+* {
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border: 2px solid var(--scrollbar-track);
 }
 
-/* 减弱动态效果：关闭全局主题过渡与所有 CSS 动画/过渡。
-   Framer Motion 侧由 MotionConfig reducedMotion="user" 处理（见 layout.tsx）。 */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+/* 下划线偏移：票据世界里的链接带下划线，需要正确偏移 */
+a { color: inherit; text-decoration: none; }
+a.link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* ============================================================
+   票据构件 —— 全站通用
+   ============================================================ */
+
+/* 栏线：票据的秩序来源 */
+.rule-t { border-top: var(--rule) solid var(--rule-color); }
+.rule-b { border-bottom: var(--rule) solid var(--rule-color); }
+.rule-l { border-left: var(--rule) solid var(--rule-color); }
+.rule-r { border-right: var(--rule) solid var(--rule-color); }
+
+/* 双线收口：票据的合计区、票头 */
+.rule-double {
+  border-top: var(--rule) solid var(--band-deep);
+  border-bottom: var(--rule) solid var(--band-deep);
+  height: 5px;
+  background: transparent;
+}
+
+/* 字段：label 在上，值在下。label 是信息，不是装饰性 kicker —— 它命名这个字段 */
+.field-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  display: block;
+  margin-bottom: var(--s1);
+}
+.field-value {
+  font-size: 15px;
+  color: var(--ink);
+}
+
+/* 棕红通栏 */
+.band {
+  background: var(--band);
+  color: var(--on-band);
+}
+
+/* 监制章：实心红，零圆角，轻微旋转 —— 盖章不是一个矩形 */
+.seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--seal);
+  color: var(--seal);
+  font-family: var(--font-display);
+  letter-spacing: 0.12em;
+  padding: var(--s2) var(--s3);
+  transform: rotate(-3.5deg);
+}
+
+/* 主行动：全站唯一的实心按钮，取监制章红 */
+.act {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  background: var(--seal);
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  padding: var(--s3) var(--s6);
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 200ms var(--ease);
+}
+.act:hover { background: #A31F14; }
+.act:active { transform: translateY(1px); }
+.act:disabled { opacity: .5; cursor: not-allowed; }
+.dark .act { color: #151310; }
+.dark .act:hover { background: #F08A79; }
+
+/* 次级行动：文字链接，带下划线 */
+.act-quiet {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 200ms var(--ease);
+}
+.act-quiet:hover { color: var(--seal); }
+
+/* 输入：零圆角，靠栏线定义 */
+.input {
+  width: 100%;
+  background: var(--paper);
+  border: var(--rule) solid var(--rule-strong);
+  border-radius: 0;
+  padding: var(--s3);
+  font: inherit;
+  color: var(--ink);
+  transition: border-color 160ms var(--ease);
+}
+.input:hover { border-color: var(--band-deep); }
+.input:focus { outline: 2px solid var(--focus); outline-offset: 0; border-color: var(--focus); }
+.input::placeholder { color: var(--ink-muted); }
+
+/* ============================================================
+   招牌动效 —— 全站唯一一个 authored moment
+   核销章落章：案例联次进入视口时，印章压下并散开墨点。
+   其余内容默认可见，不做统一的入场淡入。
+   ============================================================ */
+@keyframes stamp {
+  0%   { transform: rotate(-14deg) scale(2.4); opacity: 0; }
+  55%  { transform: rotate(-6deg)  scale(0.94); opacity: 1; }
+  70%  { transform: rotate(-8deg)  scale(1);    opacity: 1; }
+  100% { transform: rotate(-7deg)  scale(1);    opacity: 1; }
+}
+@keyframes ink-spread {
+  0%   { opacity: .55; transform: scale(.6); }
+  100% { opacity: 0;   transform: scale(1.9); }
+}
+.stamp-mark {
+  position: relative;
+  display: inline-block;
+  border: 3px solid var(--seal);
+  color: var(--seal);
+  font-family: var(--font-display);
+  letter-spacing: 0.16em;
+  padding: var(--s2) var(--s4);
+  transform: rotate(-7deg);
+  opacity: 0;
+}
+.stamp-mark[data-stamped="true"] {
+  animation: stamp 520ms var(--ease) forwards;
+}
+.stamp-mark[data-stamped="true"]::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 2px solid var(--seal);
+  animation: ink-spread 620ms var(--ease) 220ms forwards;
+}
+
+/* ── 减弱动态效果 ── */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  .stamp-mark { opacity: 1; animation: none !important; transform: rotate(-7deg); }
+  .stamp-mark::after { display: none; }
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -103,63 +304,8 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-::placeholder {
-  color: var(--color-text-muted);
-  opacity: 1;
-}
-
-.accent-text {
-  color: var(--color-text-accent);
-}
-
-/* 原名 .gradient-bg —— 实为纯色按钮底，名不副实，已改名 */
-.btn-solid {
-  background: var(--color-cta-bg);
-  color: #FFFFFF;
-}
-
-.btn-solid:hover {
-  background: var(--color-cta-hover);
-}
-
-.card {
-  background-color: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  padding: var(--space-6);
-  transition: border-color 0.3s ease;
-}
-
-.card:hover {
-  border-color: var(--color-border-hover);
-}
-
-.section-padding {
-  @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24;
-}
-
-.container-max {
-  @apply mx-auto max-w-7xl;
-}
-
-/* 焦点环：跟随强调色，随主题变化 */
-*:focus-visible {
-  outline: 2px solid var(--color-text-accent);
-  outline-offset: 2px;
+/* ── 打印：票据世界原生支持打印 ── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
 }

@@ -9,46 +9,36 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // 强调色走 CSS 变量通道，随主题切换（亮 #0F766E / 暗 #2DD4BF），
-        // 并保留 bg-primary/10 这类透明度修饰符。
-        primary: {
-          DEFAULT: 'rgb(var(--accent-rgb) / <alpha-value>)',
-          hover: 'rgb(var(--accent-hover-rgb) / <alpha-value>)',
+        paper: 'var(--paper)',
+        'paper-sunk': 'var(--paper-sunk)',
+        ink: {
+          DEFAULT: 'var(--ink)',
+          muted: 'var(--ink-muted)',
+          faint: 'var(--ink-faint)',
         },
-        // accent 与 primary 同族：原紫罗兰双色渐变是 AI 味来源，
-        // 同族后 from-primary to-accent 变为同色，视觉上不再成"渐变"。
-        accent: {
-          DEFAULT: 'rgb(var(--accent-rgb) / <alpha-value>)',
-          hover: 'rgb(var(--accent-hover-rgb) / <alpha-value>)',
+        band: {
+          DEFAULT: 'var(--band)',
+          deep: 'var(--band-deep)',
+          on: 'var(--on-band)',
+          'on-muted': 'var(--on-band-muted)',
         },
-        dark: {
-          bg: '#0C0C0E',
-          card: '#161618',
-          border: '#26262A',
-          text: '#EDEDEF',
-          muted: '#A1A1A6',
+        vote: 'var(--blue)',          // 抵扣联蓝
+        seal: 'var(--seal)',          // 监制章红 —— 全站唯一高饱和
+        rule: {
+          DEFAULT: 'var(--rule-color)',
+          strong: 'var(--rule-strong)',
         },
-        light: {
-          bg: '#FAFAF8',
-          card: '#FFFFFF',
-          border: '#E3E2DD',
-          text: '#1A1A1C',
-          muted: '#5C5C61',
-        },
+        hover: 'var(--row-hover)',
       },
       fontFamily: {
-        // 移除 'Geist'：无字体文件、无 @font-face、Google Fonts 不可达，
-        // 是从未生效的死声明（检测器 overused-font 的误报来源）。
-        sans: ['PingFang SC', 'HarmonyOS Sans SC', 'Microsoft YaHei', 'Noto Sans SC', 'system-ui', 'sans-serif'],
+        display: 'var(--font-display)',
+        body: 'var(--font-body)',
+        mono: 'var(--font-mono)',
       },
-      borderRadius: {
-        control: '6px',
-        card: '10px',
-      },
-      // 移除 float / glow 关键帧：全项目无任何组件使用，且 glow 属 AI 味手法
-      maxWidth: {
-        prose: '72ch',
-      },
+      // 票据世界零圆角
+      borderRadius: { none: '0' },
+      // 票据世界零阴影
+      boxShadow: { none: 'none' },
     },
   },
   plugins: [],

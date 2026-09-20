@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
-import { MotionConfig } from 'framer-motion'
 import { siteConfig } from '@/config/site'
 import './globals.css'
 
@@ -114,16 +113,9 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
-        {/* ── 系统字体优先，不依赖 Google Fonts（国内加载快） ── */}
-        <style>{`
-          @font-face {
-            font-family: 'Geist Fallback';
-            src: local('PingFang SC'), local('Microsoft YaHei'), local('system-ui');
-            ascent-override: 95%;
-            descent-override: 25%;
-          }
-        `}</style>
-
+        {/* 字体走系统栈，不加载 Web 字体 —— Google Fonts 在国内不可达。
+            显示字体用宋体（中国官方票据的标题字体），正文用黑体，
+            票据编号用等宽。定义见 globals.css 的 --font-* 。 */}
         {/* ── 百度统计 (替换 YOUR_BAIDU_TONGJI_ID) ── */}
         <script
           dangerouslySetInnerHTML={{
@@ -155,12 +147,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
         />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {/* reducedMotion="user"：系统开启「减弱动态效果」时，
-              Framer Motion 自动关闭位移/缩放类动画，仅保留透明度过渡，
-              内容仍完整呈现。一处配置覆盖全部 11 个使用动效的组件。 */}
-          <MotionConfig reducedMotion="user">
-            {children}
-          </MotionConfig>
+          {children}
         </ThemeProvider>
       </body>
     </html>
