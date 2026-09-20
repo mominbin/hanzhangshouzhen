@@ -73,6 +73,8 @@ export interface SiteConfig {
     title: string
     description: string
     keywords: string
+    ogImage: string
+    baseUrl: string
   }
   social: {
     github: string
@@ -186,9 +188,11 @@ export const siteConfig: SiteConfig = {
     { label: '联系', href: '#contact' },
   ],
   seo: {
-    title: '上海含章收珍软件科技 | 专业软件开发定制服务',
-    description: '上海含章收珍软件科技有限公司，专注企业管理平台、移动App、小程序、企业官网定制开发，提供全方位软件解决方案。',
-    keywords: '软件开发,小程序开发,移动App开发,企业管理平台,上海软件公司,定制开发',
+    title: '上海含章收珍软件科技有限公司 - 企业管理平台 | 移动App | 小程序定制开发服务商',
+    description: '上海含章收珍软件科技，专注企业管理平台、移动App、小程序、企业官网定制开发。提供从需求梳理、UI设计到开发上线、运维迭代的全流程软件解决方案，服务覆盖iOS/Android/HarmonyOS多端。',
+    keywords: '软件开发,小程序开发,移动App开发,企业管理平台,企业官网定制,上海软件公司,Flutter开发,HarmonyOS开发',
+    ogImage: '/images/og-image.png',
+    baseUrl: 'https://www.hanzhangshouzhen.com',
   },
   social: {
     github: 'https://github.com/mominbin',

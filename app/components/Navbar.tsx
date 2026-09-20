@@ -6,9 +6,16 @@ import { Menu, X } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
 import { siteConfig } from '@/config/site'
 
+const ANIMATION = {
+  duration: 1,       // seconds — from Webflow config (1000ms)
+  delay: 0.2,        // seconds
+  easing: [0.25, 0, 0, 1] as [number, number, number, number], // cubic-bezier ≈ outQuart
+} as const
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [revealed, setRevealed] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,12 +34,23 @@ export default function Navbar() {
   }
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <motion.header
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: ANIMATION.duration,
+        delay: ANIMATION.delay,
+        ease: ANIMATION.easing,
+      }}
+      onAnimationComplete={() => setRevealed(true)}
+      className={`fixed top-0 left-0 right-0 z-50 ${
+        revealed ? 'transition-all duration-300' : ''
+      } ${
         scrolled
           ? 'bg-[var(--color-nav-bg)] backdrop-blur-xl border-b border-[var(--color-border)] shadow-sm'
           : 'bg-transparent'
       }`}
+      style={{ transformOrigin: 'center center' }}
     >
       <nav className="container-max flex items-center justify-between px-4 md:px-8 h-16">
         {/* Logo */}
@@ -103,6 +121,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   )
 }

@@ -1,0 +1,18 @@
+# ── Cloudflare Pages HTTP Headers ──
+# 所有图片 / 字体 / 静态资源 — 1 年缓存（不可变内容）
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# JS / CSS 构建产物 — 带 hash 的不可变文件
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML — 短缓存，确保爬虫拿到最新内容
+/*.html
+  Cache-Control: public, max-age=3600
+
+# 安全头
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin

@@ -77,16 +77,17 @@ export default function Hero() {
             >
               {/* Primary CTA — dominant, larger, full-width on mobile */}
               <div className="flex flex-col gap-1.5 w-full sm:w-auto">
-                <button
-                  onClick={() => handleScroll('#contact')}
-                  className="w-full sm:w-auto px-10 py-3.5 rounded-full text-base font-semibold text-white transition-all duration-200 hover:opacity-90"
+                <a
+                  href="#contact"
+                  onClick={(e) => { e.preventDefault(); handleScroll('#contact') }}
+                  className="w-full sm:w-auto px-10 py-3.5 rounded-full text-base font-semibold text-white transition-all duration-200 hover:opacity-90 inline-block text-center"
                   style={{
                     background: 'var(--color-cta-bg)',
                     boxShadow: '0 4px 14px rgba(99,102,241,0.25)',
                   }}
                 >
                   {siteConfig.hero.primaryCta}
-                </button>
+                </a>
                 {/* Reassurance microcopy */}
                 <span className="text-xs text-center sm:text-left" style={{ color: 'var(--color-text-muted)' }}>
                   专业对接沟通，快速梳理需求
@@ -94,14 +95,15 @@ export default function Hero() {
               </div>
 
               {/* Secondary CTA — text link, low weight */}
-              <button
-                onClick={() => handleScroll('#projects')}
+              <a
+                href="#projects"
+                onClick={(e) => { e.preventDefault(); handleScroll('#projects') }}
                 className="text-sm font-medium transition-colors duration-200 hover:text-primary flex items-center gap-1.5"
                 style={{ color: 'var(--color-text-muted)' }}
               >
                 {siteConfig.hero.secondaryCta}
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
             </motion.div>
           </div>
 

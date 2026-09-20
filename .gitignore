@@ -4,3 +4,4 @@ out/
 .env*
 .superpowers/
 .wolf/
+.claude/worktrees/
