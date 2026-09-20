@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 2,
+  "name": "含章收珍 · 票据世界",
+  "description": "页面即一份正式商业凭证。地面为票面棕红，内容直接坐在材料上；栏线建立秩序，零圆角、零阴影、零渐变。",
+
+  "extensions": {
+    "narrative": {
+      "northStar": "这张票被打印出来，然后被填写、盖章、核销。",
+      "rules": [
+        "地面是命名材料本身（票面棕红），内容直接坐在其上，不设中间面板",
+        "秩序由栏线建立，不靠留白；零圆角、零阴影、零渐变",
+        "全站只有一个高饱和实心色：章红填充的「立刻咨询」按钮",
+        "章红只作填充，不作文字或描边 —— 它 on 棕红仅 1.29:1",
+        "印章在棕红地面上取纸白描边（红底上的白色钢印）",
+        "等宽表格数字；宋体标题、黑体正文、等宽编号"
+      ],
+      "doNot": [
+        "不要把地面换成中性色再让棕红只做点缀",
+        "不要在棕红地面上使用章红作文字或描边",
+        "不要给卡片加圆角、阴影或渐变"
+      ]
+    },
+
+    "breakpoints": {
+      "mobile": 375,
+      "tablet": 768,
+      "desktop": 1440
+    },
+
+    "motion": {
+      "ease": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "thesis": "世界的原生动作：打印、填写、盖章、核销",
+      "tokens": {
+        "print-wipe": "950ms — 棕红地面自左向右显影",
+        "rule-draw": "760ms — 栏线绘制",
+        "ink-in": "640ms — 行项落墨（离焦到清晰）",
+        "type-in": "760ms steps() — 等宽编号逐字打出",
+        "stamp": "820ms — 核销章落章",
+        "seal-press": "680ms — 监制章按下"
+      },
+      "reducedMotion": "全部位移与缩放降级；印章与揭示态直接显示"
+    },
+
+    "surfaces": {
+      "ground": {
+        "value": "#8C3A1E",
+        "role": "页面地面 —— 命名材料。两主题同值",
+        "note": "背景以字面值写在 html 与 body 上，不经 CSS var()（检测器无法解析 var() 背景）"
+      },
+      "groove": {
+        "value": "rgba(12, 10, 8, 0.18)",
+        "over": "#8C3A1E",
+        "blended": "#75311A",
+        "role": "输入框凹槽 —— 材料上刻出的暗槽",
+        "note": "placeholder 在其上 7.01:1(亮) / 6.34:1(暗)"
+      },
+      "seal": {
+        "value": "#C0271A",
+        "role": "章红 —— 只作填充，不作文字或描边",
+        "whiteOnIt": "5.92:1",
+        "onGround": "1.29:1 — 故绝不用作地面上的文字或描边"
+      }
+    }
+  },
+
+  "colorMeta": {
+    "ground": { "displayName": "票面棕红", "role": "地面 / 材料本身" },
+    "on-ground": { "displayName": "纸白", "role": "地面上的正文", "contrastOnGround": 7.47 },
+    "on-ground-muted": { "displayName": "纸白次级", "role": "地面上的次级文字", "contrastOnGround": 5.65 },
+    "seal": { "displayName": "监制章红", "role": "仅填充", "contrastOnGround": 1.29 },
+    "vote": { "displayName": "抵扣联蓝", "role": "已弃用于地面" },
+    "on-ground-link": { "displayName": "地面链接色", "value": "#BBD4EE", "contrastOnGround": 5.03 }
+  }
+}

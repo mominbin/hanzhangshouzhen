@@ -59,7 +59,9 @@
   --rule-color: #D9D2C4;
   --rule-strong: #888886;      /* 控件边框 3.46:1 */
   --row-hover: #F0EBE0;
-  --seal: #C0271A;             /* 章红 5.77:1 on 纸白 */
+  /* 章红只作填充（.act 按钮底），不作文字或描边 ——
+     它 on 棕红仅 1.29:1。白字 on 章红 = 5.92:1 可用。 */
+  --seal: #C0271A;
   --vote: #1B3A6B;             /* 抵扣联蓝 10.98:1 */
   --panel-shadow-none: none;
 
@@ -81,7 +83,10 @@
   --on-ground: #E9DECF;        /* 5.77:1，明显暗于亮色的 #FDFCF9（7.47:1） */
   --on-ground-muted: #E2D0C0;  /* 约 4.9:1 */
   --on-ground-rule: rgba(253, 252, 249, 0.20);
-  --on-ground-rule-strong: rgba(253, 252, 249, 0.38);
+  /* 0.55：与亮色块同值。控件边框需 ≥3:1（WCAG 1.4.11）。
+     此前此处误留 0.38（上一批用 replace_all 匹配的是亮色块的 0.5，
+     暗色块值是 0.38 故未被替换），实测混合后仅 2.14:1。 */
+  --on-ground-rule-strong: rgba(253, 252, 249, 0.55);
   /* 地面上的链接色：#1B3A6B 仅 1.47:1、#8FB3E0 仅 3.54:1，均不可用。
      取 #BBD4EE 得 5.03:1。 */
   --on-ground-link: #BBD4EE;
@@ -145,11 +150,12 @@ body {
 ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
 ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border: 2px solid var(--scrollbar-track); }
 
-/* 聚焦环：面板内取章红，地面上取纸白 —— 两处都必须可见 */
-:focus-visible { outline: 2px solid var(--seal); outline-offset: 1px; }
-.panel :focus-visible,
-.panel-sunk :focus-visible { outline-color: var(--seal); }
-.on-ground :focus-visible { outline-color: var(--on-ground); }
+/* 聚焦环：全站取纸白。
+   原先默认取 --seal（章红），但章红 on 棕红仅 1.29:1（暗色 2.52:1），
+   等于主内容区的键盘用户看不到焦点 —— 实测 15 个可聚焦元素中 6 个如此。
+   地面是唯一的表面，故统一取 --on-ground（7.47:1 / 5.77:1）。
+   .panel / .panel-sunk 规则已删除（那两个类不再存在）。 */
+:focus-visible { outline: 2px solid var(--on-ground); outline-offset: 1px; }
 
 a { color: inherit; text-decoration: none; }
 
@@ -246,6 +252,34 @@ a.on-ground-link {
 .act:disabled { opacity: .5; cursor: not-allowed; }
 .dark .act { color: #1A1614; }
 .dark .act:hover { background: #F08A79; }
+
+/* 次级行动 —— 描边不填充。
+   世界里只允许一个高饱和实心红：首屏合计区「立刻咨询」占那一席。
+   备注栏的「复制备注并致电」仍是真按钮、仍可用，但不与主行动争夺注意力。 */
+.act-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  background: none;
+  color: var(--on-ground);
+  border: var(--rule) solid var(--on-ground-rule-strong);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  padding: var(--s3) var(--s6);
+  cursor: pointer;
+  transition: background 200ms var(--ease), border-color 200ms var(--ease);
+}
+.act-quiet:hover {
+  background: rgba(12, 10, 8, 0.18);
+  border-color: var(--on-ground);
+}
+.act-quiet:active { transform: translateY(1px); }
+.act-quiet[data-copied='true'] {
+  border-color: var(--on-ground);
+  background: rgba(12, 10, 8, 0.26);
+}
 
 /* 输入 —— 材料上刻出的凹槽（暗，不是亮）。
    先前的浅色白雾（rgba(253,252,249,.10)）混合后底为 #974d34，

@@ -77,11 +77,13 @@ export default function Action() {
             开票动作 / ACTION
           </span>
 
+          {/* 描边次级，不填充 —— 世界里唯一的高饱和实心红留给首屏合计区的
+              「立刻咨询」。本按钮仍是真的、仍可用，只是不与主行动争注意力。 */}
           <button
             type="button"
             onClick={act}
             data-copied={copied}
-            className="act mt-4 w-full justify-center md:w-auto"
+            className="act-quiet mt-4 w-full justify-center md:w-auto"
           >
             {copied ? '已复制，正在拨号…' : '复制备注并致电'}
           </button>
