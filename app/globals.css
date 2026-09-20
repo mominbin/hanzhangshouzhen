@@ -229,11 +229,11 @@ a.link {
 /* 动作反馈：备注复制成功时按钮沉一下、墨色加深再回，确认动作已被接收。
    纯颜色与位移，不驱动 layout。 */
 @keyframes ink-flash {
-  0%   { background: var(--seal);    transform: translateY(0); }
-  35%  { background: var(--band-deep); transform: translateY(1px); }
-  100% { background: var(--seal);    transform: translateY(0); }
+  0%   { background: var(--seal);      transform: translateY(0); }
+  40%  { background: var(--band-deep); transform: translateY(2px); }
+  100% { background: var(--seal);      transform: translateY(0); }
 }
-.act[data-copied="true"] { animation: ink-flash 780ms var(--ease); }
+.act[data-copied="true"] { animation: ink-flash 900ms var(--ease); }
 
 /* 次级行动：文字链接，带下划线 */
 .act-quiet {
@@ -274,10 +274,16 @@ a.link {
             明细行项逐行落墨 —— 只发生在首屏，一次性。
    CONTINUITY 核销章在联次进入视口时落下（案例被核销）。
    FEEDBACK  监制章在合计区进入视口时按下；复制按钮的状态切换。
-   BUDGET    只用 transform / opacity / clip-path；
-             全部动效 ≤ 820ms；滚动触发的仅两处（核销章、监制章）。
+   BUDGET    只用 transform / opacity / clip-path / filter；
+             滚动触发的仅两处（核销章、监制章）。
 
    默认态一律可见：动效只做「加墨」，失败时不隐藏内容。
+
+   时序（放慢以产生分量，但整段收在 1.9s 内 ——
+   核心内容不能隐形太久，craft-floor 要求「关键信息几秒内可找到」）：
+     0ms  ── 950ms   棕红通栏显影
+   800ms  ── 1560ms  购方栏栏线绘制（与上一段交叠，读作连续打印）
+   850ms  ── 1880ms  明细行项逐行落墨（错开 130ms，总延迟封顶 390ms）
    ============================================================ */
 
 /* ── 打印：自左向右显影（通栏）── */
@@ -286,7 +292,7 @@ a.link {
   to   { clip-path: inset(0 0 0 0); }
 }
 .print-wipe {
-  animation: print-wipe 620ms var(--ease) both;
+  animation: print-wipe 950ms var(--ease) both;
 }
 
 /* ── 栏线绘制：自左向右 ── */
@@ -296,30 +302,45 @@ a.link {
 }
 .rule-draw {
   transform-origin: left center;
-  animation: rule-draw 520ms var(--ease) both;
+  animation: rule-draw 760ms var(--ease) both;
 }
 
-/* ── 落墨：行项逐行显影（同级错开，总延迟封顶）── */
+/* ── 落墨：行项逐行显影
+      离焦到清晰 —— 读作墨吸进纸里，而不是一块内容淡入。
+      移位 14px 让「落下」有距离感；blur 封顶 3px 且只跑一次。 ── */
 @keyframes ink-in {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(14px); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
 }
 .ink-in {
-  animation: ink-in 420ms var(--ease) both;
-  animation-delay: calc(var(--i, 0) * 70ms);
+  animation: ink-in 640ms var(--ease) both;
+  animation-delay: calc(850ms + var(--i, 0) * 130ms);
+}
+
+/* ── 打字：等宽字符逐字打出
+      用 steps() 阶梯缓动而非平滑擦除 —— 读作针式打印机逐字落字，
+      不是一块内容被揭开。用于票据编号与开票日期。 ── */
+@keyframes type-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+.type-in {
+  display: inline-block;
+  animation: type-in 760ms steps(var(--chars, 12), end) both;
 }
 
 /* ── 监制章按下 ── */
 @keyframes seal-press {
-  0%   { transform: rotate(-3.5deg) scale(1.6); opacity: 0; }
-  60%  { transform: rotate(-3.5deg) scale(.95); opacity: 1; }
-  100% { transform: rotate(-3.5deg) scale(1);   opacity: 1; }
+  0%   { transform: rotate(-3.5deg) scale(1.75); opacity: 0; }
+  55%  { transform: rotate(-3.5deg) scale(.93);  opacity: 1; }
+  75%  { transform: rotate(-3.5deg) scale(1.02); opacity: 1; }
+  100% { transform: rotate(-3.5deg) scale(1);    opacity: 1; }
 }
 .seal-press {
   opacity: 0;
 }
 .seal-press[data-pressed="true"] {
-  animation: seal-press 480ms var(--ease) forwards;
+  animation: seal-press 680ms var(--ease) forwards;
 }
 
 /* ============================================================
@@ -327,14 +348,15 @@ a.link {
    核销章落章：案例联次进入视口时，印章压下并散开墨点。
    ============================================================ */
 @keyframes stamp {
-  0%   { transform: rotate(-14deg) scale(2.4); opacity: 0; }
-  55%  { transform: rotate(-6deg)  scale(0.94); opacity: 1; }
-  70%  { transform: rotate(-8deg)  scale(1);    opacity: 1; }
+  0%   { transform: rotate(-16deg) scale(2.6); opacity: 0; }
+  52%  { transform: rotate(-5deg)  scale(0.90); opacity: 1; }
+  68%  { transform: rotate(-8deg)  scale(1.04); opacity: 1; }
+  84%  { transform: rotate(-6.5deg) scale(0.99); opacity: 1; }
   100% { transform: rotate(-7deg)  scale(1);    opacity: 1; }
 }
 @keyframes ink-spread {
-  0%   { opacity: .55; transform: scale(.6); }
-  100% { opacity: 0;   transform: scale(1.9); }
+  0%   { opacity: .6; transform: scale(.55); }
+  100% { opacity: 0;  transform: scale(2.1); }
 }
 .stamp-mark {
   position: relative;
@@ -348,14 +370,14 @@ a.link {
   opacity: 0;
 }
 .stamp-mark[data-stamped="true"] {
-  animation: stamp 520ms var(--ease) forwards;
+  animation: stamp 820ms var(--ease) forwards;
 }
 .stamp-mark[data-stamped="true"]::after {
   content: "";
   position: absolute;
   inset: -6px;
   border: 2px solid var(--seal);
-  animation: ink-spread 620ms var(--ease) 220ms forwards;
+  animation: ink-spread 900ms var(--ease) 300ms forwards;
 }
 
 /* ── 禁用 JS 时的兜底 ──
@@ -377,7 +399,8 @@ a.link {
   /* 打印类动效直接跳到终态，不搬演过程 */
   .print-wipe,
   .rule-draw,
-  .ink-in { animation: none !important; }
+  .ink-in,
+  .type-in { animation: none !important; }
 
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

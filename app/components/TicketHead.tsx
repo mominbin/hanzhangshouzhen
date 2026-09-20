@@ -36,8 +36,14 @@ export default function TicketHead() {
             记账联 · 存根
           </span>
           <span className="flex items-center gap-5">
-            <span className="hidden font-mono text-[11px] text-ink-muted sm:inline">
-              №&nbsp;HZSZ-{new Date().getFullYear()}-001
+            <span className="hidden sm:inline">
+              {/* 编号逐字打出 —— 针式打印机的动作，先于通栏 */}
+              <span
+                className="type-in font-mono text-[11px] text-ink-muted"
+                style={{ '--chars': 16, animationDelay: '180ms' } as React.CSSProperties}
+              >
+                №&nbsp;HZSZ-{new Date().getFullYear()}-001
+              </span>
             </span>
             {/* 主行动常驻可见：不给访客「滚到底才找得到联系方式」的麻烦 */}
             <a
@@ -102,7 +108,17 @@ export default function TicketHead() {
           </div>
           <div className="rule-t md:rule-t-0 md:rule-r py-6 md:px-8">
             <span className="field-label">开票日期</span>
-            <p className="font-mono text-[14px] text-ink">{today || ' '}</p>
+            <p className="font-mono text-[14px] text-ink">
+              {/* 日期接在栏线绘制之后打出（800ms + 760ms），同一段打印序列 */}
+              {today && (
+                <span
+                  className="type-in"
+                  style={{ '--chars': 13, animationDelay: '1560ms' } as React.CSSProperties}
+                >
+                  {today}
+                </span>
+              )}
+            </p>
           </div>
           <div className="rule-t md:rule-t-0 py-6 md:pl-8">
             <span className="field-label">服务项目</span>
@@ -112,7 +128,7 @@ export default function TicketHead() {
           <span
             aria-hidden="true"
             className="rule-draw absolute inset-x-0 bottom-0 h-px bg-rule"
-            style={{ animationDelay: '420ms' }}
+            style={{ animationDelay: '800ms' }}
           />
         </div>
       </div>
