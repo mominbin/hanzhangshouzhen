@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react'
 /**
  * 明暗切换
  *
- * 票据世界的控件：分段式，像表单上的选项。
- * 零圆角、零阴影，靠下划线标记当前态 —— 与全站栏线语言一致。
+ * 控件坐在棕红地面上，所以取纸白系。
+ * 分段式，像表单上的选择项；零圆角、零阴影，靠底色标记当前态。
  * 不用图标：控件用文字直说自己的动作（craft-floor：controls name their action）。
  */
 export default function ThemeToggle() {
@@ -16,7 +16,6 @@ export default function ThemeToggle() {
 
   useEffect(() => setMounted(true), [])
 
-  // 未挂载前占位，避免水合不一致
   if (!mounted) return <span className="inline-block h-[18px] w-[76px]" aria-hidden="true" />
 
   const isDark = resolvedTheme === 'dark'
@@ -25,7 +24,7 @@ export default function ThemeToggle() {
     <span
       role="group"
       aria-label="颜色模式"
-      className="inline-flex items-stretch border border-band-on-muted/50 font-mono text-[11px] leading-none"
+      className="inline-flex items-stretch border border-on-ground/50 font-mono text-[11px] leading-none"
     >
       {(['light', 'dark'] as const).map((mode) => {
         const active = (mode === 'dark') === isDark
@@ -38,8 +37,8 @@ export default function ThemeToggle() {
             className={
               'px-2 py-[5px] transition-colors ' +
               (active
-                ? 'bg-band-on text-band'
-                : 'text-band-on-muted hover:text-band-on')
+                ? 'bg-on-ground text-ground'
+                : 'text-on-muted hover:text-on-ground')
             }
           >
             {mode === 'light' ? '明' : '暗'}

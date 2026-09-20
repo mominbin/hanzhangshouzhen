@@ -1,8 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#0f0f23"/>
-  <rect x="60" y="60" width="1080" height="510" rx="24" fill="none" stroke="rgba(99,102,241,0.3)" stroke-width="2"/>
-  <text x="600" y="280" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="56" font-weight="800" fill="#e0e7ff">上海含章收珍软件科技</text>
-  <text x="600" y="360" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="32" fill="#94a3b8">企业管理平台 · 移动 App · 小程序 · 企业官网</text>
-  <rect x="500" y="410" width="200" height="48" rx="24" fill="#6366f1"/>
-  <text x="600" y="442" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#ffffff">含章收珍</text>
+  <!-- OG 分享图 · 票据世界（run-id 2026-09-20-redesign）
+       地面为票面棕红，内容直接落在其上；栏线取纸白低透明。
+       与站内 :root 的 --band / --on-band 同值。 -->
+  <rect width="1200" height="630" fill="#8C3A1E"/>
+
+  <!-- 双线收口 -->
+  <rect x="56" y="56" width="1088" height="518" fill="none" stroke="#FDFCF9" stroke-opacity="0.34" stroke-width="1"/>
+  <rect x="64" y="64" width="1072" height="502" fill="none" stroke="#FDFCF9" stroke-opacity="0.18" stroke-width="1"/>
+
+  <!-- 票眉 -->
+  <text x="56" y="34" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="17" letter-spacing="2.4" fill="#EFD9CE">记账联 · 存根</text>
+  <text x="1144" y="34" text-anchor="end" font-family="Consolas, monospace" font-size="17" fill="#EFD9CE">№ HZSZ-2026-001</text>
+
+  <!-- 开票方 -->
+  <text x="104" y="176" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="15" letter-spacing="3" fill="#EFD9CE" fill-opacity="0.85">开票方 / ISSUER</text>
+  <text x="100" y="256" font-family="Songti SC, SimSun, Noto Serif SC, serif" font-size="62" font-weight="600" fill="#FDFCF9">上海含章收珍软件科技有限公司</text>
+
+  <line x1="100" y1="308" x2="1100" y2="308" stroke="#FDFCF9" stroke-opacity="0.3" stroke-width="1"/>
+
+  <text x="100" y="376" font-family="Songti SC, SimSun, Noto Serif SC, serif" font-size="34" fill="#FDFCF9">为企业和个人打造专属数字系统</text>
+  <text x="100" y="428" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="25" fill="#EFD9CE">企业管理平台 · 移动 App · 小程序 · 企业官网定制开发</text>
+
+  <!-- 合计 -->
+  <line x1="100" y1="486" x2="1100" y2="486" stroke="#FDFCF9" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="100" y="528" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="15" letter-spacing="2.6" fill="#EFD9CE" fill-opacity="0.85">合计 / TOTAL</text>
+  <text x="100" y="564" font-family="Songti SC, SimSun, Noto Serif SC, serif" font-size="28" fill="#FDFCF9">肆 项服务 · 贰 个已交付案例 · 肆 家云厂商背书</text>
 </svg>

@@ -116,6 +116,18 @@ export default function RootLayout({
         {/* 字体走系统栈，不加载 Web 字体 —— Google Fonts 在国内不可达。
             显示字体用宋体（中国官方票据的标题字体），正文用黑体，
             票据编号用等宽。定义见 globals.css 的 --font-* 。 */}
+
+        {/* 揭示动效的启用标志。
+            滚动揭示的初始隐藏态只在 .js-reveal 下生效，而该类由这段
+            同步脚本设置 —— 它必须先于渲染执行。
+            这样一旦 JS 包加载失败（网络、缓存、老版本 bundle），
+            该类不存在，内容一律可见，不会出现「首屏以下全空」。
+            @media (scripting: none) 覆盖不到「脚本可解析但执行失败」的情况。 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('js-reveal')`,
+          }}
+        />
         {/* ── 百度统计 (替换 YOUR_BAIDU_TONGJI_ID) ── */}
         <script
           dangerouslySetInnerHTML={{

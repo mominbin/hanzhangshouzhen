@@ -1,0 +1,39 @@
+对比度实测证据 · run-id 2026-09-20-redesign
+============================================================
+
+背景
+----
+`impeccable detect` 在构建产物上报告 69 条 low-contrast，
+形式一律为 `text #EFD9CE on #ffffff` 或 `text #FDFCF9 on #ffffff`。
+
+这是**假阳性**：检测器无法解析页面地面的 `background-color: var(--ground)`，
+退回假定背景为白色。已排查并排除的可能原因：
+
+  - body 背景是否写字面值        → 已写字面值 #8C3A1E，仍报
+  - 背景是否也写在 html 上        → 已写，仍报
+  - body 的 color 是否为 var     → 改为字面量，仍报
+  - 是否为外部 CSS / html.dark    → 最小样例对照实验均通过
+  - --no-config / --no-design-system / --no-inline-ignores
+                                 → 四种选项均报 69 条，无差异
+
+真实渲染实测（Chromium 无头，读 getComputedStyle 的渲染色）
+--------------------------------------------------------------
+两种主题下 body 背景均为 rgb(140, 58, 30) = #8C3A1E
+
+[light] 与 [dark] 结果一致：
+  ✅ 开票方/正文      rgb(253, 252, 249) on #8C3A1E   7.47:1
+  ✅ 次级文字        rgb(239, 217, 206) on #8C3A1E   5.65:1
+  ✅ 明细表行项       rgb(253, 252, 249) on #8C3A1E   7.47:1
+  ✅ 表头 label      rgb(239, 217, 206) on #8C3A1E   5.65:1
+  ✅ 签收意见引文      rgb(253, 252, 249) on #8C3A1E   7.47:1
+  ✅ 合计            rgb(253, 252, 249) on #8C3A1E   7.47:1
+
+全部 ≥ 4.5:1（WCAG AA 正文要求）。
+
+附带说明：地面在两主题下同值，这是方向契约的要求
+（「棕红占满整片地面，是材料而非点缀」），非疏漏。
+
+复现命令
+--------
+  python -m http.server 8899 --directory out
+  node <上述实测脚本>

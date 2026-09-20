@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- 标识 · 票据世界
+       方形取票据的零圆角，内收细栏线，中置「含」字（宋体）。
+       取自公司名首字，与站内显示字体同族。 -->
+  <rect width="512" height="512" fill="#8C3A1E"/>
+  <rect x="40" y="40" width="432" height="432" fill="none" stroke="#FDFCF9" stroke-opacity="0.4" stroke-width="2"/>
+  <rect x="52" y="52" width="408" height="408" fill="none" stroke="#FDFCF9" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="256" y="330" text-anchor="middle"
+        font-family="Songti SC, SimSun, Noto Serif SC, serif"
+        font-size="248" font-weight="600" fill="#FDFCF9">含</text>
+</svg>

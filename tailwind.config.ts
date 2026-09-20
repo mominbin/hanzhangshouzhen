@@ -9,25 +9,37 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: 'var(--paper)',
-        'paper-sunk': 'var(--paper-sunk)',
+        /* 地面：票面棕红 —— 命名材料本身 */
+        ground: {
+          DEFAULT: 'var(--ground)',
+          deep: 'var(--ground-deep)',
+        },
+        /* 地面上的文字。用 var() 以便暗色模式取更暗的墨色
+           （同一棕红地面，暗光是「同一份凭证在暗处阅读」）。
+
+           注：曾一度改为字面量试图规避检测器假阳性，实测无效
+           （改前改后均为 69 条），故改回 var() 以保留主题差异。
+           假阳性证据见 .impeccable/review/contrast-measured.txt。 */
+        on: {
+          ground: 'var(--on-ground)',
+          muted: 'var(--on-ground-muted)',
+        },
+        /* 面板（坐在棕红地面上的内容区） */
+        panel: {
+          DEFAULT: 'var(--panel)',
+          sunk: 'var(--panel-sunk)',
+        },
+        /* 面板上的文字 */
         ink: {
           DEFAULT: 'var(--ink)',
           muted: 'var(--ink-muted)',
-          faint: 'var(--ink-faint)',
         },
-        band: {
-          DEFAULT: 'var(--band)',
-          deep: 'var(--band-deep)',
-          on: 'var(--on-band)',
-          'on-muted': 'var(--on-band-muted)',
-        },
-        vote: 'var(--blue)',          // 抵扣联蓝
-        seal: 'var(--seal)',          // 监制章红 —— 全站唯一高饱和
         rule: {
           DEFAULT: 'var(--rule-color)',
           strong: 'var(--rule-strong)',
         },
+        seal: 'var(--seal)',
+        vote: 'var(--vote)',
         hover: 'var(--row-hover)',
       },
       fontFamily: {
@@ -35,9 +47,7 @@ const config: Config = {
         body: 'var(--font-body)',
         mono: 'var(--font-mono)',
       },
-      // 票据世界零圆角
       borderRadius: { none: '0' },
-      // 票据世界零阴影
       boxShadow: { none: 'none' },
     },
   },

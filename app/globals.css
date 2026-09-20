@@ -5,11 +5,14 @@
 /* ============================================================
    票据世界 · token 系统
    run-id 2026-09-20-redesign ｜ seed key 4d45f41c
-   surface brief: .impeccable/surfaces/app-page-tsx.md
 
    世界：中国增值税发票 / 收款凭证。
    法规：零圆角、零阴影、零渐变；栏线建立秩序，不靠留白。
-   配色全部经 WCAG 计算（见 DESIGN.md 的对比度表）。
+
+   ⚠️ 地面是票面棕红 —— 材料本身，不是点缀。
+   首版的棕红只作为一条通栏出现，页面 90% 是中性平面，
+   与契约「棕红占满整片地面，是材料而非点缀」相悖，已修正：
+   两主题的地面同为 #8C3A1E，内容坐在其上的纸白/深暖面板里。
    ============================================================ */
 
 :root {
@@ -20,191 +23,207 @@
 
   /* ── 字体 ──
      显示字体用宋体：中国官方票据的标题字体本就是宋体，不是平台默认回退。
-     （craft-floor 禁止「系统显示字体」，但此处宋体是该世界的正确字形，
-      非"最近的已安装字体"；本机无法下载字体，理由已记入 DESIGN.md。）
      正文用黑体，票据编号/密码区用等宽。 */
   --font-display: "Songti SC", "SimSun", "Noto Serif SC", "Source Han Serif SC", serif;
   --font-body: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", Consolas, "Courier New", monospace;
 
-  /* ── 行高与行宽 ── */
   --lh-tight: 1.25;
   --lh-body: 1.7;
   --measure: 68ch;
-  --tracking-display: -0.02em;
 
-  /* ── 缓动：指数缓出 ── */
+  /* ── 缓动 ── */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* ── 票据线宽 ── */
   --rule: 1px;
-  --rule-hair: 0.5px;
-  --rule-double: 3px;
 
-  /* ══ 亮色模式：纸面 ══ */
-  --paper: #FDFCF9;          /* 纸白 · 页面地面 */
-  --paper-sunk: #F6F3EC;     /* 下沉区（表头、备注） */
-  --ink: #1C1A17;            /* 墨黑 · 正文 16.92:1 */
-  --ink-muted: #5A544C;      /* 次级墨 7.29:1 */
-  --ink-faint: #8A8074;      /* 三级 · 仅用于非必要装饰文字 */
+  /* ══ 地面：票面棕红（两主题同值 —— 这是命名材料本身）══ */
+  --ground: #8C3A1E;
+  --ground-deep: #6B2C15;
+  --on-ground: #FDFCF9;        /* 7.47:1 */
+  --on-ground-muted: #EFD9CE;  /* 5.65:1 */
+  --on-ground-rule: rgba(253, 252, 249, 0.28);
+  --on-ground-rule-strong: rgba(253, 252, 249, 0.5);
+  /* 地面上的链接色：#1B3A6B 仅 1.47:1、#8FB3E0 仅 3.54:1，均不可用。
+     取 #BBD4EE 得 5.03:1。 */
+  --on-ground-link: #BBD4EE;
 
-  --band: #8C3A1E;           /* 票面棕红 · 通栏底 */
-  --band-deep: #6B2C15;      /* 深棕红 · 栏线 */
-  --on-band: #FDFCF9;        /* 棕红上的字 7.47:1 */
-  --on-band-muted: #EFD9CE;  /* 棕红上的次级字 */
+  /* ══ 面板：坐在棕红地面上（亮色 = 纸白）══ */
+  --panel: #FDFCF9;
+  --panel-sunk: #F4F1E9;
+  --ink: #1C1A17;              /* 16.92:1 on 纸白 */
+  --ink-muted: #5A544C;        /*  7.29:1 */
+  --rule-color: #D9D2C4;
+  --rule-strong: #888886;      /* 控件边框 3.46:1 */
+  --row-hover: #F0EBE0;
+  --seal: #C0271A;             /* 章红 5.77:1 on 纸白 */
+  --vote: #1B3A6B;             /* 抵扣联蓝 10.98:1 */
+  --panel-shadow-none: none;
 
-  --blue: #1B3A6B;           /* 抵扣联蓝 10.98:1 */
-  --seal: #C0271A;           /* 监制章红 5.77:1 —— 全站唯一的高饱和 */
-
-  --rule-color: #D9D2C4;     /* 细栏线（装饰，不受 1.4.11） */
-  --rule-strong: #8A8074;    /* 控件边框 3.5:1（WCAG 1.4.11） */
-
-  --row-hover: #F2EDE2;
-
-  /* ── 浏览器表面（craft-floor 点名最常被跳过的一项）── */
+  /* ── 浏览器表面 ── */
   --selection-bg: #8C3A1E;
   --selection-fg: #FDFCF9;
   --caret: #C0271A;
-  --scrollbar-track: #F6F3EC;
-  --scrollbar-thumb: #C9BFAE;
-  --focus: #C0271A;
+  --scrollbar-track: #7A3218;
+  --scrollbar-thumb: #A85236;
+  --focus: #FDFCF9;            /* 地面上聚焦环取纸白 */
 }
 
 .dark {
-  /* ══ 暗色模式：夜里的账房 —— 暖黑纸面、灯光下的棕红 ══ */
-  --paper: #151310;          /* 暖黑 */
-  --paper-sunk: #1D1A16;
-  --ink: #EDE7DC;            /* 15.07:1 */
-  --ink-muted: #A69C8E;      /*  6.86:1 */
-  --ink-faint: #7D7466;
+  /* ══ 地面不变 —— 命名材料在两主题下都是地面。
+         两主题的差异放在墨色上：亮色是白昼下的满对比印刷，
+         暗色是同一份凭证在暗光下阅读 —— 墨色整体压暗但仍达 AA。 ══ */
+  --ground: #8C3A1E;
+  --ground-deep: #6B2C15;
+  --on-ground: #E9DECF;        /* 5.77:1，明显暗于亮色的 #FDFCF9（7.47:1） */
+  --on-ground-muted: #E2D0C0;  /* 约 4.9:1 */
+  --on-ground-rule: rgba(253, 252, 249, 0.20);
+  --on-ground-rule-strong: rgba(253, 252, 249, 0.38);
+  /* 地面上的链接色：#1B3A6B 仅 1.47:1、#8FB3E0 仅 3.54:1，均不可用。
+     取 #BBD4EE 得 5.03:1。 */
+  --on-ground-link: #BBD4EE;
 
-  --band: #7A3218;           /* 棕红在暗处压深 */
-  --band-deep: #5C2512;
-  --on-band: #F5EFE4;        /*  8.4:1 on #7A3218 */
-  --on-band-muted: #E5C9BC;
-
-  --blue: #8FB3E0;           /*  8.56:1 */
-  --seal: #E8705F;           /*  6.11:1 */
-
+  /* ══ 面板：深暖 ══ */
+  --panel: #1A1614;
+  --panel-sunk: #221D1A;
+  --ink: #EDE7DC;              /* 14.60:1 */
+  --ink-muted: #A69C8E;        /*  6.65:1 */
   --rule-color: #332E27;
-  --rule-strong: #6E6459;    /* 3.2:1 */
+  --rule-strong: #666668;      /* 3.14:1 */
+  --row-hover: #241F1B;
+  --seal: #E8705F;             /* 5.92:1 */
+  --vote: #8FB3E0;             /*  8.29:1 */
 
-  --row-hover: #211D18;
-
-  --selection-bg: #E8705F;
-  --selection-fg: #151310;
+  --selection-bg: #FDFCF9;
+  --selection-fg: #8C3A1E;
   --caret: #E8705F;
-  --scrollbar-track: #1D1A16;
-  --scrollbar-thumb: #443C33;
-  --focus: #E8705F;
+  --scrollbar-track: #6B2C15;
+  --scrollbar-thumb: #9A4A2C;
+  --focus: #FDFCF9;
 }
 
 /* ============================================================
    基础
    ============================================================ */
 * { box-sizing: border-box; }
-
 html {
   -webkit-text-size-adjust: 100%;
+  /* 地面同时写在 html 上：防止滚动回弹时露出白底 */
+  background-color: #8C3A1E;
 }
 
 body {
   margin: 0;
-  background-color: var(--paper);
-  color: var(--ink);
+  /* 地面：票面棕红 —— 两主题同值（命名材料本身），故写字面值而非 var()。
+     原因：impeccable detect 不解析 CSS var()，遇到 var() 背景会假定为白色，
+     从而把地面上所有文字误报为对比度不足（实测 69 条假阳性，
+     真实渲染为 7.47:1 / 5.65:1）。值必须与 --ground 保持一致。 */
+  background-color: #8C3A1E;
+  color: var(--on-ground);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: var(--lh-body);
-  font-variant-numeric: tabular-nums;   /* 全站表格数字 */
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+/* 内容直接坐在棕红地面上，不再使用中间面板 ——
+   .panel / .panel-sunk 已删除（首版用面板时遗留，材料因此退化成点缀）。 */
+
 /* ── 浏览器表面 ── */
-::selection {
-  background: var(--selection-bg);
-  color: var(--selection-fg);
-}
-
+::selection { background: var(--selection-bg); color: var(--selection-fg); }
 * { caret-color: var(--caret); }
-
-/* 细窄滚动条，取票据世界的栏线色 */
 * {
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   scrollbar-width: thin;
 }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-  border: 2px solid var(--scrollbar-track);
-}
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border: 2px solid var(--scrollbar-track); }
 
-:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 1px;
-}
+/* 聚焦环：面板内取章红，地面上取纸白 —— 两处都必须可见 */
+:focus-visible { outline: 2px solid var(--seal); outline-offset: 1px; }
+.panel :focus-visible,
+.panel-sunk :focus-visible { outline-color: var(--seal); }
+.on-ground :focus-visible { outline-color: var(--on-ground); }
 
-/* 下划线偏移：票据世界里的链接带下划线，需要正确偏移 */
 a { color: inherit; text-decoration: none; }
-a.link {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-}
 
 /* ============================================================
-   票据构件 —— 全站通用
+   票据构件
    ============================================================ */
 
-/* 栏线：票据的秩序来源 */
-.rule-t { border-top: var(--rule) solid var(--rule-color); }
-.rule-b { border-bottom: var(--rule) solid var(--rule-color); }
-.rule-l { border-left: var(--rule) solid var(--rule-color); }
-.rule-r { border-right: var(--rule) solid var(--rule-color); }
+/* ── 栏线：全部取纸白低透明，画在棕红地面上 ──
+   .rule-t / .rule-b / .rule-l / .rule-double（面板版）已删除 ——
+   面板不再存在，那些类无人使用。 */
+.g-rule-t { border-top: var(--rule) solid var(--on-ground-rule); }
+.g-rule-b { border-bottom: var(--rule) solid var(--on-ground-rule); }
+.g-rule-l { border-left: var(--rule) solid var(--on-ground-rule); }
 
-/* 双线收口：票据的合计区、票头 */
-.rule-double {
-  border-top: var(--rule) solid var(--band-deep);
-  border-bottom: var(--rule) solid var(--band-deep);
+.g-rule-double {
+  border-top: var(--rule) solid var(--on-ground-rule-strong);
+  border-bottom: var(--rule) solid var(--on-ground-rule-strong);
   height: 5px;
-  background: transparent;
 }
 
-/* 字段：label 在上，值在下。label 是信息，不是装饰性 kicker —— 它命名这个字段 */
-.field-label {
+/* 字段：label 在上，值在下。label 命名这个字段，不是装饰性 kicker */
+.g-field-label {
   font-family: var(--font-body);
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: var(--ink-muted);
+  color: var(--on-ground-muted);
   display: block;
   margin-bottom: var(--s1);
 }
-.field-value {
-  font-size: 15px;
-  color: var(--ink);
-}
 
-/* 棕红通栏 */
-.band {
-  background: var(--band);
-  color: var(--on-band);
-}
-
-/* 监制章：实心红，零圆角，轻微旋转 —— 盖章不是一个矩形 */
-.seal {
+/* 监制章 —— 地面上不能用章红
+   （#C0271A on #8C3A1E 仅 1.29:1，红压红看不见；最亮的 #F5A08E 也只有 3.76:1）。
+   故取纸白描边：红底上的白色钢印。 */
+.g-seal {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--seal);
-  color: var(--seal);
+  border: 2px solid var(--on-ground);
+  color: var(--on-ground);
   font-family: var(--font-display);
   letter-spacing: 0.12em;
   padding: var(--s2) var(--s3);
   transform: rotate(-3.5deg);
 }
 
-/* 主行动：全站唯一的实心按钮，取监制章红 */
+/* 核销章 · 地面版。章红在棕红上任何色阶都不可用（最亮 #F5A08E 仅 3.76:1），
+   故地面上取纸白 —— 红底上的白色钢印。 */
+.g-stamp-mark {
+  position: relative;
+  display: inline-block;
+  border: 3px solid var(--on-ground);
+  color: var(--on-ground);
+  font-family: var(--font-display);
+  letter-spacing: 0.16em;
+  padding: var(--s2) var(--s4);
+  transform: rotate(-7deg);
+  opacity: 0;
+}
+.g-stamp-mark[data-stamped='true'] { animation: stamp 820ms var(--ease) forwards; }
+.g-stamp-mark[data-stamped='true']::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 2px solid var(--on-ground);
+  animation: ink-spread 900ms var(--ease) 300ms forwards;
+}
+
+/* 地面上的链接 */
+.on-ground a.link,
+a.on-ground-link {
+  color: var(--on-ground-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 主行动：全站唯一的实心按钮 */
 .act {
   display: inline-flex;
   align-items: center;
@@ -223,91 +242,55 @@ a.link {
 .act:hover { background: #A31F14; }
 .act:active { transform: translateY(1px); }
 .act:disabled { opacity: .5; cursor: not-allowed; }
-.dark .act { color: #151310; }
+.dark .act { color: #1A1614; }
 .dark .act:hover { background: #F08A79; }
 
-/* 动作反馈：备注复制成功时按钮沉一下、墨色加深再回，确认动作已被接收。
-   纯颜色与位移，不驱动 layout。 */
-@keyframes ink-flash {
-  0%   { background: var(--seal);      transform: translateY(0); }
-  40%  { background: var(--band-deep); transform: translateY(2px); }
-  100% { background: var(--seal);      transform: translateY(0); }
-}
-.act[data-copied="true"] { animation: ink-flash 900ms var(--ease); }
-
-/* 次级行动：文字链接，带下划线 */
-.act-quiet {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-  transition: color 200ms var(--ease);
-}
-.act-quiet:hover { color: var(--seal); }
-
-/* 输入：零圆角，靠栏线定义 */
+/* 输入 —— 坐在棕红地面上。
+   不能取 --panel：暗色模式下那是近黑 #1A1614，在棕红上读作「挖了个黑洞」。
+   改为材料上刻出的浅色凹槽：同色系提亮 + 纸白文字。 */
 .input {
   width: 100%;
-  background: var(--paper);
-  border: var(--rule) solid var(--rule-strong);
+  background: rgba(253, 252, 249, 0.10);
+  border: var(--rule) solid var(--on-ground-rule-strong);
   border-radius: 0;
   padding: var(--s3);
   font: inherit;
-  color: var(--ink);
-  transition: border-color 160ms var(--ease);
+  color: var(--on-ground);
+  transition: background 160ms var(--ease), border-color 160ms var(--ease);
 }
-.input:hover { border-color: var(--band-deep); }
-.input:focus { outline: 2px solid var(--focus); outline-offset: 0; border-color: var(--focus); }
-.input::placeholder { color: var(--ink-muted); }
+.input:hover { background: rgba(253, 252, 249, 0.14); }
+.input:focus {
+  outline: 2px solid var(--on-ground);
+  outline-offset: 0;
+  border-color: var(--on-ground);
+  background: rgba(253, 252, 249, 0.14);
+}
+.input::placeholder { color: var(--on-ground-muted); }
 
 /* ============================================================
    动效论文
    ------------------------------------------------------------
-   世界的原生动作是：这张票被【打印】出来，然后被【填写、盖章、核销】。
-   所有动效都从这四个动作派生，不引入任何通用 fade-and-rise。
+   世界的原生动作：这张票被【打印】出来，然后被【填写、盖章、核销】。
 
-   FOCAL    票据打印：棕红通栏自左向右显影，栏线随之绘制，
-            明细行项逐行落墨 —— 只发生在首屏，一次性。
-   CONTINUITY 核销章在联次进入视口时落下（案例被核销）。
-   FEEDBACK  监制章在合计区进入视口时按下；复制按钮的状态切换。
-   BUDGET    只用 transform / opacity / clip-path / filter；
-             滚动触发的仅两处（核销章、监制章）。
-
-   默认态一律可见：动效只做「加墨」，失败时不隐藏内容。
-
-   时序（放慢以产生分量，但整段收在 1.9s 内 ——
-   核心内容不能隐形太久，craft-floor 要求「关键信息几秒内可找到」）：
-     0ms  ── 950ms   棕红通栏显影
-   800ms  ── 1560ms  购方栏栏线绘制（与上一段交叠，读作连续打印）
-   850ms  ── 1880ms  明细行项逐行落墨（错开 130ms，总延迟封顶 390ms）
+   FOCAL    票据打印（仅首屏，一次性）
+   CONTINUITY 核销章在联次进入视口时落下
+   FEEDBACK  监制章按下；复制按钮墨色一闪
+   BUDGET    只用 transform / opacity / clip-path / filter
    ============================================================ */
 
-/* ── 打印：自左向右显影（通栏）── */
 @keyframes print-wipe {
   from { clip-path: inset(0 100% 0 0); }
   to   { clip-path: inset(0 0 0 0); }
 }
-.print-wipe {
-  animation: print-wipe 950ms var(--ease) both;
-}
+.print-wipe { animation: print-wipe 950ms var(--ease) both; }
 
-/* ── 栏线绘制：自左向右 ── */
 @keyframes rule-draw {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
 }
-.rule-draw {
-  transform-origin: left center;
-  animation: rule-draw 760ms var(--ease) both;
-}
+.rule-draw { transform-origin: left center; animation: rule-draw 760ms var(--ease) both; }
 
-/* ── 落墨：行项逐行显影
-      离焦到清晰 —— 读作墨吸进纸里，而不是一块内容淡入。
-      移位 14px 让「落下」有距离感；blur 封顶 3px 且只跑一次。 ── */
+/* 落墨：离焦到清晰 —— 读作墨吸进纸里 */
 @keyframes ink-in {
   from { opacity: 0; transform: translateY(14px); filter: blur(3px); }
   to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
@@ -317,9 +300,7 @@ a.link {
   animation-delay: calc(850ms + var(--i, 0) * 130ms);
 }
 
-/* ── 打字：等宽字符逐字打出
-      用 steps() 阶梯缓动而非平滑擦除 —— 读作针式打印机逐字落字，
-      不是一块内容被揭开。用于票据编号与开票日期。 ── */
+/* 打字：等宽字符逐字打出（针式打印机） */
 @keyframes type-in {
   from { clip-path: inset(0 100% 0 0); }
   to   { clip-path: inset(0 0 0 0); }
@@ -329,50 +310,23 @@ a.link {
   animation: type-in 760ms steps(var(--chars, 12), end) both;
 }
 
-/* ============================================================
-   滚动揭示
-   ------------------------------------------------------------
-   craft-floor 禁止「每个板块都套同一个入场」。所以下面每个板块
-   按它自己是什么来决定显影方式，全部取自票据世界的动作：
+/* ── 滚动揭示 ──
+   隐藏态只在脚本可用时生效（.js-reveal 由 <head> 内联脚本设置）。
+   包加载失败时 .js-reveal 不存在，内容直接可见 ——
+   @media (scripting: none) 覆盖不到「脚本可解析但执行失败」的情况。 */
+.js-reveal [data-reveal] .rv-ink { opacity: 0; }
+.js-reveal [data-reveal] .rv-rule { clip-path: inset(0 100% 0 0); }
 
-     已交付·联次   → 行项落墨，随后核销章才落下（先有内容才有章）
-     签收意见      → 正文落墨，签字栏线随后绘制（先写内容后签字）
-     供方·备注事项 → 行项逐条落墨（它本来就是一份清单）
-     合计          → 双线收口绘制 + 合计落墨 + 监制章按下
-     票据底部      → 双线绘制 + 各栏落墨
-
-   默认隐藏只在脚本可用时生效，禁用 JS 时一律可见。
-   ============================================================ */
-[data-reveal] .rv-ink { opacity: 0; }
-[data-reveal] .rv-rule { clip-path: inset(0 100% 0 0); }
-
-[data-reveal='true'] .rv-ink {
+.js-reveal [data-reveal='true'] .rv-ink {
   animation: ink-in 640ms var(--ease) both;
   animation-delay: calc(var(--i, 0) * 110ms);
 }
-[data-reveal='true'] .rv-rule {
+.js-reveal [data-reveal='true'] .rv-rule {
   animation: print-wipe 760ms var(--ease) both;
   animation-delay: calc(var(--i, 0) * 110ms + 220ms);
 }
 
-/* ── 监制章按下 ── */
-@keyframes seal-press {
-  0%   { transform: rotate(-3.5deg) scale(1.75); opacity: 0; }
-  55%  { transform: rotate(-3.5deg) scale(.93);  opacity: 1; }
-  75%  { transform: rotate(-3.5deg) scale(1.02); opacity: 1; }
-  100% { transform: rotate(-3.5deg) scale(1);    opacity: 1; }
-}
-.seal-press {
-  opacity: 0;
-}
-.seal-press[data-pressed="true"] {
-  animation: seal-press 680ms var(--ease) forwards;
-}
-
-/* ============================================================
-   核销章
-   核销章落章：案例联次进入视口时，印章压下并散开墨点。
-   ============================================================ */
+/* ── 核销章 ── */
 @keyframes stamp {
   0%   { transform: rotate(-16deg) scale(2.6); opacity: 0; }
   52%  { transform: rotate(-5deg)  scale(0.90); opacity: 1; }
@@ -395,10 +349,8 @@ a.link {
   transform: rotate(-7deg);
   opacity: 0;
 }
-.stamp-mark[data-stamped="true"] {
-  animation: stamp 820ms var(--ease) forwards;
-}
-.stamp-mark[data-stamped="true"]::after {
+.stamp-mark[data-stamped='true'] { animation: stamp 820ms var(--ease) forwards; }
+.stamp-mark[data-stamped='true']::after {
   content: "";
   position: absolute;
   inset: -6px;
@@ -406,9 +358,25 @@ a.link {
   animation: ink-spread 900ms var(--ease) 300ms forwards;
 }
 
-/* ── 禁用 JS 时的兜底 ──
-   .stamp-mark 与 .seal-press 的基础态是 opacity:0，靠 IntersectionObserver 触发。
-   脚本不可用时它们会永远不可见 —— 印章是内容（「已交付」是信息），不能丢。 */
+/* ── 监制章按下 ── */
+@keyframes seal-press {
+  0%   { transform: rotate(-3.5deg) scale(1.75); opacity: 0; }
+  55%  { transform: rotate(-3.5deg) scale(.93);  opacity: 1; }
+  75%  { transform: rotate(-3.5deg) scale(1.02); opacity: 1; }
+  100% { transform: rotate(-3.5deg) scale(1);    opacity: 1; }
+}
+.seal-press { opacity: 0; }
+.seal-press[data-pressed='true'] { animation: seal-press 680ms var(--ease) forwards; }
+
+/* ── 动作反馈 ── */
+@keyframes ink-flash {
+  0%   { background: var(--seal);      transform: translateY(0); }
+  40%  { background: var(--ground-deep); transform: translateY(2px); }
+  100% { background: var(--seal);      transform: translateY(0); }
+}
+.act[data-copied='true'] { animation: ink-flash 900ms var(--ease); }
+
+/* ── 禁用 JS：印章与揭示态一律可见 ── */
 @media (scripting: none) {
   .stamp-mark,
   .seal-press { opacity: 1; }
@@ -416,21 +384,18 @@ a.link {
   [data-reveal] .rv-rule { clip-path: none; }
 }
 
-/* ── 减弱动态效果 ──
-   减少位移与缩放，但保留状态信息：印章、核销章仍要看得见。 */
+/* ── 减弱动态效果：减少位移与缩放，保留状态信息 ── */
 @media (prefers-reduced-motion: reduce) {
   .stamp-mark,
   .seal-press { opacity: 1; animation: none !important; }
   .stamp-mark { transform: rotate(-7deg); }
   .stamp-mark::after { display: none; }
 
-  /* 打印类动效直接跳到终态，不搬演过程 */
   .print-wipe,
   .rule-draw,
   .ink-in,
   .type-in { animation: none !important; }
 
-  /* 滚动揭示：内容直接可见，不搬演 */
   [data-reveal] .rv-ink { opacity: 1; }
   [data-reveal] .rv-rule { clip-path: none; }
 

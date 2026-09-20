@@ -41,45 +41,22 @@ export default function Action() {
       data-reveal={String(seen)}
       className="mx-auto max-w-[1180px] px-6 md:px-10"
     >
-      {/* 合计区：双线收口。线先绘制，合计随后落墨，监制章最后按下 ——
-          顺序即这个动作本身：先有栏线，再填写，再盖章。 */}
-      <div className="mt-12 md:mt-16">
-        <div className="rv-rule rule-double" />
-        <div className="grid grid-cols-1 gap-y-6 py-6 md:grid-cols-[1.8fr_1fr] md:items-start md:gap-x-10">
-          <div className="rv-ink" style={{ '--i': 1 } as React.CSSProperties}>
-            <span className="field-label">合计 / TOTAL</span>
-            <p className="font-display text-[clamp(1.15rem,2.4vw,1.6rem)] leading-snug tracking-[-0.01em] text-ink">
-              肆 项服务 · 贰 个已交付案例 · 肆 家云厂商背书
-            </p>
-          </div>
-          <div className="md:text-right">
-            <span className="field-label rv-ink md:text-right" style={{ '--i': 2 } as React.CSSProperties}>
-              监制
-            </span>
-            {/* 监制章在合计区进入视口时按下 —— 世界的原生动作。 */}
-            <span className="seal seal-press text-[12px]" data-pressed={seen}>
-              上海含章收珍 · 交付监制
-            </span>
-          </div>
-        </div>
-        <div className="rv-rule rule-double" style={{ '--i': 1 } as React.CSSProperties} />
-      </div>
-
-      {/* 备注栏 + 开票动作 */}
-      <div className="grid grid-cols-1 gap-y-10 py-12 md:grid-cols-[1.4fr_1fr] md:gap-x-12 md:py-16">
+      {/* 合计已上移，紧接明细行项表收口（票据的语法：合计收行项）。
+          本区只留备注栏与开票动作。 */}
+      <div className="grid grid-cols-1 gap-y-10 pt-12 pb-12 md:grid-cols-[1.4fr_1fr] md:gap-x-12 md:pt-16 md:pb-16">
         <div>
           <h2
-            className="rv-ink font-display text-[clamp(1.25rem,2.6vw,1.75rem)] tracking-[-0.01em] text-ink"
+            className="rv-ink font-display text-[clamp(1.25rem,2.6vw,1.75rem)] tracking-[-0.01em] text-on-ground"
             style={{ '--i': 2 } as React.CSSProperties}
           >
             备注栏
           </h2>
-          <p className="rv-ink mt-3 max-w-[62ch] text-[15px] leading-relaxed text-ink-muted" style={{ '--i': 3 } as React.CSSProperties}>
+          <p className="rv-ink mt-3 max-w-[62ch] text-[15px] leading-relaxed text-on-muted" style={{ '--i': 3 } as React.CSSProperties}>
             写下您要做的东西，一句话就够。按下右边的按钮，这段备注会被复制到剪贴板，
             同时拨通电话；接通后直接粘贴即可，不用重新讲一遍。
           </p>
 
-          <label htmlFor="note" className="field-label mt-8">
+          <label htmlFor="note" className="g-field-label mt-8">
             需求备注 / REMARKS
           </label>
           <textarea
@@ -90,13 +67,13 @@ export default function Action() {
             placeholder="例：我们做连锁零售，想做一个门店的进销存后台，要和现有的收银系统对接"
             className="input resize-y"
           />
-          <p className="mt-2 text-[12px] text-ink-muted">
+          <p className="mt-2 text-[12px] text-on-muted">
             未填写也可以直接拨打。备注只是帮您少讲一遍。
           </p>
         </div>
 
-        <div className="rule-l md:pl-12">
-          <span className="field-label rv-ink" style={{ '--i': 3 } as React.CSSProperties}>
+        <div className="g-rule-l md:pl-12">
+          <span className="g-field-label rv-ink" style={{ '--i': 3 } as React.CSSProperties}>
             开票动作 / ACTION
           </span>
 
@@ -111,24 +88,24 @@ export default function Action() {
 
           <dl className="rv-ink mt-8 space-y-4" style={{ '--i': 4 } as React.CSSProperties}>
             <div>
-              <dt className="field-label">电话 / 微信</dt>
+              <dt className="g-field-label">电话 / 微信</dt>
               <dd>
-                <a href={`tel:${phone}`} className="font-mono text-[17px] text-ink underline decoration-rule-strong underline-offset-[5px] transition-colors hover:text-seal">
+                <a href={`tel:${phone}`} className="font-mono text-[17px] text-on-ground underline decoration-on-ground/50 underline-offset-[5px] transition-colors hover:text-on-ground">
                   {siteConfig.contact.phone}
                 </a>
               </dd>
             </div>
             <div>
-              <dt className="field-label">邮箱</dt>
+              <dt className="g-field-label">邮箱</dt>
               <dd>
-                <a href={`mailto:${siteConfig.contact.email}`} className="font-mono text-[14px] text-ink-muted underline decoration-rule-strong underline-offset-[5px] transition-colors hover:text-seal">
+                <a href={`mailto:${siteConfig.contact.email}`} className="font-mono text-[14px] text-on-muted underline decoration-on-ground/50 underline-offset-[5px] transition-colors hover:text-on-ground">
                   {siteConfig.contact.email}
                 </a>
               </dd>
             </div>
             <div>
-              <dt className="field-label">地址</dt>
-              <dd className="text-[14px] text-ink-muted">{siteConfig.contact.address}</dd>
+              <dt className="g-field-label">地址</dt>
+              <dd className="text-[14px] text-on-muted">{siteConfig.contact.address}</dd>
             </div>
           </dl>
         </div>
