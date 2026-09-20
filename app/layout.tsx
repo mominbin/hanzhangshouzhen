@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
+import { MotionConfig } from 'framer-motion'
 import { siteConfig } from '@/config/site'
 import './globals.css'
 
@@ -154,7 +155,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
         />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {children}
+          {/* reducedMotion="user"：系统开启「减弱动态效果」时，
+              Framer Motion 自动关闭位移/缩放类动画，仅保留透明度过渡，
+              内容仍完整呈现。一处配置覆盖全部 11 个使用动效的组件。 */}
+          <MotionConfig reducedMotion="user">
+            {children}
+          </MotionConfig>
         </ThemeProvider>
       </body>
     </html>

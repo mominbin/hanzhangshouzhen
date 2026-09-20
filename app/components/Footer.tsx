@@ -13,7 +13,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-sm font-bold">
+              <div className="w-8 h-8 rounded-control bg-primary flex items-center justify-center text-white text-sm font-bold">
                 含
               </div>
               <span className="font-bold">{siteConfig.company.shortName}</span>
@@ -25,7 +25,7 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 className="font-semibold text-sm mb-3">快速链接</h4>
+            <h2 className="font-semibold text-sm mb-3">快速链接</h2>
             <ul className="space-y-2">
               {siteConfig.nav.map((item) => (
                 <li key={item.href}>
@@ -43,7 +43,7 @@ export default function Footer() {
 
           {/* Contact + Social */}
           <div>
-            <h4 className="font-semibold text-sm mb-3">联系我们</h4>
+            <h2 className="font-semibold text-sm mb-3">联系我们</h2>
             <div className="space-y-1.5 text-sm" style={{ color: 'var(--color-text-muted)' }}>
               <p>{siteConfig.contact.email}</p>
               <p>{siteConfig.contact.phone}</p>

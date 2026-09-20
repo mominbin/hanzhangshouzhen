@@ -1,0 +1,104 @@
+/* ============================================================
+   tokens.css · 视觉系统 token 定义
+   run-id: 2026-09-20-redesign
+   来源: DESIGN.md §4（配色）/ §1（间距）/ §5（一致性）
+
+   用法: 替换 app/globals.css 中现有的 :root / .dark 变量块。
+   间距 token 为 G1 判据「无魔数」的基准——CSS 中所有
+   margin/padding/gap 取值必须属于以下集合。
+   ============================================================ */
+
+:root {
+  /* ── 间距刻度（4px 基准，G1 判据基准） ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* ── 板块纵向留白（舒适密度档） ── */
+  --section-y: 56px;          /* mobile */
+  --content-max: 1152px;
+  --prose-max: 72ch;
+
+  /* ── 圆角 ── */
+  --radius-control: 6px;      /* 按钮 / 输入 */
+  --radius-card: 10px;        /* 卡片 */
+
+  /* ── 字体 ── */
+  --font-sans: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei",
+               "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+  /* ── 行高 ── */
+  --lh-body: 1.65;
+  --lh-heading: 1.15;
+
+  /* ── 缓动 ── */
+  --ease-out-quart: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── 亮色模式配色 ── */
+  --color-bg: #FAFAF8;              /* 画布：暖白，非纯白 */
+  --color-bg-secondary: #F2F1ED;    /* 次级面 */
+  --color-surface: #FFFFFF;         /* 卡片 */
+  --color-surface-hover: #F7F7F4;
+  --color-border: #E3E2DD;          /* 装饰性分割线，不受 1.4.11 约束 */
+  --color-border-strong: #888886;   /* 控件边框 3.40:1 ✅ WCAG 1.4.11 */
+
+  --color-text: #1A1A1C;            /* 14.05:1 on 画布 */
+  --color-text-muted: #5C5C61;      /*  6.34:1 on 画布 */
+  --color-text-inverse: #FFFFFF;    /*  5.47:1 on 强调色 */
+
+  --color-accent: #0F766E;          /* 靛青 · 白字 5.47:1 ✅ */
+  --color-accent-hover: #115E59;    /*        白字 7.58:1 ✅ */
+  --color-accent-subtle: #E6F2F0;   /* 强调色浅底，用于标签/高亮 */
+
+  --color-nav-bg: rgba(250, 250, 248, 0.82);
+
+  /* ── 阴影：近乎无 ── */
+  --shadow-card-hover: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  --color-bg: #0C0C0E;              /* 近黑，非蓝黑 */
+  --color-bg-secondary: #141416;
+  --color-surface: #161618;
+  --color-surface-hover: #1D1D20;
+  --color-border: #26262A;          /* 装饰性分割线，不受 1.4.11 约束 */
+  --color-border-strong: #666668;   /* 控件边框 3.41:1 ✅ WCAG 1.4.11 */
+
+  --color-text: #EDEDEF;            /* 16.71:1 on 画布 */
+  --color-text-muted: #A1A1A6;      /*  7.60:1 on 画布 */
+  --color-text-inverse: #0C0C0E;    /*  暗色下按钮文字用深色 */
+
+  --color-accent: #2DD4BF;          /* 10.50:1 on 画布 */
+  --color-accent-hover: #5EEAD4;
+  --color-accent-subtle: #10312D;
+
+  --color-nav-bg: rgba(12, 12, 14, 0.82);
+
+  --shadow-card-hover: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 768px) {
+  :root { --section-y: 72px; }
+}
+
+@media (min-width: 1440px) {
+  :root { --section-y: 96px; }
+}
+
+/* ============================================================
+   已移除（相对现有 globals.css）
+   ------------------------------------------------------------
+   --color-hero-gradient   : 渐变是 profile 的 AI 味来源，删
+   --color-cta-bg: #6366f1 : 白字仅 4.47:1，不达 WCAG AA，删
+   --color-text-accent:#818cf8 : 暗色下紫色强调，删
+   字体栈中的 'Geist'      : 死声明（无字体文件、无 @font-face、
+                             Google Fonts 不可达），删
+   ============================================================ */

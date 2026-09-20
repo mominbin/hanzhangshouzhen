@@ -59,7 +59,7 @@ export default function Navbar() {
           onClick={(e) => { e.preventDefault(); handleNavClick('#hero') }}
           className="flex items-center gap-2.5 group"
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-sm font-bold">
+          <div className="w-8 h-8 rounded-control bg-primary flex items-center justify-center text-white text-sm font-bold">
             含
           </div>
           <span className="font-bold text-base hidden sm:block group-hover:text-primary transition-colors">

@@ -12,11 +12,13 @@ export default function HomePage() {
     <>
       <Navbar />
       <main>
+        {/* 顺序依 S0 信息优先级：能做什么 → 案例 → 凭什么信 → 怎么联系 → 你是谁。
+            原顺序把「关于/品牌故事」（优先级 5）排在「他们信任我们」（优先级 3）之前。 */}
         <Hero />
         <Services />
         <Projects />
-        <About />
         <Testimonials />
+        <About />
         <Contact />
       </main>
       <Footer />

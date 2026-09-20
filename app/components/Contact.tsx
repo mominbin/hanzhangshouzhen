@@ -30,7 +30,7 @@ export default function Contact() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left: CTA text + contact info */}
-            <div className="p-8 md:p-12 gradient-bg text-white flex flex-col justify-center">
+            <div className="p-8 md:p-12 btn-solid text-white flex flex-col justify-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-3">
                 准备好开始您的项目了吗？
               </h2>
@@ -118,7 +118,7 @@ export default function Contact() {
                   type="submit"
                   disabled={submitted}
                   className={`w-full py-3 rounded-full text-sm font-semibold text-white transition-all duration-200 flex items-center justify-center gap-2 ${
-                    submitted ? 'bg-green-500' : 'gradient-bg hover:opacity-90'
+                    submitted ? 'bg-green-500' : 'btn-solid hover:opacity-90'
                   }`}
                 >
                   {submitted ? (

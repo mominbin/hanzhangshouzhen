@@ -79,7 +79,7 @@ function ServiceImage({ src, alt }: { src: string; alt: string }) {
             decoding="async"
             width={400}
             height={250}
-            className="w-full h-32 object-cover transition-transform duration-500 group-hover/img:scale-105"
+            className="w-full h-32 object-cover"
           />
         </div>
         {/* hover: zoom icon */}

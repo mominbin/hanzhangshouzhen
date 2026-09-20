@@ -69,7 +69,7 @@ export default function About() {
               <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary mb-3 group-hover:scale-110 transition-transform duration-300">
                 {item.icon}
               </div>
-              <h4 className="font-semibold mb-1.5 text-sm md:text-base">{item.title}</h4>
+              <h3 className="font-semibold mb-1.5 text-sm md:text-base">{item.title}</h3>
               <p className="text-xs md:text-sm leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                 {item.desc}
               </p>

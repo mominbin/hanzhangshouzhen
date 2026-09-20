@@ -2,39 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   视觉系统 token · run-id 2026-09-20-redesign
+   变量名保持与旧版一致（避免改动全部组件），仅替换取值。
+   定义来源：.workflow/2026-09-20-redesign/tokens.css
+   ============================================================ */
 :root {
-  --color-bg: #ffffff;
-  --color-bg-secondary: #f8fafc;
+  /* 间距刻度（4px 基准）——门禁「无魔数」的判定基准 */
+  --space-1: 4px;  --space-2: 8px;   --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px;  --space-12: 48px; --space-16: 64px;
+  --space-24: 96px; --space-32: 128px;
+
+  /* 圆角 */
+  --radius-control: 6px;
+  --radius-card: 10px;
+
+  /* 字体：系统 CJK 栈，不加载 Web 字体 */
+  --font-sans: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei",
+               "Noto Sans SC", system-ui, -apple-system, sans-serif;
+
+  /* 配色 —— 亮色模式 */
+  --color-bg: #FAFAF8;              /* 暖白画布 */
+  --color-bg-secondary: #F2F1ED;
   --color-card: #FFFFFF;
-  --color-card-hover: #f1f5f9;
-  --color-text: #1e1b4b;
-  --color-text-muted: #6b7280;
-  --color-text-accent: #6366f1;
-  --color-border: #e5e7eb;
-  --color-border-hover: #d1d5db;
-  --color-nav-bg: rgba(255, 255, 255, 0.8);
-  --color-hero-gradient: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  --color-cta-bg: #6366f1;
-  --color-cta-hover: #4f46e5;
-  --color-surface-elevated: #ffffff;
+  --color-card-hover: #F7F7F4;
+  --color-text: #1A1A1C;            /* 16.63:1 */
+  --color-text-muted: #5C5C61;      /*  6.36:1 */
+  --color-text-accent: #0F766E;     /* 靛青 */
+  --color-border: #E3E2DD;
+  --color-border-hover: #888886;    /* 控件边框 3.40:1，WCAG 1.4.11 */
+  --color-nav-bg: rgba(250, 250, 248, 0.82);
+  --color-cta-bg: #0F766E;          /* 白字 5.47:1 */
+  --color-cta-hover: #115E59;       /* 白字 7.58:1 */
+  --color-surface-elevated: #FFFFFF;
+  --color-accent-subtle: #E6F2F0;
+
+  /* Tailwind 通道变量：供 rgb(var(--x) / <alpha-value>) 使用，
+     使 text-primary / bg-primary/10 等类名随主题切换 */
+  --accent-rgb: 15 118 110;         /* #0F766E */
+  --accent-hover-rgb: 17 94 89;     /* #115E59 */
 }
 
 .dark {
-  --color-bg: #0f0f23;
-  --color-bg-secondary: #0a0a1a;
-  --color-card: rgba(255, 255, 255, 0.04);
-  --color-card-hover: rgba(255, 255, 255, 0.08);
-  --color-text: #e0e7ff;
-  --color-text-muted: #94a3b8;
-  --color-text-accent: #818cf8;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.16);
-  --color-nav-bg: rgba(15, 15, 35, 0.85);
-  --color-hero-gradient: transparent;
-  --color-cta-bg: #6366f1;
-  --color-cta-hover: #4f46e5;
-  --color-surface-elevated: rgba(255, 255, 255, 0.06);
+  --color-bg: #0C0C0E;              /* 近黑，非蓝黑 */
+  --color-bg-secondary: #141416;
+  --color-card: #161618;
+  --color-card-hover: #1D1D20;
+  --color-text: #EDEDEF;            /* 16.71:1 */
+  --color-text-muted: #A1A1A6;      /*  7.60:1 */
+  --color-text-accent: #2DD4BF;     /* 10.50:1 */
+  --color-border: #26262A;
+  --color-border-hover: #666668;    /* 控件边框 3.41:1，WCAG 1.4.11 */
+  --color-nav-bg: rgba(12, 12, 14, 0.82);
+  --color-cta-bg: #0F766E;          /* 按钮底色两模式一致，文字色区分 */
+  --color-cta-hover: #115E59;
+  --color-surface-elevated: #161618;
+  --color-accent-subtle: #10312D;
+
+  --accent-rgb: 45 212 191;         /* #2DD4BF */
+  --accent-hover-rgb: 94 234 212;   /* #5EEAD4 */
 }
+/* 注：--color-hero-gradient 已移除——渐变是本轮要消除的 AI 味来源 */
 
 * {
   box-sizing: border-box;
@@ -62,6 +90,19 @@
   transition-property: background-color, color, border-color;
 }
 
+/* 减弱动态效果：关闭全局主题过渡与所有 CSS 动画/过渡。
+   Framer Motion 侧由 MotionConfig reducedMotion="user" 处理（见 layout.tsx）。 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -79,32 +120,29 @@ a {
 }
 
 ::placeholder {
-  color: #9ca3af;
+  color: var(--color-text-muted);
   opacity: 1;
 }
 
-.dark ::placeholder {
-  color: #64748b;
-}
-
-/* Solid indigo accent — no gradient text, single color */
 .accent-text {
   color: var(--color-text-accent);
 }
 
-.gradient-bg {
+/* 原名 .gradient-bg —— 实为纯色按钮底，名不副实，已改名 */
+.btn-solid {
   background: var(--color-cta-bg);
+  color: #FFFFFF;
 }
 
-.gradient-bg:hover {
+.btn-solid:hover {
   background: var(--color-cta-hover);
 }
 
 .card {
   background-color: var(--color-card);
   border: 1px solid var(--color-border);
-  border-radius: 1rem;
-  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
   transition: border-color 0.3s ease;
 }
 
@@ -120,8 +158,8 @@ a {
   @apply mx-auto max-w-7xl;
 }
 
-/* Subtle focus ring — single accent, hairline */
+/* 焦点环：跟随强调色，随主题变化 */
 *:focus-visible {
-  outline: 2px solid #6366f1;
+  outline: 2px solid var(--color-text-accent);
   outline-offset: 2px;
 }

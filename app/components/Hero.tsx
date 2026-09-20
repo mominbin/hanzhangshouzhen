@@ -13,19 +13,15 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden"
+      className="relative pt-24 pb-16 md:pt-28 md:pb-20"
     >
-      {/* Subtle background — single accent, no glow orbs */}
-      <div className="absolute inset-0">
-        <div
-          className="absolute inset-0 dark:opacity-100 opacity-0 transition-opacity duration-500"
-          style={{ background: 'var(--color-bg)' }}
-        />
-        <div
-          className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] rounded-full opacity-0 dark:opacity-[0.04] transition-opacity duration-500"
-          style={{ background: 'radial-gradient(circle, rgb(99,102,241), transparent)' }}
-        />
-      </div>
+      {/* 背景：纯色画布。原紫色径向光晕已移除（AI 味特征），
+          随之去掉 overflow-hidden —— 它本是为裁切光晕而加，
+          却会裁掉绝对定位子元素（检测器 clipped-overflow-container）。 */}
+      <div
+        className="absolute inset-0"
+        style={{ background: 'var(--color-bg)' }}
+      />
 
       {/* Content — asymmetric split */}
       <div className="relative z-10 container-max px-4 sm:px-6 lg:px-8">
@@ -41,7 +37,7 @@ export default function Hero() {
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border"
                 style={{
                   background: 'var(--color-card)',
-                  borderColor: 'rgba(99,102,241,0.25)',
+                  borderColor: 'var(--color-border)',
                   color: 'var(--color-text-accent)',
                 }}
               >
@@ -80,11 +76,8 @@ export default function Hero() {
                 <a
                   href="#contact"
                   onClick={(e) => { e.preventDefault(); handleScroll('#contact') }}
-                  className="w-full sm:w-auto px-10 py-3.5 rounded-full text-base font-semibold text-white transition-all duration-200 hover:opacity-90 inline-block text-center"
-                  style={{
-                    background: 'var(--color-cta-bg)',
-                    boxShadow: '0 4px 14px rgba(99,102,241,0.25)',
-                  }}
+                  className="w-full sm:w-auto px-10 py-3.5 rounded-[6px] text-base font-semibold text-white transition-colors duration-200 inline-block text-center"
+                  style={{ background: 'var(--color-cta-bg)' }}
                 >
                   {siteConfig.hero.primaryCta}
                 </a>
@@ -115,11 +108,8 @@ export default function Hero() {
             className="flex-1 hidden lg:block"
           >
             <div
-              className="rounded-xl overflow-hidden border shadow-lg"
-              style={{
-                borderColor: 'var(--color-border)',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-              }}
+              className="rounded-[10px] overflow-hidden border"
+              style={{ borderColor: 'var(--color-border)' }}
             >
               <img
                 src="/images/projects/project3.webp"
