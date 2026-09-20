@@ -21,18 +21,18 @@ export default function LineItems() {
 
   return (
     <section id="services" className="mx-auto max-w-[1180px] px-6 md:px-10">
-      <div className="g-rule-b pb-3 pt-8 md:pt-10">
-        <h2 className="font-display text-[clamp(1.25rem,2.6vw,1.75rem)] tracking-[-0.01em] text-on-ground">
+      <div className="rule-b pb-3 pt-8 md:pt-10">
+        <h2 className="font-display text-[clamp(1.25rem,2.6vw,1.75rem)] tracking-[-0.01em] text-ink">
           服务项目明细
         </h2>
       </div>
 
       {/* 表头 */}
-      <div className="g-rule-b hidden grid-cols-[64px_1fr_2fr_1.1fr] gap-x-6 py-2 md:grid">
-        <span className="g-field-label mb-0 text-right">序号</span>
-        <span className="g-field-label mb-0">项目名称</span>
-        <span className="g-field-label mb-0">交付内容</span>
-        <span className="g-field-label mb-0">参考案例</span>
+      <div className="rule-b hidden grid-cols-[64px_1fr_2fr_1.1fr] gap-x-6 py-2 md:grid">
+        <span className="field-label mb-0 text-right">序号</span>
+        <span className="field-label mb-0">项目名称</span>
+        <span className="field-label mb-0">交付内容</span>
+        <span className="field-label mb-0">参考案例</span>
       </div>
 
       <ol>
@@ -42,53 +42,53 @@ export default function LineItems() {
             <li
               key={svc.title}
               id={i === 0 ? 'service-1' : undefined}
-              className="ink-in g-rule-b group transition-colors duration-150 hover:bg-on-ground/10"
+              className="ink-in rule-b group transition-colors duration-150 hover:bg-hover"
               style={{ '--i': i } as React.CSSProperties}
             >
               {/* 桌面：四栏行项 */}
               <div className="hidden grid-cols-[64px_1fr_2fr_1.1fr] items-baseline gap-x-6 py-4 md:grid">
-                <span className="font-mono text-right text-[13px] text-on-muted">
+                <span className="font-mono text-right text-[13px] text-ink-muted">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="font-display text-[18px] leading-snug text-on-ground">
+                <h3 className="font-display text-[18px] leading-snug text-ink">
                   {svc.title}
                 </h3>
-                <p className="max-w-[52ch] text-[14px] leading-relaxed text-on-muted">
+                <p className="max-w-[52ch] text-[14px] leading-relaxed text-ink-muted">
                   {svc.desc}
                 </p>
                 {proof ? (
                   /* 真链接到对应联次 —— 原先只是看起来像链接的 span（可及性缺陷） */
                   <a
                     href="#projects"
-                    className="font-body text-[13px] text-on-ground-link underline decoration-on-ground-link/40 underline-offset-[3px] transition-colors hover:decoration-on-ground-link"
+                    className="font-body text-[13px] text-vote underline decoration-vote/40 underline-offset-[3px] transition-colors hover:decoration-vote"
                   >
                     {proof}
                   </a>
                 ) : (
-                  <span className="font-body text-[13px] text-on-muted">—</span>
+                  <span className="font-body text-[13px] text-ink-muted">—</span>
                 )}
               </div>
 
               {/* 移动：字段堆叠，仍带栏线 */}
               <div className="space-y-3 py-4 md:hidden">
                 <div className="flex items-baseline gap-3">
-                  <span className="font-mono text-[12px] text-on-muted">
+                  <span className="font-mono text-[12px] text-ink-muted">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="font-display text-[17px] text-on-ground">{svc.title}</h3>
+                  <h3 className="font-display text-[17px] text-ink">{svc.title}</h3>
                 </div>
-                <p className="text-[14px] leading-relaxed text-on-muted">{svc.desc}</p>
+                <p className="text-[14px] leading-relaxed text-ink-muted">{svc.desc}</p>
                 <div>
-                  <span className="g-field-label">参考案例</span>
+                  <span className="field-label">参考案例</span>
                   {proof ? (
                     <a
                       href="#projects"
-                      className="font-body text-[13px] text-on-ground-link underline decoration-on-ground-link/40 underline-offset-[3px]"
+                      className="font-body text-[13px] text-vote underline decoration-vote/40 underline-offset-[3px]"
                     >
                       {proof}
                     </a>
                   ) : (
-                    <span className="font-body text-[13px] text-on-muted">—</span>
+                    <span className="font-body text-[13px] text-ink-muted">—</span>
                   )}
                 </div>
               </div>

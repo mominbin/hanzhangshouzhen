@@ -1,1 +1,132 @@
-[]
+{
+  "run": "2026-09-20-redesign / 棕红通栏回退",
+  "generated_at": "2026-09-20T12:39:33.759Z",
+  "method": {
+    "critical_note": "detect 只解析内联样式。Next.js 静态导出把 CSS 写在 out/_next/static/css/ 外部文件里，因此扫描 out/ 目录或其 HTML 得到的是【假阴性】——看不见任何样式规则。必须单独扫描导出的 CSS 文件。",
+    "positive_controls": {
+      "note": "先证明检测器在工作，再采信阴性结果。",
+      "inline_html_control": "故意违规的内联 <style> 文件 → 8 条发现",
+      "external_css_control": "故意违规的 .css 文件 → 1 条发现（gradient-text）"
+    }
+  },
+  "scans": [
+    {
+      "target": "CONTROL .impeccable/review/controls/control.html（内联 <style>，故意违规）",
+      "findings": [
+        {
+          "antipattern": "gradient-text",
+          "severity": "warning",
+          "description": "Gradient text is decorative rather than meaningful — a common AI tell, especially on headings and metrics. Use solid colors for text.",
+          "snippet": "background-clip: text + gradient"
+        },
+        {
+          "antipattern": "low-contrast",
+          "severity": "warning",
+          "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+          "snippet": "2.1:1 (need 4.5:1) — text #a78bfa on #7c3aed"
+        },
+        {
+          "antipattern": "low-contrast",
+          "severity": "warning",
+          "description": "Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.",
+          "snippet": "2.1:1 (need 4.5:1) — text #a78bfa on #7c3aed"
+        },
+        {
+          "antipattern": "overused-font",
+          "severity": "warning",
+          "description": "Inter, Roboto, Fraunces, Geist, Plus Jakarta Sans, and Space Grotesk are used on so many sites they no longer feel distinctive. Each new wave of AI-generated UIs converges on the same handful of faces. Choose a face that gives your interface personality.",
+          "snippet": "Primary font: inter"
+        },
+        {
+          "antipattern": "flat-type-hierarchy",
+          "severity": "warning",
+          "description": "Dominant heading and body roles are separated by less than 1.25× at every step, leaving the size hierarchy flat. Add at least one stronger size step.",
+          "snippet": "Role sizes: body 16px, h1 16px, h3 16px (largest adjacent step 1.00:1; target 1.25:1)"
+        },
+        {
+          "antipattern": "skipped-heading",
+          "severity": "warning",
+          "description": "Heading levels should not skip (e.g. h1 then h3 with no h2). Screen readers use heading hierarchy for navigation. Skipping levels breaks the document outline.",
+          "snippet": "<h1> \"紫气东来\" followed by <h3> \"卡片标题\" (missing h2)"
+        },
+        {
+          "antipattern": "ai-color-palette",
+          "severity": "warning",
+          "description": "Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette.",
+          "snippet": "Purple/violet accent colors detected"
+        },
+        {
+          "antipattern": "gradient-text",
+          "severity": "warning",
+          "description": "Gradient text is decorative rather than meaningful — a common AI tell, especially on headings and metrics. Use solid colors for text.",
+          "snippet": "background-clip: text + gradient"
+        }
+      ],
+      "control": true
+    },
+    {
+      "target": "CONTROL .impeccable/review/controls/control.css（外部 CSS，故意违规）",
+      "findings": [
+        {
+          "antipattern": "gradient-text",
+          "severity": "warning",
+          "description": "Gradient text is decorative rather than meaningful — a common AI tell, especially on headings and metrics. Use solid colors for text.",
+          "snippet": "background-clip: text + gradient"
+        }
+      ],
+      "control": true
+    },
+    {
+      "target": "out/_next/static/css/1a32a31dce0c5168.css",
+      "findings": [],
+      "exit_semantics": "0=无主发现"
+    },
+    {
+      "target": "out/index.html",
+      "findings": []
+    },
+    {
+      "target": "out/404.html",
+      "findings": [
+        {
+          "antipattern": "tiny-text",
+          "severity": "warning",
+          "description": "Body text below 12px is hard to read, especially on high-DPI screens. Use at least 14px for body content, 16px is ideal.",
+          "snippet": "11.5px body text"
+        },
+        {
+          "antipattern": "tiny-text",
+          "severity": "warning",
+          "description": "Body text below 12px is hard to read, especially on high-DPI screens. Use at least 14px for body content, 16px is ideal.",
+          "snippet": "11px body text"
+        }
+      ]
+    }
+  ],
+  "manual_checks_beyond_detector": {
+    "note": "detect 抓不到、需人工/脚本量测的项目",
+    "measured": {
+      "band_background": "rgb(140,58,30) —— 通栏存在且非透明",
+      "h1_on_band": "7.47:1 (light) / 5.77:1 (dark)",
+      "band_nav_on_band": "5.65:1 (light) / 5.12:1 (dark)",
+      "focus_ring_in_band": "5.65:1 / 5.12:1（用 --on-band）",
+      "focus_ring_on_paper": "5.77:1 / 5.92:1（用 --seal）",
+      "testimonial_divider": "1px 已渲染（此前因 md:rule-r 无效而从未渲染）",
+      "buyer_row_bottom_rule": "1px 单线（此前静态边框与动画线叠成 2px）",
+      "border_radius": "全站 0px（含 404）",
+      "mobile_h1": "1 行 @ 22.4px，无孤字",
+      "horizontal_overflow": "index 与 404、桌面与移动，均 0px 溢出",
+      "page_404": "对比度 16.92:1 / 14.6:1；作废章 5.77:1 / 5.92:1；圆角 0px"
+    }
+  },
+  "known_warnings_not_suppressed": [
+    {
+      "target": "out/404.html",
+      "antipattern": "tiny-text",
+      "count": 2,
+      "severity": "warning",
+      "exit_code": 0,
+      "note": "404 的 11px/11.5px 用于票眉与版权行。该字号是本世界票眉/字段标签的排印习惯；主站用了 19 处而 detect 报 0 条——检测器自身在同类用法上判定不一致。按非阻塞警告记录，未做任何 suppress（未使用 ignore、未改值规避）。"
+    }
+  ]
+}

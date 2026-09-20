@@ -1,0 +1,4 @@
+.hero { background: linear-gradient(135deg,#8B5CF6,#EC4899); }
+.grad { background: linear-gradient(90deg,#7C3AED,#EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.card { border-radius: 24px; box-shadow: 0 20px 40px rgba(124,58,237,.4); backdrop-filter: blur(20px); }
+.kicker { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #A78BFA; }

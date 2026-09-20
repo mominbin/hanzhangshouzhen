@@ -9,10 +9,15 @@
    世界：中国增值税发票 / 收款凭证。
    法规：零圆角、零阴影、零渐变；栏线建立秩序，不靠留白。
 
-   ⚠️ 地面是票面棕红 —— 材料本身，不是点缀。
-   首版的棕红只作为一条通栏出现，页面 90% 是中性平面，
-   与契约「棕红占满整片地面，是材料而非点缀」相悖，已修正：
-   两主题的地面同为 #8C3A1E，内容直接坐在材料上，不设中间面板。
+   ⚠️ 棕红是通栏，不是地面。
+   中途曾按终审的 GROUND 判定把整页地面翻成棕红（依据是我方契约写的
+   「棕红占满整片地面，是材料而非点缀」）。用户看过后明确表示
+   「棕红是一条通栏 更符合我的审美」—— 用户定调优先于骰子、也优先于我方契约，
+   故改回：纸面为地，棕红作通栏。
+
+   改回后重新可用（地面为棕红时不可用）：
+     章红 #C0271A on 纸白 = 5.77:1 → 印章回到红色，不再需要白描边
+     抵扣联蓝 #1B3A6B on 纸白 = 10.98:1 → 参考案例链接回到蓝
    ============================================================ */
 
 :root {
@@ -29,82 +34,76 @@
   --font-mono: "JetBrains Mono", "SF Mono", Consolas, "Courier New", monospace;
 
   --lh-body: 1.7;
-
-  /* ── 缓动 ── */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* ── 票据线宽 ── */
   --rule: 1px;
 
-  /* ══ 地面：票面棕红（两主题同值 —— 这是命名材料本身）══ */
-  --ground: #8C3A1E;
-  --ground-deep: #6B2C15;
-  --on-ground: #FDFCF9;        /* 7.47:1 */
-  --on-ground-muted: #EFD9CE;  /* 5.65:1 */
-  --on-ground-rule: rgba(253, 252, 249, 0.28);
-  /* 0.55：控件边框需 ≥3:1（WCAG 1.4.11）。
-     实测混合后 0.38 只有 2.39:1、0.5 得 3.08:1，0.55 留出余量。 */
-  --on-ground-rule-strong: rgba(253, 252, 249, 0.55);
-  /* 地面上的链接色：#1B3A6B 仅 1.47:1、#8FB3E0 仅 3.54:1，均不可用。
-     取 #BBD4EE 得 5.03:1。 */
-  --on-ground-link: #BBD4EE;
+  /* ══ 地面：纸面 ══ */
+  --paper: #FDFCF9;
+  --paper-sunk: #F6F3EC;
 
-  /* 章红只作填充（.act 按钮底），不作文字或描边 ——
-     它 on 棕红仅 1.29:1。白字 on 章红 = 5.92:1 可用。 */
-  --seal: #C0271A;
+  /* ══ 通栏：票面棕红（两主题同值 —— 这是命名材料）══ */
+  --band: #8C3A1E;
+  --band-deep: #6B2C15;
+  --on-band: #FDFCF9;          /* 7.47:1 */
+  --on-band-muted: #EFD9CE;    /* 5.65:1 */
+
+  /* ══ 纸面上的墨 ══ */
+  --ink: #1C1A17;              /* 16.92:1 */
+  --ink-muted: #5A544C;        /*  7.29:1 */
+  --rule-color: #D9D2C4;
+  --rule-strong: #888886;      /* 控件边框 3.46:1（WCAG 1.4.11） */
+  --row-hover: #F2EDE2;
+
+  /* ══ 纸面上的两枚专色 ══ */
+  --seal: #C0271A;             /* 监制章红 5.77:1 —— 填充与描边均可用 */
+  --vote: #1B3A6B;             /* 抵扣联蓝 10.98:1 */
 
   /* ── 浏览器表面 ── */
   --selection-bg: #8C3A1E;
   --selection-fg: #FDFCF9;
   --caret: #C0271A;
-  --scrollbar-track: #7A3218;
-  --scrollbar-thumb: #A85236;
+  --scrollbar-track: #F6F3EC;
+  --scrollbar-thumb: #C9BFAE;
 }
 
 .dark {
-  /* ══ 地面不变 —— 命名材料在两主题下都是地面。
-         两主题的差异放在墨色上：亮色是白昼下的满对比印刷，
-         暗色是同一份凭证在暗光下阅读 —— 墨色整体压暗但仍达 AA。 ══ */
-  --ground: #8C3A1E;
-  --ground-deep: #6B2C15;
-  --on-ground: #E9DECF;        /* 5.77:1，明显暗于亮色的 #FDFCF9（7.47:1） */
-  --on-ground-muted: #E2D0C0;  /* 约 4.9:1 */
-  --on-ground-rule: rgba(253, 252, 249, 0.20);
-  /* 0.55：与亮色块同值。控件边框需 ≥3:1（WCAG 1.4.11）。
-     此前此处误留 0.38（上一批用 replace_all 匹配的是亮色块的 0.5，
-     暗色块值是 0.38 故未被替换），实测混合后仅 2.14:1。 */
-  --on-ground-rule-strong: rgba(253, 252, 249, 0.55);
-  /* 地面上的链接色：#1B3A6B 仅 1.47:1、#8FB3E0 仅 3.54:1，均不可用。
-     取 #BBD4EE 得 5.03:1。 */
-  --on-ground-link: #BBD4EE;
+  /* ══ 地面：深暖（夜里的账房）══ */
+  --paper: #1A1614;
+  --paper-sunk: #221D1A;
 
-  --seal: #E8705F;             /* 与亮色块同为「只作填充」 */
+  /* ══ 通栏：同值 ══ */
+  --band: #8C3A1E;
+  --band-deep: #6B2C15;
+  --on-band: #E9DECF;
+  --on-band-muted: #E2D0C0;
 
-  --selection-bg: #FDFCF9;
-  --selection-fg: #8C3A1E;
+  /* ══ 深暖纸面上的墨 ══ */
+  --ink: #EDE7DC;              /* 14.60:1 */
+  --ink-muted: #A69C8E;        /*  6.65:1 */
+  --rule-color: #332E27;
+  --rule-strong: #666668;      /* 3.14:1 */
+  --row-hover: #241F1B;
+
+  --seal: #E8705F;             /* 5.92:1 */
+  --vote: #8FB3E0;             /* 8.29:1 */
+
+  --selection-bg: #E8705F;
+  --selection-fg: #1A1614;
   --caret: #E8705F;
-  --scrollbar-track: #6B2C15;
-  --scrollbar-thumb: #9A4A2C;
+  --scrollbar-track: #221D1A;
+  --scrollbar-thumb: #4A4139;
 }
 
 /* ============================================================
    基础
    ============================================================ */
 * { box-sizing: border-box; }
-html {
-  -webkit-text-size-adjust: 100%;
-  /* 地面同时写在 html 上：防止滚动回弹时露出白底 */
-  background-color: #8C3A1E;
-}
+html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  /* 地面：票面棕红 —— 两主题同值（命名材料本身），故写字面值而非 var()。
-     原因：impeccable detect 不解析 CSS var()，遇到 var() 背景会假定为白色，
-     从而把地面上所有文字误报为对比度不足（实测 69 条假阳性，
-     真实渲染为 7.47:1 / 5.65:1）。值必须与 --ground 保持一致。 */
-  background-color: #8C3A1E;
-  color: var(--on-ground);
+  background-color: var(--paper);
+  color: var(--ink);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: var(--lh-body);
@@ -112,9 +111,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-
-/* 内容直接坐在棕红地面上，不再使用中间面板 ——
-   .panel / .panel-sunk 已删除（首版用面板时遗留，材料因此退化成点缀）。 */
 
 /* ── 浏览器表面 ── */
 ::selection { background: var(--selection-bg); color: var(--selection-fg); }
@@ -127,12 +123,12 @@ body {
 ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
 ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border: 2px solid var(--scrollbar-track); }
 
-/* 聚焦环：全站取纸白。
-   原先默认取 --seal（章红），但章红 on 棕红仅 1.29:1（暗色 2.52:1），
-   等于主内容区的键盘用户看不到焦点 —— 实测 15 个可聚焦元素中 6 个如此。
-   地面是唯一的表面，故统一取 --on-ground（7.47:1 / 5.77:1）。
-   .panel / .panel-sunk 规则已删除（那两个类不再存在）。 */
-:focus-visible { outline: 2px solid var(--on-ground); outline-offset: 1px; }
+/* 聚焦环：纸面取章红（5.77:1 / 5.92:1），通栏内取纸白。
+   两处都必须可见 —— 曾一度全站取章红而地面是棕红，导致 15 个可聚焦元素中
+   6 个的焦点环隐形（章红 on 棕红 = 1.29:1）。 */
+:focus-visible { outline: 2px solid var(--seal); outline-offset: 1px; }
+.band :focus-visible,
+.on-band :focus-visible { outline-color: var(--on-band); }
 
 a { color: inherit; text-decoration: none; }
 
@@ -140,72 +136,54 @@ a { color: inherit; text-decoration: none; }
    票据构件
    ============================================================ */
 
-/* ── 栏线：全部取纸白低透明，画在棕红地面上 ──
-   .rule-t / .rule-b / .rule-l / .rule-double（面板版）已删除 ——
-   面板不再存在，那些类无人使用。 */
-.g-rule-t { border-top: var(--rule) solid var(--on-ground-rule); }
-.g-rule-b { border-bottom: var(--rule) solid var(--on-ground-rule); }
-.g-rule-l { border-left: var(--rule) solid var(--on-ground-rule); }
+/* ── 棕红通栏 ──
+   票面的命名材料。整页地面是纸，棕红只此一条通栏。
+   ⚠️ 这个背景必须由 .band 提供：组件里写的是 className="band on-band"，
+   没有 bg-* 工具类。曾经漏掉这条规则，通栏就一直是透明的
+   （连带通栏内文字的对比度与焦点环全部失去参照色）。 */
+.band {
+  background: var(--band);
+  color: var(--on-band);
+}
 
-.g-rule-double {
-  border-top: var(--rule) solid var(--on-ground-rule-strong);
-  border-bottom: var(--rule) solid var(--on-ground-rule-strong);
+/* ── 栏线 ──
+   ⚠️ 这几个是普通 CSS 类，不是 Tailwind 工具类：
+   写 `md:rule-r` 之类的响应式变体【不会生效】——Tailwind 不认这些名字，
+   编译出来的类名永远不会被匹配到。需要按断点变化时用 Tailwind 工具类
+   （`md:border-r md:border-rule`、`md:border-t-0`）。
+   评价区两栏之间的分隔线曾因此一直缺失。
+   只有 t / b / l 三条边，没有 .rule-r —— 别假设它存在。 */
+.rule-t { border-top: var(--rule) solid var(--rule-color); }
+.rule-b { border-bottom: var(--rule) solid var(--rule-color); }
+.rule-l { border-left: var(--rule) solid var(--rule-color); }
+
+.rule-double {
+  border-top: var(--rule) solid var(--band-deep);
+  border-bottom: var(--rule) solid var(--band-deep);
   height: 5px;
 }
 
-/* 字段：label 在上，值在下。label 命名这个字段，不是装饰性 kicker */
-.g-field-label {
+/* 字段 label：命名这个字段，不是装饰性 kicker */
+.field-label {
   font-family: var(--font-body);
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: var(--on-ground-muted);
+  color: var(--ink-muted);
   display: block;
   margin-bottom: var(--s1);
 }
 
-/* 监制章 —— 地面上不能用章红
-   （#C0271A on #8C3A1E 仅 1.29:1，红压红看不见；最亮的 #F5A08E 也只有 3.76:1）。
-   故取纸白描边：红底上的白色钢印。 */
-.g-seal {
+/* 印章 —— 纸面上是章红，红章落在纸上 */
+.seal {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--on-ground);
-  color: var(--on-ground);
+  border: 2px solid var(--seal);
+  color: var(--seal);
   font-family: var(--font-display);
   letter-spacing: 0.12em;
   padding: var(--s2) var(--s3);
   transform: rotate(-3.5deg);
-}
-
-/* 核销章 · 地面版。章红在棕红上任何色阶都不可用（最亮 #F5A08E 仅 3.76:1），
-   故地面上取纸白 —— 红底上的白色钢印。 */
-.g-stamp-mark {
-  position: relative;
-  display: inline-block;
-  border: 3px solid var(--on-ground);
-  color: var(--on-ground);
-  font-family: var(--font-display);
-  letter-spacing: 0.16em;
-  padding: var(--s2) var(--s4);
-  transform: rotate(-7deg);
-  opacity: 0;
-}
-.g-stamp-mark[data-stamped='true'] { animation: stamp 820ms var(--ease) forwards; }
-.g-stamp-mark[data-stamped='true']::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border: 2px solid var(--on-ground);
-  animation: ink-spread 900ms var(--ease) 300ms forwards;
-}
-
-/* 地面上的链接 */
-.on-ground a.link,
-a.on-ground-link {
-  color: var(--on-ground-link);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 /* 主行动：全站唯一的实心按钮 */
@@ -231,15 +209,14 @@ a.on-ground-link {
 .dark .act:hover { background: #F08A79; }
 
 /* 次级行动 —— 描边不填充。
-   世界里只允许一个高饱和实心红：首屏合计区「立刻咨询」占那一席。
-   备注栏的「复制备注并致电」仍是真按钮、仍可用，但不与主行动争夺注意力。 */
+   世界里只允许一个高饱和实心红：首屏合计区「立刻咨询」占那一席。 */
 .act-quiet {
   display: inline-flex;
   align-items: center;
   gap: var(--s2);
   background: none;
-  color: var(--on-ground);
-  border: var(--rule) solid var(--on-ground-rule-strong);
+  color: var(--ink);
+  border: var(--rule) solid var(--rule-strong);
   border-radius: 0;
   font-family: var(--font-body);
   font-weight: 600;
@@ -248,49 +225,35 @@ a.on-ground-link {
   cursor: pointer;
   transition: background 200ms var(--ease), border-color 200ms var(--ease);
 }
-.act-quiet:hover {
-  background: rgba(12, 10, 8, 0.18);
-  border-color: var(--on-ground);
-}
+.act-quiet:hover { background: var(--row-hover); border-color: var(--band-deep); }
 .act-quiet:active { transform: translateY(1px); }
-.act-quiet[data-copied='true'] {
-  border-color: var(--on-ground);
-  background: rgba(12, 10, 8, 0.26);
-}
+.act-quiet[data-copied='true'] { border-color: var(--seal); color: var(--seal); }
 
-/* 输入 —— 材料上刻出的凹槽（暗，不是亮）。
-   先前的浅色白雾（rgba(253,252,249,.10)）混合后底为 #974d34，
-   placeholder 在暗色模式下只有 4.09:1，低于 4.5:1。
-   改为暗凹槽后，浅色文字对比反而更高：
-     α=0.18 → 凹槽 #75311a，placeholder 7.01:1(亮) / 6.34:1(暗)，边框 3.82:1 */
+/* 输入 —— 纸面上的票据字段 */
 .input {
   width: 100%;
-  background: rgba(12, 10, 8, 0.18);
-  border: var(--rule) solid var(--on-ground-rule-strong);
+  background: var(--paper);
+  border: var(--rule) solid var(--rule-strong);
   border-radius: 0;
   padding: var(--s3);
   font: inherit;
-  color: var(--on-ground);
-  transition: background 160ms var(--ease), border-color 160ms var(--ease);
+  color: var(--ink);
+  transition: border-color 160ms var(--ease);
 }
-.input:hover { background: rgba(12, 10, 8, 0.26); }
+.input:hover { border-color: var(--band-deep); }
 .input:focus {
-  outline: 2px solid var(--on-ground);
+  outline: 2px solid var(--seal);
   outline-offset: 0;
-  border-color: var(--on-ground);
-  background: rgba(12, 10, 8, 0.26);
+  border-color: var(--seal);
 }
-.input::placeholder { color: var(--on-ground-muted); }
+.input::placeholder { color: var(--ink-muted); }
 
 /* ============================================================
    动效论文
    ------------------------------------------------------------
    世界的原生动作：这张票被【打印】出来，然后被【填写、盖章、核销】。
-
-   FOCAL    票据打印（仅首屏，一次性）
-   CONTINUITY 核销章在联次进入视口时落下
-   FEEDBACK  监制章按下；复制按钮墨色一闪
-   BUDGET    只用 transform / opacity / clip-path / filter
+   FOCAL 打印序列（仅首屏）｜CONTINUITY 核销章｜FEEDBACK 监制章与按钮
+   只用 transform / opacity / clip-path / filter。
    ============================================================ */
 
 @keyframes print-wipe {
@@ -326,9 +289,8 @@ a.on-ground-link {
 }
 
 /* ── 滚动揭示 ──
-   隐藏态只在脚本可用时生效（.js-reveal 由 <head> 内联脚本设置）。
-   包加载失败时 .js-reveal 不存在，内容直接可见 ——
-   @media (scripting: none) 覆盖不到「脚本可解析但执行失败」的情况。 */
+   隐藏态只在 .js-reveal 下生效，该类由 <head> 同步脚本设置，
+   并带 1.8s 失效保护（RevealBoot 挂载即撤销）—— 覆盖包加载失败。 */
 .js-reveal [data-reveal] .rv-ink { opacity: 0; }
 .js-reveal [data-reveal] .rv-rule { clip-path: inset(0 100% 0 0); }
 
@@ -385,9 +347,9 @@ a.on-ground-link {
 
 /* ── 动作反馈 ── */
 @keyframes ink-flash {
-  0%   { background: var(--seal);      transform: translateY(0); }
-  40%  { background: var(--ground-deep); transform: translateY(2px); }
-  100% { background: var(--seal);      transform: translateY(0); }
+  0%   { background: var(--seal);       transform: translateY(0); }
+  40%  { background: var(--band-deep);  transform: translateY(2px); }
+  100% { background: var(--seal);       transform: translateY(0); }
 }
 .act[data-copied='true'] { animation: ink-flash 900ms var(--ease); }
 
@@ -422,7 +384,7 @@ a.on-ground-link {
   }
 }
 
-/* ── 打印：票据世界原生支持打印 ── */
+/* ── 打印 ── */
 @media print {
   .no-print { display: none !important; }
   body { background: #fff; color: #000; }

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 /**
  * 明暗切换
  *
- * 控件坐在棕红地面上，所以取纸白系。
+ * 控件坐在棕红通栏里，故取通栏上的纸白系。
  * 分段式，像表单上的选择项；零圆角、零阴影，靠底色标记当前态。
  * 不用图标：控件用文字直说自己的动作（craft-floor：controls name their action）。
  */
@@ -24,7 +24,7 @@ export default function ThemeToggle() {
     <span
       role="group"
       aria-label="颜色模式"
-      className="inline-flex items-stretch border border-on-ground/50 font-mono text-[11px] leading-none"
+      className="inline-flex items-stretch border border-band-muted/60 font-mono text-[11px] leading-none"
     >
       {(['light', 'dark'] as const).map((mode) => {
         const active = (mode === 'dark') === isDark
@@ -36,9 +36,7 @@ export default function ThemeToggle() {
             aria-pressed={active}
             className={
               'px-2 py-[5px] transition-colors ' +
-              (active
-                ? 'bg-on-ground text-ground'
-                : 'text-on-muted hover:text-on-ground')
+              (active ? 'bg-band-on text-band' : 'text-band-muted hover:text-band-on')
             }
           >
             {mode === 'light' ? '明' : '暗'}

@@ -18,26 +18,29 @@ export default function Endorsements() {
   return (
     <section ref={ref} data-reveal={String(seen)} className="mx-auto max-w-[1180px] px-6 md:px-10">
       <div className="pb-3 pt-12 md:pt-16">
-        <h2 className="rv-ink font-display text-[clamp(1.25rem,2.6vw,1.75rem)] tracking-[-0.01em] text-on-ground">
+        <h2 className="rv-ink font-display text-[clamp(1.25rem,2.6vw,1.75rem)] tracking-[-0.01em] text-ink">
           签收意见
         </h2>
-        <p className="rv-ink mt-2 max-w-[64ch] text-[14px] text-on-muted" style={{ '--i': 1 } as React.CSSProperties}>
+        <p className="rv-ink mt-2 max-w-[64ch] text-[14px] text-ink-muted" style={{ '--i': 1 } as React.CSSProperties}>
           以下为已交付客户的签收意见原文。
         </p>
-        <span aria-hidden="true" className="rv-rule mt-3 block h-px w-full bg-on-ground/30" />
+        <span aria-hidden="true" className="rv-rule mt-3 block h-px w-full bg-rule" />
       </div>
 
+      {/* 两栏分隔线用 Tailwind 工具类，不用 .rule-* ——
+          后者是普通 CSS 类，md: 变体对它无效。原先写的 md:rule-r
+          从未生效，两栏之间一直没有分隔线。 */}
       <div className="grid grid-cols-1 md:grid-cols-2">
         {siteConfig.testimonials.map((t, i) => (
           <blockquote
             key={t.name}
-            className={`g-rule-b py-8 md:py-10 ${
-              i === 0 ? 'md:rule-r md:pr-10' : 'md:pl-10'
+            className={`rule-b py-8 md:py-10 ${
+              i === 0 ? 'md:border-r md:border-rule md:pr-10' : 'md:pl-10'
             }`}
           >
             {/* 先落墨：写下意见 */}
             <p
-              className="rv-ink max-w-[46ch] font-display text-[clamp(1rem,1.9vw,1.15rem)] leading-relaxed text-on-ground"
+              className="rv-ink max-w-[46ch] font-display text-[clamp(1rem,1.9vw,1.15rem)] leading-relaxed text-ink"
               style={{ '--i': 2 + i * 2 } as React.CSSProperties}
             >
               &ldquo;{t.content}&rdquo;
@@ -45,17 +48,17 @@ export default function Endorsements() {
 
             <footer className="mt-6 flex items-end justify-between gap-6">
               <div className="rv-ink" style={{ '--i': 3 + i * 2 } as React.CSSProperties}>
-                <span className="g-field-label">签收人</span>
-                <cite className="font-display not-italic text-[15px] text-on-ground">{t.name}</cite>
-                <p className="mt-0.5 text-[13px] text-on-muted">{t.title}</p>
+                <span className="field-label">签收人</span>
+                <cite className="font-display not-italic text-[15px] text-ink">{t.name}</cite>
+                <p className="mt-0.5 text-[13px] text-ink-muted">{t.title}</p>
               </div>
 
               {/* 后签字：栏线随后绘制。票据本来的空白，不该被填满。 */}
               <div className="shrink-0 text-right">
-                <span className="g-field-label md:text-right">签字 / 日期</span>
+                <span className="field-label md:text-right">签字 / 日期</span>
                 <span
                   aria-hidden="true"
-                  className="rv-rule mb-1.5 block h-px w-[104px] bg-on-ground/50"
+                  className="rv-rule mb-1.5 block h-px w-[104px] bg-rule-strong"
                   style={{ '--i': 4 + i * 2 } as React.CSSProperties}
                 />
                 <span className="block h-5 w-[104px]" />

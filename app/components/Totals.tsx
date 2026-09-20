@@ -23,11 +23,11 @@ export default function Totals() {
       aria-label="合计"
       className="mx-auto max-w-[1180px] px-6 md:px-10"
     >
-      <div className="g-rule-double rv-rule" />
+      <div className="rule-double rv-rule" />
       <div className="grid grid-cols-1 gap-y-6 py-5 md:grid-cols-[1.8fr_1fr] md:items-center md:gap-x-10">
         <div className="rv-ink" style={{ '--i': 1 } as React.CSSProperties}>
-          <span className="g-field-label">合计 / TOTAL</span>
-          <p className="font-display text-[clamp(1.25rem,2.8vw,1.9rem)] leading-snug tracking-[-0.01em] text-on-ground">
+          <span className="field-label">合计 / TOTAL</span>
+          <p className="font-display text-[clamp(1.25rem,2.8vw,1.9rem)] leading-snug tracking-[-0.01em] text-ink">
             肆 项服务 · 贰 个已交付案例 · 肆 家云厂商背书
           </p>
         </div>
@@ -36,12 +36,12 @@ export default function Totals() {
               地面上取纸白（章红 on 棕红 仅 1.29:1，红压红看不见）。 */}
           <span className="flex flex-col items-start gap-1.5 md:items-end">
             <span
-              className="g-field-label rv-ink md:mb-0 md:text-right"
+              className="field-label rv-ink md:mb-0 md:text-right"
               style={{ '--i': 2 } as React.CSSProperties}
             >
               监制
             </span>
-            <span className="g-seal seal-press text-[12px]" data-pressed={seen}>
+            <span className="seal seal-press text-[12px]" data-pressed={seen}>
               上海含章收珍 · 交付监制
             </span>
           </span>
@@ -54,7 +54,7 @@ export default function Totals() {
           </a>
         </div>
       </div>
-      <div className="g-rule-double rv-rule" style={{ '--i': 1 } as React.CSSProperties} />
+      <div className="rule-double rv-rule" style={{ '--i': 1 } as React.CSSProperties} />
     </section>
   )
 }
